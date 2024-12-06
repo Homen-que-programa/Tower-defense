@@ -75,8 +75,48 @@ function criarUnidade() {
             }
         }
         if (_colisao && _inimigoIndex == -1) {
-            _alvoTrue = true
-            _alvoTabela.push(_inimigo)
+            let _xposicaoTabelaUnid = Math.floor(_x/tabelaCaminhoTamanho)
+            let _yposicaoTabelaUnid = Math.floor(_y/tabelaCaminhoTamanho)
+            let _xposicaoTabelaIni = Math.floor(_inimigo[6]/tabelaCaminhoTamanho)
+            let _yposicaoTabelaIni = Math.floor(_inimigo[7]/tabelaCaminhoTamanho)
+            let _obstaculoCaminhoTrue = true
+            while (true) {
+                if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
+                    _xposicaoTabelaUnid++
+                } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
+                    _xposicaoTabelaUnid--
+                }
+                if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+                    if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+                        _obstaculoCaminhoTrue = false
+                        break
+                    }
+                } else {
+                    break
+                }
+                if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
+                    _yposicaoTabelaUnid++
+                } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
+                    _yposicaoTabelaUnid--
+                }
+                if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+                    if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+                        _obstaculoCaminhoTrue = false
+                        break
+                    }
+                } else {
+                    break
+                }
+            }
+            if (_obstaculoCaminhoTrue) {
+                document.getElementById(_element.id).style.backgroundColor = 'red'
+                document.getElementById(_inimigo[0]).style.backgroundColor = 'red'
+                _alvoTrue = true
+                _alvoTabela.push(_inimigo)
+            } else {
+                _alvoTabela.splice(_inimigoIndex, 1)
+                _alvoTabela.length == 0 ? _alvoTrue = false : 0
+            }
         } else if (!_colisao && _inimigoIndex != -1) {
             _alvoTabela.splice(_inimigoIndex, 1)
             _alvoTabela.length == 0 ? _alvoTrue = false : 0
@@ -434,53 +474,54 @@ setInterval(() => {
                         if (tabelaColisao[i][e][a][2] != tabelaColisao[i][e][x][2] && x != a) {
                             if (tabelaColisao[i][e][a][3] == 'circulo' && tabelaColisao[i][e][x][3] == 'circulo') {
                                 if ((((tabelaColisao[i][e][a][6] - tabelaColisao[i][e][x][6])**2) + ((tabelaColisao[i][e][a][7] - tabelaColisao[i][e][x][7])**2))**0.5 < (tabelaColisao[i][e][a][5] + (tabelaColisao[i][e][x][4]/2))) {
-                                    let _xposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][6]/tabelaCaminhoTamanho)
-                                    let _yposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][7]/tabelaCaminhoTamanho)
-                                    let _xposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][6]/tabelaCaminhoTamanho)
-                                    let _yposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][7]/tabelaCaminhoTamanho)
-                                    let _obstaculoCaminhoTrue = true
-                                    // console.log('tchau');
-                                    // console.log(_xposicaoTabelaUnid)
-                                    // console.log(_yposicaoTabelaUnid)
-                                    // console.log(tabelaColisao[i][e][x][6])
-                                    // console.log(tabelaColisao[i][e][x][7])
-                                    // console.log(tabelaColisao[i][e][x][0])
-                                    // console.log('ola');
-                                    while (true) {
-                                        if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
-                                            _xposicaoTabelaUnid++
-                                        } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
-                                            _xposicaoTabelaUnid--
-                                        }
-                                        if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                                            if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                                                _obstaculoCaminhoTrue = false
-                                                break
-                                            }
-                                        } else {
-                                            break
-                                        }
-                                        if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
-                                            _yposicaoTabelaUnid++
-                                        } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
-                                            _yposicaoTabelaUnid--
-                                        }
-                                        if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                                            if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                                                _obstaculoCaminhoTrue = false
-                                                break
-                                            }
-                                        } else {
-                                            break
-                                        }
-                                    }
-                                    if (_obstaculoCaminhoTrue) {
-                                        document.getElementById(tabelaColisao[i][e][a][0]).style.backgroundColor = 'red'
-                                        document.getElementById(tabelaColisao[i][e][x][0]).style.backgroundColor = 'red'
-                                        unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
-                                    } else {
-                                        unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
-                                    }
+                                    // let _xposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][6]/tabelaCaminhoTamanho)
+                                    // let _yposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][7]/tabelaCaminhoTamanho)
+                                    // let _xposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][6]/tabelaCaminhoTamanho)
+                                    // let _yposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][7]/tabelaCaminhoTamanho)
+                                    // let _obstaculoCaminhoTrue = true
+                                    // // console.log('tchau');
+                                    // // console.log(_xposicaoTabelaUnid)
+                                    // // console.log(_yposicaoTabelaUnid)
+                                    // // console.log(tabelaColisao[i][e][x][6])
+                                    // // console.log(tabelaColisao[i][e][x][7])
+                                    // // console.log(tabelaColisao[i][e][x][0])
+                                    // // console.log('ola');
+                                    // while (true) {
+                                    //     if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
+                                    //         _xposicaoTabelaUnid++
+                                    //     } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
+                                    //         _xposicaoTabelaUnid--
+                                    //     }
+                                    //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+                                    //         if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+                                    //             _obstaculoCaminhoTrue = false
+                                    //             break
+                                    //         }
+                                    //     } else {
+                                    //         break
+                                    //     }
+                                    //     if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
+                                    //         _yposicaoTabelaUnid++
+                                    //     } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
+                                    //         _yposicaoTabelaUnid--
+                                    //     }
+                                    //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+                                    //         if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+                                    //             _obstaculoCaminhoTrue = false
+                                    //             break
+                                    //         }
+                                    //     } else {
+                                    //         break
+                                    //     }
+                                    // }
+                                    unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
+                                    // if (_obstaculoCaminhoTrue) {
+                                    //     document.getElementById(tabelaColisao[i][e][a][0]).style.backgroundColor = 'red'
+                                    //     document.getElementById(tabelaColisao[i][e][x][0]).style.backgroundColor = 'red'
+                                    //     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
+                                    // } else {
+                                    //     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
+                                    // }
                                 } else {
                                     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
                                 }
