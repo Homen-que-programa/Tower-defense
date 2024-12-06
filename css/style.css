@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.quadrado {
+    width: 2000px;
+    height: 1000px;
+    border: 2px solid red;
+}
+.alvo-circulo {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(68, 218, 49);
+    border-radius: 50%;
+    position: absolute;
+    top: 200px;
+    left: 400px;
+}
+.fuzileiro {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(34, 125, 228);
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0px 0px 0px 125px rgba(0, 247, 255, 0.25);
+}
+.obstaculo {
+    width: 100px;
+    height: 500px;
+    position: absolute;
+    top: 200px;
+    left: 300px;
+    background-color: rgb(53, 177, 29);
+}
+.obstaculo1 {
+    width: 100px;
+    height: 550px;
+    position: absolute;
+    top: 450px;
+    left: 1000px;
+    background-color: rgb(53, 177, 29);
+}
+.obstaculo2 {
+    width: 100px;
+    height: 500px;
+    position: absolute;
+    top: 0px;
+    left: 1150px;
+    background-color: rgb(53, 177, 29);
+}
