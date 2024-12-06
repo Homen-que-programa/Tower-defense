@@ -474,54 +474,7 @@ setInterval(() => {
                         if (tabelaColisao[i][e][a][2] != tabelaColisao[i][e][x][2] && x != a) {
                             if (tabelaColisao[i][e][a][3] == 'circulo' && tabelaColisao[i][e][x][3] == 'circulo') {
                                 if ((((tabelaColisao[i][e][a][6] - tabelaColisao[i][e][x][6])**2) + ((tabelaColisao[i][e][a][7] - tabelaColisao[i][e][x][7])**2))**0.5 < (tabelaColisao[i][e][a][5] + (tabelaColisao[i][e][x][4]/2))) {
-                                    // let _xposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][6]/tabelaCaminhoTamanho)
-                                    // let _yposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][7]/tabelaCaminhoTamanho)
-                                    // let _xposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][6]/tabelaCaminhoTamanho)
-                                    // let _yposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][7]/tabelaCaminhoTamanho)
-                                    // let _obstaculoCaminhoTrue = true
-                                    // // console.log('tchau');
-                                    // // console.log(_xposicaoTabelaUnid)
-                                    // // console.log(_yposicaoTabelaUnid)
-                                    // // console.log(tabelaColisao[i][e][x][6])
-                                    // // console.log(tabelaColisao[i][e][x][7])
-                                    // // console.log(tabelaColisao[i][e][x][0])
-                                    // // console.log('ola');
-                                    // while (true) {
-                                    //     if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
-                                    //         _xposicaoTabelaUnid++
-                                    //     } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
-                                    //         _xposicaoTabelaUnid--
-                                    //     }
-                                    //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                                    //         if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                                    //             _obstaculoCaminhoTrue = false
-                                    //             break
-                                    //         }
-                                    //     } else {
-                                    //         break
-                                    //     }
-                                    //     if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
-                                    //         _yposicaoTabelaUnid++
-                                    //     } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
-                                    //         _yposicaoTabelaUnid--
-                                    //     }
-                                    //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                                    //         if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                                    //             _obstaculoCaminhoTrue = false
-                                    //             break
-                                    //         }
-                                    //     } else {
-                                    //         break
-                                    //     }
-                                    // }
                                     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
-                                    // if (_obstaculoCaminhoTrue) {
-                                    //     document.getElementById(tabelaColisao[i][e][a][0]).style.backgroundColor = 'red'
-                                    //     document.getElementById(tabelaColisao[i][e][x][0]).style.backgroundColor = 'red'
-                                    //     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
-                                    // } else {
-                                    //     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
-                                    // }
                                 } else {
                                     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
                                 }
@@ -533,6 +486,75 @@ setInterval(() => {
         }
     }
 }, 100);
+
+// setInterval(() => {
+//     for (let i = 0; i < tabelaColisao.length; i++) {
+//         for (let e = 0; e < tabelaColisao[i].length; e++) {
+//             if (tabelaColisao[i][e].length > 1) {
+//                 for (let a = 0; a < tabelaColisao[i][e].length; a++) {
+//                     for (let x = 0; x < tabelaColisao[i][e].length; x++) {
+//                         if (tabelaColisao[i][e][a][2] != tabelaColisao[i][e][x][2] && x != a) {
+//                             if (tabelaColisao[i][e][a][3] == 'circulo' && tabelaColisao[i][e][x][3] == 'circulo') {
+//                                 if ((((tabelaColisao[i][e][a][6] - tabelaColisao[i][e][x][6])**2) + ((tabelaColisao[i][e][a][7] - tabelaColisao[i][e][x][7])**2))**0.5 < (tabelaColisao[i][e][a][5] + (tabelaColisao[i][e][x][4]/2))) {
+//                                     // let _xposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][6]/tabelaCaminhoTamanho)
+//                                     // let _yposicaoTabelaUnid = Math.floor(tabelaColisao[i][e][a][7]/tabelaCaminhoTamanho)
+//                                     // let _xposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][6]/tabelaCaminhoTamanho)
+//                                     // let _yposicaoTabelaIni = Math.floor(tabelaColisao[i][e][x][7]/tabelaCaminhoTamanho)
+//                                     // let _obstaculoCaminhoTrue = true
+//                                     // // console.log('tchau');
+//                                     // // console.log(_xposicaoTabelaUnid)
+//                                     // // console.log(_yposicaoTabelaUnid)
+//                                     // // console.log(tabelaColisao[i][e][x][6])
+//                                     // // console.log(tabelaColisao[i][e][x][7])
+//                                     // // console.log(tabelaColisao[i][e][x][0])
+//                                     // // console.log('ola');
+//                                     // while (true) {
+//                                     //     if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
+//                                     //         _xposicaoTabelaUnid++
+//                                     //     } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
+//                                     //         _xposicaoTabelaUnid--
+//                                     //     }
+//                                     //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+//                                     //         if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+//                                     //             _obstaculoCaminhoTrue = false
+//                                     //             break
+//                                     //         }
+//                                     //     } else {
+//                                     //         break
+//                                     //     }
+//                                     //     if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
+//                                     //         _yposicaoTabelaUnid++
+//                                     //     } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
+//                                     //         _yposicaoTabelaUnid--
+//                                     //     }
+//                                     //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+//                                     //         if (tabelaCaminho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+//                                     //             _obstaculoCaminhoTrue = false
+//                                     //             break
+//                                     //         }
+//                                     //     } else {
+//                                     //         break
+//                                     //     }
+//                                     // }
+//                                     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
+//                                     // if (_obstaculoCaminhoTrue) {
+//                                     //     document.getElementById(tabelaColisao[i][e][a][0]).style.backgroundColor = 'red'
+//                                     //     document.getElementById(tabelaColisao[i][e][x][0]).style.backgroundColor = 'red'
+//                                     //     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
+//                                     // } else {
+//                                     //     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
+//                                     // }
+//                                 } else {
+//                                     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }, 100);
 
 criarUnidade()
 criarUnidade()
