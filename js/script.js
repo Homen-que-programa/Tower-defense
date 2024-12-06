@@ -56,6 +56,9 @@ function criarUnidade() {
     let _alvoTabela = []
     let _monerDistancia = [0, 1000]
 
+    let _atackTrue = false
+    let _atackAlvo
+
     let _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
     let _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
     let _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
@@ -210,9 +213,14 @@ function criarUnidade() {
         }
         _element.style.top = `${_y}px`
         _element.style.left = `${_x}px`
-        if (psliderDist <= 5) {
-            console.log('chegou')
+        if (psliderDist <= 70) {
+            _atackAlvo = _alvoTabela[_monerDistancia[0]]
+            _atackTrue = true
         }
+    }
+
+    let _unidadeAtack = () => {
+        alert('Uau tiroteio!!')
     }
 
     let _unidadeVisaoCaminho = () => {
@@ -452,12 +460,13 @@ function criarUnidade() {
         }
         _unidadeColisao()
         _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
-        if (_alvoTrue) {
+        if (_atackTrue) {
+            _unidadeAtack()
+        } else if (_alvoTrue) {
             _unidadeColisaoMovimento()
         } else if (_caminhoTrue) {
             _movimentoCaminho()
         } else {
-            _unidadeVisaoCaminho()
             _movimentoReto()
         }
     }, 10);
