@@ -1,5 +1,6 @@
 const tabelaColisao = []
 const tabelaColisaoTamanho = 500
+let unidadeInformacao = []
 let unidadeMensagemColisao = [(_colisao, _inimigo) => {}]
 let unidadeIndex = 1
 let caminhoAlteracoes = 0
@@ -41,10 +42,15 @@ function criarUnidade() {
     let _y = Math.floor(Math.random()*950)
     let _xposicaoTabela = Math.floor(_x/tabelaCaminhoTamanho)
     let _yposicaoTabela = Math.floor(_y/tabelaCaminhoTamanho)
-    let _element = document.createElement('div')
+    let _unidadeElement = document.createElement('div')
+    let _unidadeElementVida = document.createElement('div')
+
     let _unidadeVelocidade = 1
     let _unidadeRange = 150
     let _unidadeTamanho = 50
+    let _unidadeVida = 200
+    let _unidadeAtackVelocidade = 1000
+    let _unidadeAtackDano = 35
     let _unidadeIndexCopy = unidadeIndex
 
     let _caminhotab = []
@@ -57,6 +63,7 @@ function criarUnidade() {
     let _monerDistancia = [0, 1000]
 
     let _atackTrue = false
+    let _atackLoad
     let _atackAlvo
 
     let _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
@@ -64,11 +71,19 @@ function criarUnidade() {
     let _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
     let _ycord2 = _y-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRange+(_unidadeTamanho/2)
 
-    _element.style.top = `${_y}px`
-    _element.style.left = `${_x}px`
-    _element.id = `fuzileiro${unidadeIndex}`
-    _element.className = 'fuzileiro'
+    _unidadeElement.style.top = `${_y}px`
+    _unidadeElement.style.left = `${_x}px`
+    _unidadeElement.id = `fuzileiro${unidadeIndex}`
+    _unidadeElement.className = 'fuzileiro'
+
+    _unidadeElement.id = `barra-vida${unidadeIndex}`
+    _unidadeElementVida.className = 'barra-vida'
+
+    document.body.appendChild(_unidadeElement)
+    _unidadeElement.appendChild(_unidadeElementVida)
+
     tabelaCaminho[_yposicaoTabela][_xposicaoTabela] = 'B'
+    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
 
     unidadeMensagemColisao.push((_colisao, _inimigo) => {
         let _inimigoIndex = -1
@@ -112,7 +127,7 @@ function criarUnidade() {
                 }
             }
             if (_obstaculoCaminhoTrue) {
-                document.getElementById(_element.id).style.backgroundColor = 'red'
+                document.getElementById(_unidadeElement.id).style.backgroundColor = 'red'
                 document.getElementById(_inimigo[0]).style.backgroundColor = 'red'
                 _alvoTrue = true
                 _alvoTabela.push(_inimigo)
@@ -130,7 +145,7 @@ function criarUnidade() {
         for (let i = 0; i < tabelaColisao.length; i++) {
             for (let e = 0; e < tabelaColisao[i].length; e++) {
                 for (let a = 0; a < tabelaColisao[i][e].length; a++) {
-                    if (tabelaColisao[i][e][a][0] == _element.id) {
+                    if (tabelaColisao[i][e][a][0] == _unidadeElement.id) {
                         tabelaColisao[i][e].splice(a, 1)
                     }
                 }
@@ -140,15 +155,15 @@ function criarUnidade() {
         _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
         _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
         _ycord2 = _y-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRange+(_unidadeTamanho/2)
-        tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_element.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2)])
+        tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         if (Math.floor(_xcord2/tabelaColisaoTamanho) != Math.floor((_xcord1)/tabelaColisaoTamanho)) {
             if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-                tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_element.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2)])
+                tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
             }
-            tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_element.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2)])
+            tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         }
         if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-            tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_element.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2)])
+            tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         }
     }
 
@@ -211,16 +226,15 @@ function criarUnidade() {
                 }
             }
         }
-        _element.style.top = `${_y}px`
-        _element.style.left = `${_x}px`
+        _unidadeElement.style.top = `${_y}px`
+        _unidadeElement.style.left = `${_x}px`
         if (psliderDist <= 70) {
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
+            _atackLoad = setInterval(() => {
+                unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0 ? unidadeInformacao[_atackAlvo[1]][8] = 0 : unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
+            }, _unidadeAtackVelocidade)
         }
-    }
-
-    let _unidadeAtack = () => {
-        alert('Uau tiroteio!!')
     }
 
     let _unidadeVisaoCaminho = () => {
@@ -442,8 +456,8 @@ function criarUnidade() {
                 }
             }
         }
-        _element.style.top = `${_y}px`
-        _element.style.left = `${_x}px`
+        _unidadeElement.style.top = `${_y}px`
+        _unidadeElement.style.left = `${_x}px`
         if (psliderDist <= 5) {
             _caminhoPercorrido + 1 < _caminhotab.length-1 ? _caminhoPercorrido++ : console.log('erro')
         }
@@ -451,17 +465,19 @@ function criarUnidade() {
 
     let _movimentoReto = () => {
         _x++
-        _element.style.left = `${_x}px`
+        _unidadeElement.style.left = `${_x}px`
     }
 
     _caminhoPercorrido = 0
     let _unidadeIntervalo = setInterval(() => {
+        _unidadeVida = unidadeInformacao[_unidadeIndexCopy-1][8]
+        _unidadeElementVida.style.width = `${_unidadeVida}px`
         if (Math.floor(_x/tabelaCaminhoTamanho) != _xposicaoTabela || Math.floor(_y/tabelaCaminhoTamanho) != _yposicaoTabela ) {
         }
         _unidadeColisao()
         _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
         if (_atackTrue) {
-            _unidadeAtack()
+            
         } else if (_alvoTrue) {
             _unidadeColisaoMovimento()
         } else if (_caminhoTrue) {
@@ -469,8 +485,7 @@ function criarUnidade() {
         } else {
             _movimentoReto()
         }
-    }, 10);
-    document.body.appendChild(_element)
+    }, 10)
     unidadeIndex++
 }
 
@@ -581,10 +596,10 @@ criarUnidade()
 //     caminhoAlteracoes++
 // }, 500);
 
-setTimeout(() => {
-    let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
-    let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
-    tabelaCaminho[_ind1][_ind2] = 'B'
-    tabelaCaminho[9][22] = 'B'
-    caminhoAlteracoes++
-}, 5000);
+// setTimeout(() => {
+//     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
+//     let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
+//     tabelaCaminho[_ind1][_ind2] = 'B'
+//     tabelaCaminho[9][22] = 'B'
+//     caminhoAlteracoes++
+// }, 5000);
