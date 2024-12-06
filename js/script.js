@@ -1,6 +1,6 @@
 const tabelaColisao = []
 const tabelaColisaoTamanho = 500
-let unidadeInformacao = []
+let unidadeInformacao = [200]
 let unidadeMensagemColisao = [(_colisao, _inimigo) => {}]
 let unidadeIndex = 1
 let caminhoAlteracoes = 0
@@ -151,6 +151,11 @@ function criarUnidade() {
                 }
             }
         }
+        if (unidadeInformacao[_unidadeIndexCopy][1] == 'morto') {
+            clearInterval(_unidadeIntervalo)
+            document.body.removeChild(_unidadeElement)
+            return
+        }
         _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
         _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
         _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
@@ -232,7 +237,13 @@ function criarUnidade() {
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
-                unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0 ? unidadeInformacao[_atackAlvo[1]][8] = 0 : unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
+                if (unidadeInformacao[_atackAlvo[1]+1][8] - _unidadeAtackDano < 0) {
+                    unidadeInformacao[_atackAlvo[1]+1][8] = 0
+                    unidadeInformacao[_atackAlvo[1]+1][1] = 'morto'
+                    clearInterval(_atackLoad)
+                } else {
+                    unidadeInformacao[_atackAlvo[1]+1][8] -= _unidadeAtackDano
+                }
             }, _unidadeAtackVelocidade)
         }
     }
@@ -459,7 +470,7 @@ function criarUnidade() {
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
         if (psliderDist <= 5) {
-            _caminhoPercorrido + 1 < _caminhotab.length-1 ? _caminhoPercorrido++ : console.log('erro')
+            _caminhoPercorrido+1 < _caminhotab.length-1 ? _caminhoPercorrido++ : console.log('erro')
         }
     }
 
@@ -470,20 +481,23 @@ function criarUnidade() {
 
     _caminhoPercorrido = 0
     let _unidadeIntervalo = setInterval(() => {
-        _unidadeVida = unidadeInformacao[_unidadeIndexCopy-1][8]
+        _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
         _unidadeElementVida.style.width = `${_unidadeVida}px`
-        if (Math.floor(_x/tabelaCaminhoTamanho) != _xposicaoTabela || Math.floor(_y/tabelaCaminhoTamanho) != _yposicaoTabela ) {
-        }
         _unidadeColisao()
-        _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
-        if (_atackTrue) {
-            
-        } else if (_alvoTrue) {
-            _unidadeColisaoMovimento()
-        } else if (_caminhoTrue) {
-            _movimentoCaminho()
+        if ((((1975 - _x) ** 2 + (475 - _y) ** 2) ** 0.5 < 100) || (((1975 - _x) ** 2 + (425 - _y) ** 2) ** 0.5 < 100)) {
         } else {
-            _movimentoReto()
+            _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
+            if (_atackTrue) {
+                
+            } else if (_alvoTrue) {
+                _unidadeColisaoMovimento()
+            } else if (_caminhoTrue) {
+                _movimentoCaminho()
+            } else {
+                _movimentoReto()
+            }
+        }
+        if (Math.floor(_x/tabelaCaminhoTamanho) != _xposicaoTabela || Math.floor(_y/tabelaCaminhoTamanho) != _yposicaoTabela ) {
         }
     }, 10)
     unidadeIndex++
@@ -495,7 +509,7 @@ setInterval(() => {
             if (tabelaColisao[i][e].length > 1) {
                 for (let a = 0; a < tabelaColisao[i][e].length; a++) {
                     for (let x = 0; x < tabelaColisao[i][e].length; x++) {
-                        if (tabelaColisao[i][e][a][2] != tabelaColisao[i][e][x][2] && x != a) {
+                        if (tabelaColisao[i][e][a][2] != tabelaColisao[i][e][x][2] && x != a && unidadeInformacao[tabelaColisao[i][e][x][1]][1] != 'morto' && unidadeInformacao[tabelaColisao[i][e][a][1]][1] != 'morto') {
                             if (tabelaColisao[i][e][a][3] == 'circulo' && tabelaColisao[i][e][x][3] == 'circulo') {
                                 if ((((tabelaColisao[i][e][a][6] - tabelaColisao[i][e][x][6])**2) + ((tabelaColisao[i][e][a][7] - tabelaColisao[i][e][x][7])**2))**0.5 < (tabelaColisao[i][e][a][5] + (tabelaColisao[i][e][x][4]/2))) {
                                     unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
