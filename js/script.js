@@ -256,53 +256,23 @@ function criarUnidade() {
             _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminho[i]))
         }
         let _xytab = [[Math.floor((_y+25)/tabelaCaminhoTamanho), Math.floor((_x+25)/tabelaCaminhoTamanho)]]
-        let e = 1
+        let _e = 1
         let breackWhile = true
         let _xytabInicio = []
         _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
-        while (breackWhile && e < 200) {
+        console.log(isNaN('w'))
+        while (breackWhile && _e < 200) {
             let _xytabSub = []
             let _verificacao = 0
             for (let i = 0; i < _xytab.length; i++) {
-                if (_xytab[i][0]-1 >= 0 && _xytab[i][0]-1 < 20 && _xytab[i][1]-1 >= 0 && _xytab[i][1]-1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]-1] == '.' && _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] == '.' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] == '.' : false) {
-                    _xytabSub.push([_xytab[i][0]-1, _xytab[i][1]-1])
-                    _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]-1] = e
-                    _verificacao++
-                }
-                if (_xytab[i][0]-1 >= 0 && _xytab[i][0]-1 < 20 && _xytab[i][1] >= 0 && _xytab[i][1] < 40 ? _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] == '.' : false) {
-                    _xytabSub.push([_xytab[i][0]-1, _xytab[i][1]])
-                    _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] = e
-                    _verificacao++
-                }
-                if (_xytab[i][0]-1 >= 0 && _xytab[i][0]-1 < 20 && _xytab[i][1]+1 >= 0 && _xytab[i][1]+1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]+1] == '.' && _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] == '.' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+1] == '.' : false) {
-                    _xytabSub.push([_xytab[i][0]-1, _xytab[i][1]+1])
-                    _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]+1] = e
-                    _verificacao++
-                }
-                if (_xytab[i][0] >= 0 && _xytab[i][0] < 20 && _xytab[i][1]-1 >= 0 && _xytab[i][1]-1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] == '.' : false) {
-                    _xytabSub.push([_xytab[i][0], _xytab[i][1]-1])
-                    _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] = e
-                    _verificacao++
-                }
-                if (_xytab[i][0] >= 0 && _xytab[i][0] < 20 && _xytab[i][1]+1 >= 0 && _xytab[i][1]+1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+1] == '.' : false) {
-                    _xytabSub.push([_xytab[i][0], _xytab[i][1]+1])
-                    _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+1] = e
-                    _verificacao++
-                }
-                if (_xytab[i][0]+1 >= 0 && _xytab[i][0]+1 < 20 && _xytab[i][1]-1 >= 0 && _xytab[i][1]-1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]-1] == '.' && _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]] == '.' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] == '.' : false){
-                    _xytabSub.push([_xytab[i][0]+1, _xytab[i][1]-1])
-                    _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]-1] = e
-                    _verificacao++
-                }
-                if (_xytab[i][0]+1 >= 0 && _xytab[i][0]+1 < 20 && _xytab[i][1] >= 0 && _xytab[i][1] < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]] == '.' : false) {
-                    _xytabSub.push([_xytab[i][0]+1, _xytab[i][1]])
-                    _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]] = e
-                    _verificacao++
-                }
-                if (_xytab[i][0]+1 >= 0 && _xytab[i][0]+1 < 20 && _xytab[i][1]+1 >= 0 && _xytab[i][1]+1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]+1] == '.' && _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]] == '.' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+1] == '.' : false) {
-                    _xytabSub.push([_xytab[i][0]+1, _xytab[i][1]+1])
-                    _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]+1] = e
-                    _verificacao++
+                for (let _forI = -1; _forI < 2; _forI++) {
+                    for (let _forE = -1; _forE < 2; _forE++) {
+                        if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
+                            _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
+                            _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
+                            _verificacao++
+                        }
+                    }
                 }
                 if (_xytab[i][0]-1 >= 0 && _xytab[i][0]-1 < 20 && _xytab[i][1]-1 >= 0 && _xytab[i][1]-1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]-1] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] == 'A' : false) {
                     _xytabInicio = [_xytab[i][0]-1, _xytab[i][1]-1]
@@ -361,14 +331,14 @@ function criarUnidade() {
                 _caminhoTrue = true
             }
             _xytab = _xytabSub
-            e++
+            _e++
         }
         let _xytabMin = []
-        let _numtabMin = e+1
+        let _numtabMin = _e+1
         let _numindMin = 0
-        e=0
-        while (true && e < 200) {
-            e++
+        _e=0
+        while (true && _e < 200) {
+            _e++
             if (_xytabInicio[0]-1 >= 0 && _xytabInicio[0]-1 < 20 && _xytabInicio[1]-1 >= 0 && _xytabInicio[1]-1 < 40 ? !isNaN(_tabelaCaminhoCopy[_xytabInicio[0]-1][_xytabInicio[1]-1]) && !isNaN(_tabelaCaminhoCopy[_xytabInicio[0]-1][_xytabInicio[1]]) && !isNaN(_tabelaCaminhoCopy[_xytabInicio[0]][_xytabInicio[1]-1]) : false) {
                 _xytabMin.push([[_xytabInicio[0]-1, _xytabInicio[1]-1], _tabelaCaminhoCopy[_xytabInicio[0]-1][_xytabInicio[1]-1]])
             }
@@ -412,6 +382,8 @@ function criarUnidade() {
             _caminhotab.push(_xytabInicio)
             if (_tabelaCaminhoCopy[_xytabInicio[0]][_xytabInicio[1]] <= 1) {
                 _caminhotab.reverse()
+                console.log(_tabelaCaminhoCopy)
+                console.log(_caminhotab)
                 break
             }
         }
@@ -470,7 +442,7 @@ function criarUnidade() {
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
         if (psliderDist <= 5) {
-            _caminhoPercorrido+1 < _caminhotab.length-1 ? _caminhoPercorrido++ : console.log('erro')
+            _unidadeVisaoCaminho()
         }
     }
 
@@ -595,20 +567,19 @@ setInterval(() => {
 // }, 100);
 
 criarUnidade()
-criarUnidade()
 
 
 // setInterval(() => {
 //     criarUnidade()
 // }, 200)
 
-// setInterval(() => {
-//     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
-//     let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
-//     tabelaCaminho[_ind1][_ind2] = 'B'
-//     tabelaCaminho[9][22] = 'B'
-//     caminhoAlteracoes++
-// }, 500);
+setInterval(() => {
+    let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
+    let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
+    tabelaCaminho[_ind1][_ind2] = 'B'
+    tabelaCaminho[9][22] = 'B'
+    caminhoAlteracoes++
+}, 500);
 
 // setTimeout(() => {
 //     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
