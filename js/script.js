@@ -133,7 +133,7 @@ function criarUnidadeAzul() {
     _unidadeElement.id = `barra-vida${unidadeIndex}`
     _unidadeElementVida.className = 'barra-vida'
 
-    document.body.appendChild(_unidadeElement)
+    document.getElementById('corpo').appendChild(_unidadeElement)
     _unidadeElement.appendChild(_unidadeElementVida)
 
     tabelaCaminhoAzul[_yposicaoTabela][_xposicaoTabela] = 'B'
@@ -181,8 +181,6 @@ function criarUnidadeAzul() {
                 }
             }
             if (_obstaculoCaminhoTrue) {
-                document.getElementById(_unidadeElement.id).style.backgroundColor = 'red'
-                document.getElementById(_inimigo[0]).style.backgroundColor = 'red'
                 _alvoTrue = true
                 _alvoTabela.push(_inimigo)
             } else {
@@ -253,8 +251,13 @@ function criarUnidadeAzul() {
         if (psliderDist <= 70) {
             _chegadaTrue = true
             _atackLoad = setInterval(() => {
-                baseAzulVida -= _unidadeAtackDano
-                baseAzulBarraId.style.width = `${Math.floor(baseAzulVida/3)}px`
+                if (baseVermelhoVida - _unidadeAtackDano < 0) {
+                    baseVermelhoVida = 0
+                    baseVermelhoBarraId.style.width = `${baseVermelhoVida}px`
+                } else {
+                    baseVermelhoVida -= _unidadeAtackDano
+                    baseVermelhoBarraId.style.width = `${Math.floor(baseVermelhoVida/3)}px`
+                }
             }, _unidadeAtackVelocidade)
         }
     }
@@ -271,7 +274,7 @@ function criarUnidadeAzul() {
         }
         if (unidadeInformacao[_unidadeIndexCopy][1] == 'morto') {
             clearInterval(_unidadeIntervalo)
-            document.body.removeChild(_unidadeElement)
+            document.getElementById('corpo').removeChild(_unidadeElement)
             return
         }
         _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
@@ -598,7 +601,7 @@ function criarUnidadeVarmelho() {
     _unidadeElement.id = `barra-vida${unidadeIndex}`
     _unidadeElementVida.className = 'barra-vida'
 
-    document.body.appendChild(_unidadeElement)
+    document.getElementById('corpo').appendChild(_unidadeElement)
     _unidadeElement.appendChild(_unidadeElementVida)
 
     unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
@@ -645,8 +648,6 @@ function criarUnidadeVarmelho() {
                 }
             }
             if (_obstaculoCaminhoTrue) {
-                document.getElementById(_unidadeElement.id).style.backgroundColor = 'red'
-                document.getElementById(_inimigo[0]).style.backgroundColor = 'red'
                 _alvoTrue = true
                 _alvoTabela.push(_inimigo)
             } else {
@@ -717,8 +718,13 @@ function criarUnidadeVarmelho() {
         if (psliderDist <= 70) {
             _chegadaTrue = true
             _atackLoad = setInterval(() => {
-                baseVermelhoVida -= _unidadeAtackDano
-                baseVermelhoBarraId.style.width = `${Math.floor(baseVermelhoVida/3)}px`
+                if (baseVermelhoVida - _unidadeAtackDano < 0) {
+                    baseVermelhoVida = 0
+                    baseVermelhoBarraId.style.width = `${baseVermelhoVida}px`
+                } else {
+                    baseVermelhoVida -= _unidadeAtackDano
+                    baseVermelhoBarraId.style.width = `${Math.floor(baseVermelhoVida/3)}px`
+                }
             }, _unidadeAtackVelocidade)
         }
     }
@@ -735,7 +741,7 @@ function criarUnidadeVarmelho() {
         }
         if (unidadeInformacao[_unidadeIndexCopy][1] == 'morto') {
             clearInterval(_unidadeIntervalo)
-            document.body.removeChild(_unidadeElement)
+            document.getElementById('corpo').removeChild(_unidadeElement)
             return
         }
         _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
@@ -1275,6 +1281,8 @@ setInterval(() => {
 // }, 100)
 
 criarUnidadeAzul()
+criarUnidadeVarmelho()
+criarUnidadeVarmelho()
 criarUnidadeVarmelho()
 criarUnidadeVarmelho()
 

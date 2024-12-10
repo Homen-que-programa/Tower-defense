@@ -2,6 +2,17 @@
     margin: 0;
     padding: 0;
 }
+.alinhar-corpo {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.corpo {
+    position: absolute;
+}
 .base-azul {
     position: absolute;
     width: 100px;
