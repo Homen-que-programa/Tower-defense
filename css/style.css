@@ -19,6 +19,23 @@
     position: absolute;
     background-color: brown;
 }
+.base-vermelho {
+    position: absolute;
+    width: 100px;
+    height: 200px;
+    top: 400px;
+    left: -50px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+}
+.base-vermelho-barra {
+    margin-top: -100px;
+    width: 500px;
+    height: 30px;
+    position: absolute;
+    background-color: brown;
+}
 .quadrado {
     width: 2000px;
     height: 1000px;
