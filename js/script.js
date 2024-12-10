@@ -6,11 +6,11 @@ let unidadeIndex = 1
 let caminhoAlteracoes = 0
 var tabelaVPositions = []
 
-const baseAzulPosition = [450, 1975]
+const baseAzulPosition = [450, 25]
 let baseAzulVida = 1500
 const baseAzulBarraId = document.getElementById('base-azul-barra')
 
-const baseVermelhoPosition = [450, 25]
+const baseVermelhoPosition = [450, 1975]
 let baseVermelhoVida = 1500
 const baseVermelhoBarraId = document.getElementById('base-vermelho-barra')
 
@@ -136,7 +136,7 @@ function criarUnidadeAzul() {
     document.getElementById('corpo').appendChild(_unidadeElement)
     _unidadeElement.appendChild(_unidadeElementVida)
 
-    tabelaCaminhoAzul[_yposicaoTabela][_xposicaoTabela] = 'B'
+    // tabelaCaminhoAzul[_yposicaoTabela][_xposicaoTabela] = 'B'
     unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
 
     unidadeMensagemColisao.push((_colisao, _inimigo) => {
@@ -190,6 +190,7 @@ function criarUnidadeAzul() {
         } else if (_colisao && _inimigoIndex != -1) {
             _alvoTabela[_inimigoIndex][6] = _inimigo[6]
             _alvoTabela[_inimigoIndex][7] = _inimigo[7]
+            _alvoTabela[_inimigoIndex][1] = _inimigo[1]
         } else if (!_colisao && _inimigoIndex != -1) {
             _alvoTabela.splice(_inimigoIndex, 1)
             _alvoTabela.length == 0 ? _alvoTrue = false : 0
@@ -296,6 +297,9 @@ function criarUnidadeAzul() {
     let _unidadeColisaoMovimento = () => {
         if (_alvoTabela.length==0) return
         for (let i = 0; i < _alvoTabela.length; i++) {
+            if (_alvoTabela[i][1] == 'morto') {
+                _alvoTabela.splice(i, 1)
+            }
             if (_alvoTabela[i][3] == 'circulo') {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
@@ -559,6 +563,15 @@ function criarUnidadeAzul() {
     unidadeIndex++
 }
 
+
+
+
+
+
+
+
+
+
 function criarUnidadeVarmelho() {
     let _x = Math.floor(Math.random()*200+1800)
     let _y = Math.floor(Math.random()*950)
@@ -657,6 +670,7 @@ function criarUnidadeVarmelho() {
         } else if (_colisao && _inimigoIndex != -1) {
             _alvoTabela[_inimigoIndex][6] = _inimigo[6]
             _alvoTabela[_inimigoIndex][7] = _inimigo[7]
+            _alvoTabela[_inimigoIndex][1] = _inimigo[1]
         } else if (!_colisao && _inimigoIndex != -1) {
             _alvoTabela.splice(_inimigoIndex, 1)
             _alvoTabela.length == 0 ? _alvoTrue = false : 0
@@ -718,12 +732,12 @@ function criarUnidadeVarmelho() {
         if (psliderDist <= 70) {
             _chegadaTrue = true
             _atackLoad = setInterval(() => {
-                if (baseVermelhoVida - _unidadeAtackDano < 0) {
-                    baseVermelhoVida = 0
-                    baseVermelhoBarraId.style.width = `${baseVermelhoVida}px`
+                if (baseAzulVida - _unidadeAtackDano < 0) {
+                    baseAzulVida = 0
+                    baseAzulBarraId.style.width = `${baseAzulVida}px`
                 } else {
-                    baseVermelhoVida -= _unidadeAtackDano
-                    baseVermelhoBarraId.style.width = `${Math.floor(baseVermelhoVida/3)}px`
+                    baseAzulVida -= _unidadeAtackDano
+                    baseAzulBarraId.style.width = `${Math.floor(baseAzulVida/3)}px`
                 }
             }, _unidadeAtackVelocidade)
         }
@@ -763,6 +777,9 @@ function criarUnidadeVarmelho() {
     let _unidadeColisaoMovimento = () => {
         if (_alvoTabela.length==0) return
         for (let i = 0; i < _alvoTabela.length; i++) {
+            if (_alvoTabela[i][1] == 'morto') {
+                _alvoTabela.splice(i, 1)
+            }
             if (_alvoTabela[i][3] == 'circulo') {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
@@ -1153,27 +1170,27 @@ function atualizarCaminhoVermelho() {
     let _xyVSub = []
     if (_xyVtrue) {
         for (let i = 0; i < 10; i++) {
-            for (let e = 38; e > -1; e--) {
+            for (let e = 0; e < 39; e++) {
                 if (_tabelaCaminhoCopy[9-i][e] == 'V') {
                     _xyVtrue = false
                     i = 100
                     break
                 }
                 if (!isNaN(_tabelaCaminhoCopy[9-i][e])) {
-                    _xyVSub = [9-i, e+1, _tabelaCaminhoCopy[9-i][e+1]]
+                    _xyVSub = [9-i, e-1, _tabelaCaminhoCopy[9-i][e-1]]
                     i = 100
                     break
                 }
             }
             if (i < 10) {
-                for (let e = 38; e > -1; e--) {
+                for (let e = 0; e < 39; e++) {
                     if (_tabelaCaminhoCopy[10+i][e] == 'V') {
                         _xyVtrue = false
                         i = 100
                         break
                     }
                     if (!isNaN(_tabelaCaminhoCopy[10+i][e])) {
-                        _xyVSub = [10+i, e+1, _tabelaCaminhoCopy[10+i][e+1]]
+                        _xyVSub = [10+i, e-1, _tabelaCaminhoCopy[10+i][e-1]]
                         i = 100
                         break
                     }
@@ -1187,6 +1204,7 @@ function atualizarCaminhoVermelho() {
         tabelaVPositions = _xyVSub
     }
     console.log(tabelaCaminhoVermelho)
+    console.log(_tabelaCaminhoCopy)
 }
 
 setInterval(() => {
@@ -1281,6 +1299,9 @@ setInterval(() => {
 // }, 100)
 
 criarUnidadeAzul()
+criarUnidadeAzul()
+criarUnidadeAzul()
+criarUnidadeAzul()
 criarUnidadeVarmelho()
 criarUnidadeVarmelho()
 criarUnidadeVarmelho()
@@ -1302,10 +1323,13 @@ criarUnidadeVarmelho()
 // setTimeout(() => {
 //     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
 //     let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
-//     tabelaCaminho[_ind1][_ind2] = 'B'
-//     tabelaCaminho[9][22] = 'B'
+//     tabelaCaminhoAzul[_ind1][_ind2] = 'B'
+//     tabelaCaminhoVermelho[_ind1][_ind2] = 'B'
+//     tabelaCaminhoAzul[9][22] = 'B'
+//     tabelaCaminhoVermelho[9][22] = 'B'
 //     caminhoAlteracoes++
-//     atualizarCaminho()
+//     atualizarCaminhoAzul()
+//     atualizarCaminhoVermelho()
 // }, 500)
 
 // setTimeout(() => {
