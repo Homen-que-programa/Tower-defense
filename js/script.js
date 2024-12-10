@@ -5,6 +5,10 @@ let unidadeMensagemColisao = [(_colisao, _inimigo) => {}]
 let unidadeIndex = 1
 let caminhoAlteracoes = 0
 
+const baseAzulPosition = [450, 1975]
+let baseAzulVida = 1500
+const baseAzulBarraId = document.getElementById('base-azul-barra')
+
 const tabelaCaminhoTamanho = 50
 const tabelaCaminho = [
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
@@ -35,7 +39,7 @@ for (let i = 0; i < Math.floor(2000/tabelaColisaoTamanho); i++) {
         tabelaColisao[i].push([])
     }
 }
-tabelaColisao[0][0].push(['alvo', 0, 'vermelho', 'circulo', 50, 150, 425, 225])
+tabelaColisao[0][0].push(['alvo', 0, 'vermelho', 'circulo', 50, 150, 525, 225])
 
 function criarUnidade() {
     let _x = Math.floor(Math.random()*200)
@@ -54,9 +58,7 @@ function criarUnidade() {
     let _unidadeIndexCopy = unidadeIndex
 
     let _caminhotab = []
-    let _caminhoPercorrido = Math.floor((_x+25)/tabelaCaminhoTamanho)
     let _caminhoAlteracoesCopy = caminhoAlteracoes
-    let _caminhoTrue = false
 
     let _alvoTrue = false
     let _alvoTabela = []
@@ -65,6 +67,8 @@ function criarUnidade() {
     let _atackTrue = false
     let _atackLoad
     let _atackAlvo
+    
+    let _chegadaTrue = false
 
     let _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
     let _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
@@ -140,6 +144,67 @@ function criarUnidade() {
             _alvoTabela.length == 0 ? _alvoTrue = false : 0
         }
     })
+
+    
+    let _unidadeChegadaMovimento = () => {
+        let _unidadeAlvoXY = [baseAzulPosition[0]-(_unidadeTamanho/2), baseAzulPosition[1]-(_unidadeTamanho/2)]
+        let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+        let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+        psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
+        if (_x > _unidadeAlvoXY[1]) {
+            if (_a < 0) {
+                if (Math.abs(_a) > 1) {
+                    _y += _unidadeVelocidade
+                    _x = (_y - _b) / _a
+                }
+                else {
+                    _x -= _unidadeVelocidade
+                    _y = (_x * _a) + _b
+                }
+            }
+            else {
+                if (Math.abs(_a) > 1) {
+                    _y -= _unidadeVelocidade
+                    _x = (_y - _b) / _a
+                }
+                else {
+                    _x -= _unidadeVelocidade
+                    _y = (_x * _a) + _b
+                }
+            }
+        }
+        else {
+            if (_a < 0) {
+                if (Math.abs(_a) > 1) {
+                    _y -= _unidadeVelocidade
+                    _x = (_y - _b) / _a
+                }
+                else {
+                    _x += _unidadeVelocidade
+                    _y = (_x * _a) + _b
+                }
+            }
+            else {
+                if (Math.abs(_a) > 1) {
+                    _y += _unidadeVelocidade
+                    _x = (_y - _b) / _a
+                }
+                else {
+                    _x += _unidadeVelocidade
+                    _y = (_x * _a) + _b
+                }
+            }
+        }
+        _unidadeElement.style.top = `${_y}px`
+        _unidadeElement.style.left = `${_x}px`
+        if (psliderDist <= 70) {
+            _chegadaTrue = true
+            _atackLoad = setInterval(() => {
+                baseAzulVida -= _unidadeAtackDano
+                baseAzulBarraId.style.width = `${Math.floor(baseAzulVida/3)}px`
+            }, _unidadeAtackVelocidade)
+        }
+    }
 
     let _unidadeColisao = () => {
         for (let i = 0; i < tabelaColisao.length; i++) {
@@ -260,7 +325,6 @@ function criarUnidade() {
         let breackWhile = true
         let _xytabInicio = []
         _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
-        console.log(isNaN('w'))
         while (breackWhile && _e < 200) {
             let _xytabSub = []
             let _verificacao = 0
@@ -274,61 +338,20 @@ function criarUnidade() {
                         }
                     }
                 }
-                if (_xytab[i][0]-1 >= 0 && _xytab[i][0]-1 < 20 && _xytab[i][1]-1 >= 0 && _xytab[i][1]-1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]-1] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0]-1, _xytab[i][1]-1]
-                    breackWhile = false
-                    _verificacao++
-                    break
-                }
-                if (_xytab[i][0]-1 >= 0 && _xytab[i][0]-1 < 20 && _xytab[i][1] >= 0 && _xytab[i][1] < 40 ? _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0]-1, _xytab[i][1]]
-                    breackWhile = false
-                    _verificacao++
-                    break
-                }
-                if (_xytab[i][0]-1 >= 0 && _xytab[i][0]-1 < 20 && _xytab[i][1]+1 >= 0 && _xytab[i][1]+1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]+1] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]-1][_xytab[i][1]] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+1] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0]-1, _xytab[i][1]+1]
-                    breackWhile = false
-                    _verificacao++
-                    break
-                }
-                if (_xytab[i][0] >= 0 && _xytab[i][0] < 20 && _xytab[i][1]-1 >= 0 && _xytab[i][1]-1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0], _xytab[i][1]-1]
-                    breackWhile = false
-                    _verificacao++
-                    break
-                }
-                if (_xytab[i][0] >= 0 && _xytab[i][0] < 20 && _xytab[i][1]+1 >= 0 && _xytab[i][1]+1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+1] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0], _xytab[i][1]+1]
-                    breackWhile = false
-                    _verificacao++
-                    break
-                }
-                if (_xytab[i][0]+1 >= 0 && _xytab[i][0]+1 < 20 && _xytab[i][1]-1 >= 0 && _xytab[i][1]-1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]-1] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]-1] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0]+1, _xytab[i][1]-1]
-                    breackWhile = false
-                    _verificacao++
-                    break
-                }
-                if (_xytab[i][0]+1 >= 0 && _xytab[i][0]+1 < 20 && _xytab[i][1] >= 0 && _xytab[i][1] < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0]+1, _xytab[i][1]]
-                    breackWhile = false
-                    _verificacao++
-                    break
-                }
-                if (_xytab[i][0]+1 >= 0 && _xytab[i][0]+1 < 20 && _xytab[i][1]+1 >= 0 && _xytab[i][1]+1 < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]+1] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]+1][_xytab[i][1]] == 'A' && _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+1] == 'A' : false) {
-                    _xytabInicio = [_xytab[i][0]+1, _xytab[i][1]+1]
-                    breackWhile = false
-                    _verificacao++
-                    break
+                for (let _forI = -1; _forI < 2; _forI++) {
+                    for (let _forE = -1; _forE < 2; _forE++) {
+                        if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
+                            _xytabInicio = [_xytab[i][0]+_forI, _xytab[i][1]+_forE]
+                            breackWhile = false
+                            _verificacao++
+                            break
+                        }
+                    }
                 }
             }
             if (_verificacao == 0) {
                 breackWhile = false
-                _caminhoTrue = false
                 return
-            } else {
-                _caminhoTrue = true
             }
             _xytab = _xytabSub
             _e++
@@ -382,8 +405,6 @@ function criarUnidade() {
             _caminhotab.push(_xytabInicio)
             if (_tabelaCaminhoCopy[_xytabInicio[0]][_xytabInicio[1]] <= 1) {
                 _caminhotab.reverse()
-                console.log(_tabelaCaminhoCopy)
-                console.log(_caminhotab)
                 break
             }
         }
@@ -391,7 +412,7 @@ function criarUnidade() {
     _unidadeVisaoCaminho()
 
     let _movimentoCaminho = () => {
-        let _unidadeAlvoXY = [Math.max(_caminhotab[_caminhoPercorrido][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[_caminhoPercorrido][1]*tabelaCaminhoTamanho)]
+        let _unidadeAlvoXY = [Math.max(_caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
         let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
         let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
@@ -446,30 +467,25 @@ function criarUnidade() {
         }
     }
 
-    let _movimentoReto = () => {
-        _x++
-        _unidadeElement.style.left = `${_x}px`
-    }
-
-    _caminhoPercorrido = 0
     let _unidadeIntervalo = setInterval(() => {
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
         _unidadeElementVida.style.width = `${_unidadeVida}px`
         _unidadeColisao()
-        if ((((1975 - _x) ** 2 + (475 - _y) ** 2) ** 0.5 < 100) || (((1975 - _x) ** 2 + (425 - _y) ** 2) ** 0.5 < 100)) {
-        } else {
-            _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
-            if (_atackTrue) {
-                
-            } else if (_alvoTrue) {
-                _unidadeColisaoMovimento()
-            } else if (_caminhoTrue) {
-                _movimentoCaminho()
+        if (!_chegadaTrue) {
+            if ((((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]+25) - _y) ** 2) ** 0.5 < 100) || (((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]-25) - _y) ** 2) ** 0.5 < 100)) {
+                _unidadeChegadaMovimento()
             } else {
-                _movimentoReto()
+                _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
+                if (_atackTrue) {
+                    
+                } else if (_alvoTrue) {
+                    _unidadeColisaoMovimento()
+                } else {
+                    _movimentoCaminho()
+                }
             }
-        }
-        if (Math.floor(_x/tabelaCaminhoTamanho) != _xposicaoTabela || Math.floor(_y/tabelaCaminhoTamanho) != _yposicaoTabela ) {
+            if (Math.floor(_x/tabelaCaminhoTamanho) != _xposicaoTabela || Math.floor(_y/tabelaCaminhoTamanho) != _yposicaoTabela) {
+            }
         }
     }, 10)
     unidadeIndex++
@@ -495,7 +511,91 @@ setInterval(() => {
             }
         }
     }
-}, 100);
+}, 100)
+
+var tabelaVPositions = []
+
+function atualizarCaminho() {
+    _caminhoAlteracoesCopy = caminhoAlteracoes
+    let _x = 0
+    let _y = 500
+    let _tabelaCaminhoCopy = []
+    let _xytab = [[Math.floor((_y+25)/tabelaCaminhoTamanho), Math.floor((_x+25)/tabelaCaminhoTamanho)]]
+    let _e = 1
+    let breackWhile = true
+    let _xyVtrue = true
+    for (let i = 0; i < tabelaCaminho.length; i++) {
+        _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminho[i]))
+    }
+    _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
+    while (breackWhile && _e < 200) {
+        let _xytabSub = []
+        let _verificacao = 0
+        for (let i = 0; i < _xytab.length; i++) {
+            for (let _forI = -1; _forI < 2; _forI++) {
+                for (let _forE = -1; _forE < 2; _forE++) {
+                    if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
+                        _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
+                        _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
+                        _verificacao++
+                    }
+                }
+            }
+            for (let _forI = -1; _forI < 2; _forI++) {
+                for (let _forE = -1; _forE < 2; _forE++) {
+                    if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
+                        _verificacao++
+                        break
+                    }
+                }
+            }
+        }
+        if (_verificacao == 0) {
+            breackWhile = false
+            _xyVtrue
+            break
+        }
+        _xytab = _xytabSub
+        _e++
+    }
+    let _xyVSub = []
+    if (_xyVtrue) {
+        for (let i = 0; i < 10; i++) {
+            for (let e = 38; e > -1; e--) {
+                if (_tabelaCaminhoCopy[9-i][e] == 'V') {
+                    _xyVtrue = false
+                    i = 100
+                    break
+                }
+                if (!isNaN(_tabelaCaminhoCopy[9-i][e])) {
+                    _xyVSub = [9-i, e+1, _tabelaCaminhoCopy[9-i][e+1]]
+                    i = 100
+                    break
+                }
+            }
+            if (i < 10) {
+                for (let e = 38; e > -1; e--) {
+                    if (_tabelaCaminhoCopy[10+i][e] == 'V') {
+                        _xyVtrue = false
+                        i = 100
+                        break
+                    }
+                    if (!isNaN(_tabelaCaminhoCopy[10+i][e])) {
+                        _xyVSub = [10+i, e+1, _tabelaCaminhoCopy[10+i][e+1]]
+                        i = 100
+                        break
+                    }
+                }
+            }
+        }
+    }
+    if (_xyVtrue) {
+        tabelaCaminho[_xyVSub[0]][_xyVSub[1]] = 'V'
+        tabelaVPositions.length > 0 ? tabelaCaminho[tabelaVPositions[0]][tabelaVPositions[1]] = tabelaVPositions[2] : 0
+        tabelaVPositions = _xyVSub
+    }
+    console.log(tabelaCaminho)
+}
 
 // setInterval(() => {
 //     for (let i = 0; i < tabelaColisao.length; i++) {
@@ -564,22 +664,20 @@ setInterval(() => {
 //             }
 //         }
 //     }
-// }, 100);
-
-criarUnidade()
-
+// }, 100)
 
 // setInterval(() => {
 //     criarUnidade()
 // }, 200)
 
-setInterval(() => {
-    let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
-    let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
-    tabelaCaminho[_ind1][_ind2] = 'B'
-    tabelaCaminho[9][22] = 'B'
-    caminhoAlteracoes++
-}, 500);
+// setInterval(() => {
+//     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
+//     let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
+//     tabelaCaminho[_ind1][_ind2] = 'B'
+//     tabelaCaminho[9][22] = 'B'
+//     caminhoAlteracoes++
+//     atualizarCaminho()
+// }, 500)
 
 // setTimeout(() => {
 //     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
@@ -587,4 +685,11 @@ setInterval(() => {
 //     tabelaCaminho[_ind1][_ind2] = 'B'
 //     tabelaCaminho[9][22] = 'B'
 //     caminhoAlteracoes++
-// }, 5000);
+//     atualizarCaminho()
+// }, 500)
+
+// setTimeout(() => {
+//     tabelaCaminho[9][22] = '.'
+//     caminhoAlteracoes++
+//     atualizarCaminho()
+// }, 5000)
