@@ -296,16 +296,27 @@ function criarUnidadeAzul() {
 
     let _unidadeColisaoMovimento = () => {
         if (_alvoTabela.length==0) return
+        let algo = 0
         for (let i = 0; i < _alvoTabela.length; i++) {
             if (_alvoTabela[i][1] == 'morto') {
                 _alvoTabela.splice(i, 1)
+                if (_alvoTabela.length==0) {
+                    _monerDistancia = [0, 1000]
+                    return
+                }
             }
             if (_alvoTabela[i][3] == 'circulo') {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
                     _monerDistancia[0] = i
+                    algo=1
                 }
             }
+        }
+        if (algo==1) {
+            console.log(_monerDistancia[0])
+        } else {
+            console.log('erro')
         }
 
         let _unidadeAlvoXY = [_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2), _alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2)]
@@ -379,6 +390,7 @@ function criarUnidadeAzul() {
                 }
             }, _unidadeAtackVelocidade)
         }
+        _monerDistancia = [0, 1000]
     }
 
     let _unidadeVisaoCaminho = () => {
@@ -480,7 +492,7 @@ function criarUnidadeAzul() {
     _unidadeVisaoCaminho()
 
     let _movimentoCaminho = () => {
-        let _unidadeAlvoXY = [Math.max(_caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
+        let _unidadeAlvoXY = [Math.max(1, _caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
         let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
         let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
@@ -776,16 +788,27 @@ function criarUnidadeVarmelho() {
 
     let _unidadeColisaoMovimento = () => {
         if (_alvoTabela.length==0) return
+        let algo = 0
         for (let i = 0; i < _alvoTabela.length; i++) {
             if (_alvoTabela[i][1] == 'morto') {
                 _alvoTabela.splice(i, 1)
+                if (_alvoTabela.length==0) {
+                    _monerDistancia = [0, 1000]
+                    return
+                }
             }
             if (_alvoTabela[i][3] == 'circulo') {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
                     _monerDistancia[0] = i
+                    algo=1
                 }
             }
+        }
+        if (algo==1) {
+            console.log(_monerDistancia[0])
+        } else {
+            console.log('erro')
         }
 
         let _unidadeAlvoXY = [_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2), _alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2)]
@@ -859,6 +882,7 @@ function criarUnidadeVarmelho() {
                 }
             }, _unidadeAtackVelocidade)
         }
+        _monerDistancia = [0, 1000]
     }
 
     let _unidadeVisaoCaminho = () => {
@@ -960,7 +984,7 @@ function criarUnidadeVarmelho() {
     _unidadeVisaoCaminho()
 
     let _movimentoCaminho = () => {
-        let _unidadeAlvoXY = [Math.max(_caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
+        let _unidadeAlvoXY = [Math.max(1, _caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
         let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
         let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
@@ -1301,11 +1325,11 @@ setInterval(() => {
 criarUnidadeAzul()
 criarUnidadeAzul()
 criarUnidadeAzul()
-criarUnidadeAzul()
+// criarUnidadeAzul()
 criarUnidadeVarmelho()
 criarUnidadeVarmelho()
 criarUnidadeVarmelho()
-criarUnidadeVarmelho()
+// criarUnidadeVarmelho()
 
 // setInterval(() => {
 //     criarUnidadeAzul()
