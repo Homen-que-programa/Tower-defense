@@ -47,8 +47,8 @@ const tabelaCaminhoAzul = [
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'A'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'A'],
+    ['C', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'A'],
+    ['C', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'A'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
@@ -69,8 +69,8 @@ const tabelaCaminhoVermelho = [
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['A', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['A', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+    ['A', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'C'],
+    ['A', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'C'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
@@ -91,9 +91,9 @@ for (let i = 0; i < Math.floor(2000/tabelaColisaoTamanho); i++) {
 
 // tabelaColisao[0][0].push(['alvo', 0, 'vermelho', 'circulo', 50, 150, 525, 225])
 
-function criarUnidadeAzul() {
-    let _x = Math.floor(Math.random()*200)
-    let _y = Math.floor(Math.random()*950)
+function criarUnidadeAzul(x, y) {
+    let _x = x
+    let _y = y
     let _xposicaoTabela = Math.floor(_x/tabelaCaminhoTamanho)
     let _yposicaoTabela = Math.floor(_y/tabelaCaminhoTamanho)
     let _unidadeElement = document.createElement('div')
@@ -296,7 +296,6 @@ function criarUnidadeAzul() {
 
     let _unidadeColisaoMovimento = () => {
         if (_alvoTabela.length==0) return
-        let algo = 0
         for (let i = 0; i < _alvoTabela.length; i++) {
             if (_alvoTabela[i][1] == 'morto') {
                 _alvoTabela.splice(i, 1)
@@ -309,14 +308,8 @@ function criarUnidadeAzul() {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
                     _monerDistancia[0] = i
-                    algo=1
                 }
             }
-        }
-        if (algo==1) {
-            console.log(_monerDistancia[0])
-        } else {
-            console.log('erro')
         }
 
         let _unidadeAlvoXY = [_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2), _alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2)]
@@ -420,7 +413,7 @@ function criarUnidadeAzul() {
                 }
                 for (let _forI = -1; _forI < 2; _forI++) {
                     for (let _forE = -1; _forE < 2; _forE++) {
-                        if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
+                        if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') : false) {
                             _xytabInicio = [_xytab[i][0]+_forI, _xytab[i][1]+_forE]
                             breackWhile = false
                             _verificacao++
@@ -431,6 +424,16 @@ function criarUnidadeAzul() {
             }
             if (_verificacao == 0) {
                 breackWhile = false
+                for (let e = 0; e < _tabelaCaminhoCopy.length; e++) {
+                    for (let a = 0; a < _tabelaCaminhoCopy[e].length; a++) {
+                        if (_tabelaCaminhoCopy[e][a] === 'N') {
+                            tabelaCaminhoVermelho[e][a] = 'V'
+                            tabelaCaminhoAzul[e][a] = 'V'
+                        }
+                    }
+                }
+                _unidadeVisaoCaminho()
+                caminhoAlteracoes++
                 return
             }
             _xytab = _xytabSub
@@ -551,6 +554,7 @@ function criarUnidadeAzul() {
         if (unidadeInformacao[_unidadeIndexCopy][8] <= 0) {
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
+            console.log('morreu')
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
         _unidadeElementVida.style.width = `${_unidadeVida}px`
@@ -574,6 +578,16 @@ function criarUnidadeAzul() {
     }, 10)
     unidadeIndex++
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -788,7 +802,6 @@ function criarUnidadeVarmelho() {
 
     let _unidadeColisaoMovimento = () => {
         if (_alvoTabela.length==0) return
-        let algo = 0
         for (let i = 0; i < _alvoTabela.length; i++) {
             if (_alvoTabela[i][1] == 'morto') {
                 _alvoTabela.splice(i, 1)
@@ -801,14 +814,8 @@ function criarUnidadeVarmelho() {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
                     _monerDistancia[0] = i
-                    algo=1
                 }
             }
-        }
-        if (algo==1) {
-            console.log(_monerDistancia[0])
-        } else {
-            console.log('erro')
         }
 
         let _unidadeAlvoXY = [_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2), _alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2)]
@@ -912,7 +919,7 @@ function criarUnidadeVarmelho() {
                 }
                 for (let _forI = -1; _forI < 2; _forI++) {
                     for (let _forE = -1; _forE < 2; _forE++) {
-                        if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
+                        if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') : false) {
                             _xytabInicio = [_xytab[i][0]+_forI, _xytab[i][1]+_forE]
                             breackWhile = false
                             _verificacao++
@@ -923,6 +930,16 @@ function criarUnidadeVarmelho() {
             }
             if (_verificacao == 0) {
                 breackWhile = false
+                for (let e = 0; e < _tabelaCaminhoCopy.length; e++) {
+                    for (let a = 0; a < _tabelaCaminhoCopy[e].length; a++) {
+                        if (_tabelaCaminhoCopy[e][a] === 'N') {
+                            tabelaCaminhoVermelho[e][a] = 'V'
+                            tabelaCaminhoAzul[e][a] = 'V'
+                        }
+                    }
+                }
+                _unidadeVisaoCaminho()
+                caminhoAlteracoes++
                 return
             }
             _xytab = _xytabSub
@@ -1043,6 +1060,7 @@ function criarUnidadeVarmelho() {
         if (unidadeInformacao[_unidadeIndexCopy][8] <= 0) {
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
+            console.log('morreu')
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
         _unidadeElementVida.style.width = `${_unidadeVida}px`
@@ -1067,169 +1085,191 @@ function criarUnidadeVarmelho() {
     unidadeIndex++
 }
 
-function atualizarCaminhoAzul() {
-    _caminhoAlteracoesCopy = caminhoAlteracoes
-    let _x = 0
-    let _y = 500
-    let _tabelaCaminhoCopy = []
-    let _xytab = [[Math.floor((_y+25)/tabelaCaminhoTamanho), Math.floor((_x+25)/tabelaCaminhoTamanho)]]
-    let _e = 1
-    let breackWhile = true
-    let _xyVtrue = true
-    for (let i = 0; i < tabelaCaminhoAzul.length; i++) {
-        _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminhoAzul[i]))
-    }
-    _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
-    while (breackWhile && _e < 200) {
-        let _xytabSub = []
-        let _verificacao = 0
-        for (let i = 0; i < _xytab.length; i++) {
-            for (let _forI = -1; _forI < 2; _forI++) {
-                for (let _forE = -1; _forE < 2; _forE++) {
-                    if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
-                        _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
-                        _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
-                        _verificacao++
-                    }
-                }
-            }
-            for (let _forI = -1; _forI < 2; _forI++) {
-                for (let _forE = -1; _forE < 2; _forE++) {
-                    if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
-                        _verificacao++
-                        break
-                    }
-                }
-            }
-        }
-        if (_verificacao == 0) {
-            breackWhile = false
-            _xyVtrue
-            break
-        }
-        _xytab = _xytabSub
-        _e++
-    }
-    let _xyVSub = []
-    if (_xyVtrue) {
-        for (let i = 0; i < 10; i++) {
-            for (let e = 38; e > -1; e--) {
-                if (_tabelaCaminhoCopy[9-i][e] == 'V') {
-                    _xyVtrue = false
-                    i = 100
-                    break
-                }
-                if (!isNaN(_tabelaCaminhoCopy[9-i][e])) {
-                    _xyVSub = [9-i, e+1, _tabelaCaminhoCopy[9-i][e+1]]
-                    i = 100
-                    break
-                }
-            }
-            if (i < 10) {
-                for (let e = 38; e > -1; e--) {
-                    if (_tabelaCaminhoCopy[10+i][e] == 'V') {
-                        _xyVtrue = false
-                        i = 100
-                        break
-                    }
-                    if (!isNaN(_tabelaCaminhoCopy[10+i][e])) {
-                        _xyVSub = [10+i, e+1, _tabelaCaminhoCopy[10+i][e+1]]
-                        i = 100
-                        break
-                    }
-                }
+
+
+
+
+
+
+
+function atualizarCaminho() {
+    for (let e = 0; e < tabelaCaminhoVermelho.length; e++) {
+        for (let a = 0; a < tabelaCaminhoVermelho[e].length; a++) {
+            if (tabelaCaminhoVermelho[e][a] === 'N') {
+                tabelaCaminhoVermelho[e][a] = 'B'
+                tabelaCaminhoAzul[e][a] = 'B'
             }
         }
     }
-    if (_xyVtrue) {
-        tabelaCaminhoAzul[_xyVSub[0]][_xyVSub[1]] = 'V'
-        tabelaVPositions.length > 0 ? tabelaCaminhoAzul[tabelaVPositions[0]][tabelaVPositions[1]] = tabelaVPositions[2] : 0
-        tabelaVPositions = _xyVSub
-    }
-    console.log(tabelaCaminhoAzul)
+    caminhoAlteracoes++
 }
-function atualizarCaminhoVermelho() {
-    _caminhoAlteracoesCopy = caminhoAlteracoes
-    let _x = 2000
-    let _y = 500
-    let _tabelaCaminhoCopy = []
-    let _xytab = [[Math.floor((_y+25)/tabelaCaminhoTamanho), Math.floor((_x+25)/tabelaCaminhoTamanho)]]
-    let _e = 1
-    let breackWhile = true
-    let _xyVtrue = true
-    for (let i = 0; i < tabelaCaminhoVermelho.length; i++) {
-        _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminhoVermelho[i]))
-    }
-    _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
-    while (breackWhile && _e < 200) {
-        let _xytabSub = []
-        let _verificacao = 0
-        for (let i = 0; i < _xytab.length; i++) {
-            for (let _forI = -1; _forI < 2; _forI++) {
-                for (let _forE = -1; _forE < 2; _forE++) {
-                    if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
-                        _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
-                        _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
-                        _verificacao++
-                    }
-                }
-            }
-            for (let _forI = -1; _forI < 2; _forI++) {
-                for (let _forE = -1; _forE < 2; _forE++) {
-                    if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
-                        _verificacao++
-                        break
-                    }
-                }
-            }
-        }
-        if (_verificacao == 0) {
-            breackWhile = false
-            _xyVtrue
-            break
-        }
-        _xytab = _xytabSub
-        _e++
-    }
-    let _xyVSub = []
-    if (_xyVtrue) {
-        for (let i = 0; i < 10; i++) {
-            for (let e = 0; e < 39; e++) {
-                if (_tabelaCaminhoCopy[9-i][e] == 'V') {
-                    _xyVtrue = false
-                    i = 100
-                    break
-                }
-                if (!isNaN(_tabelaCaminhoCopy[9-i][e])) {
-                    _xyVSub = [9-i, e-1, _tabelaCaminhoCopy[9-i][e-1]]
-                    i = 100
-                    break
-                }
-            }
-            if (i < 10) {
-                for (let e = 0; e < 39; e++) {
-                    if (_tabelaCaminhoCopy[10+i][e] == 'V') {
-                        _xyVtrue = false
-                        i = 100
-                        break
-                    }
-                    if (!isNaN(_tabelaCaminhoCopy[10+i][e])) {
-                        _xyVSub = [10+i, e-1, _tabelaCaminhoCopy[10+i][e-1]]
-                        i = 100
-                        break
-                    }
-                }
-            }
-        }
-    }
-    if (_xyVtrue) {
-        tabelaCaminhoVermelho[_xyVSub[0]][_xyVSub[1]] = 'V'
-        tabelaVPositions.length > 0 ? tabelaCaminhoVermelho[tabelaVPositions[0]][tabelaVPositions[1]] = tabelaVPositions[2] : 0
-        tabelaVPositions = _xyVSub
-    }
-    console.log(tabelaCaminhoVermelho)
-    console.log(_tabelaCaminhoCopy)
-}
+
+
+
+
+// function atualizarCaminhoAzul() {
+//     _caminhoAlteracoesCopy = caminhoAlteracoes
+//     let _x = 0
+//     let _y = 500
+//     let _tabelaCaminhoCopy = []
+//     let _xytab = [[Math.floor((_y+25)/tabelaCaminhoTamanho), Math.floor((_x+25)/tabelaCaminhoTamanho)]]
+//     let _e = 1
+//     let breackWhile = true
+//     let _xyVtrue = true
+//     for (let i = 0; i < tabelaCaminhoAzul.length; i++) {
+//         _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminhoAzul[i]))
+//     }
+//     _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
+//     while (breackWhile && _e < 200) {
+//         let _xytabSub = []
+//         let _verificacao = 0
+//         for (let i = 0; i < _xytab.length; i++) {
+//             for (let _forI = -1; _forI < 2; _forI++) {
+//                 for (let _forE = -1; _forE < 2; _forE++) {
+//                     if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
+//                         _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
+//                         _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
+//                         _verificacao++
+//                     }
+//                 }
+//             }
+//             for (let _forI = -1; _forI < 2; _forI++) {
+//                 for (let _forE = -1; _forE < 2; _forE++) {
+//                     if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
+//                         _verificacao++
+//                         break
+//                     }
+//                 }
+//             }
+//         }
+//         if (_verificacao == 0) {
+//             breackWhile = false
+//             _xyVtrue
+//             break
+//         }
+//         _xytab = _xytabSub
+//         _e++
+//     }
+//     let _xyVSub = []
+//     if (_xyVtrue) {
+//         for (let i = 0; i < 10; i++) {
+//             for (let e = 38; e > -1; e--) {
+//                 if (_tabelaCaminhoCopy[9-i][e] == 'V') {
+//                     _xyVtrue = false
+//                     i = 100
+//                     break
+//                 }
+//                 if (!isNaN(_tabelaCaminhoCopy[9-i][e])) {
+//                     _xyVSub = [9-i, e+1, _tabelaCaminhoCopy[9-i][e+1]]
+//                     i = 100
+//                     break
+//                 }
+//             }
+//             if (i < 10) {
+//                 for (let e = 38; e > -1; e--) {
+//                     if (_tabelaCaminhoCopy[10+i][e] == 'V') {
+//                         _xyVtrue = false
+//                         i = 100
+//                         break
+//                     }
+//                     if (!isNaN(_tabelaCaminhoCopy[10+i][e])) {
+//                         _xyVSub = [10+i, e+1, _tabelaCaminhoCopy[10+i][e+1]]
+//                         i = 100
+//                         break
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     if (_xyVtrue) {
+//         tabelaCaminhoAzul[_xyVSub[0]][_xyVSub[1]] = 'V'
+//         tabelaVPositions.length > 0 ? tabelaCaminhoAzul[tabelaVPositions[0]][tabelaVPositions[1]] = tabelaVPositions[2] : 0
+//         tabelaVPositions = _xyVSub
+//     }
+//     console.log(tabelaCaminhoAzul)
+// }
+// function atualizarCaminhoVermelho() {
+//     _caminhoAlteracoesCopy = caminhoAlteracoes
+//     let _x = 2000
+//     let _y = 500
+//     let _tabelaCaminhoCopy = []
+//     let _xytab = [[Math.floor((_y+25)/tabelaCaminhoTamanho), Math.floor((_x+25)/tabelaCaminhoTamanho)]]
+//     let _e = 1
+//     let breackWhile = true
+//     let _xyVtrue = true
+//     for (let i = 0; i < tabelaCaminhoVermelho.length; i++) {
+//         _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminhoVermelho[i]))
+//     }
+//     _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
+//     while (breackWhile && _e < 200) {
+//         let _xytabSub = []
+//         let _verificacao = 0
+//         for (let i = 0; i < _xytab.length; i++) {
+//             for (let _forI = -1; _forI < 2; _forI++) {
+//                 for (let _forE = -1; _forE < 2; _forE++) {
+//                     if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
+//                         _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
+//                         _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
+//                         _verificacao++
+//                     }
+//                 }
+//             }
+//             for (let _forI = -1; _forI < 2; _forI++) {
+//                 for (let _forE = -1; _forE < 2; _forE++) {
+//                     if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'A' || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == 'V') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.') && (!isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forE][_xytab[i][1]]) || _tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.') : false) {
+//                         _verificacao++
+//                         break
+//                     }
+//                 }
+//             }
+//         }
+//         if (_verificacao == 0) {
+//             breackWhile = false
+//             _xyVtrue
+//             break
+//         }
+//         _xytab = _xytabSub
+//         _e++
+//     }
+//     let _xyVSub = []
+//     if (_xyVtrue) {
+//         for (let i = 0; i < 10; i++) {
+//             for (let e = 0; e < 39; e++) {
+//                 if (_tabelaCaminhoCopy[9-i][e] == 'V') {
+//                     _xyVtrue = false
+//                     i = 100
+//                     break
+//                 }
+//                 if (!isNaN(_tabelaCaminhoCopy[9-i][e])) {
+//                     _xyVSub = [9-i, e-1, _tabelaCaminhoCopy[9-i][e-1]]
+//                     i = 100
+//                     break
+//                 }
+//             }
+//             if (i < 10) {
+//                 for (let e = 0; e < 39; e++) {
+//                     if (_tabelaCaminhoCopy[10+i][e] == 'V') {
+//                         _xyVtrue = false
+//                         i = 100
+//                         break
+//                     }
+//                     if (!isNaN(_tabelaCaminhoCopy[10+i][e])) {
+//                         _xyVSub = [10+i, e-1, _tabelaCaminhoCopy[10+i][e-1]]
+//                         i = 100
+//                         break
+//                     }
+//                 }
+//             }
+//         }
+//     }
+//     if (_xyVtrue) {
+//         tabelaCaminhoVermelho[_xyVSub[0]][_xyVSub[1]] = 'V'
+//         tabelaVPositions.length > 0 ? tabelaCaminhoVermelho[tabelaVPositions[0]][tabelaVPositions[1]] = tabelaVPositions[2] : 0
+//         tabelaVPositions = _xyVSub
+//     }
+//     console.log(tabelaCaminhoVermelho)
+//     console.log(_tabelaCaminhoCopy)
+// }
 
 setInterval(() => {
     for (let i = 0; i < tabelaColisao.length; i++) {
@@ -1322,42 +1362,51 @@ setInterval(() => {
 //     }
 // }, 100)
 
-criarUnidadeAzul()
-criarUnidadeAzul()
-criarUnidadeAzul()
 // criarUnidadeAzul()
-criarUnidadeVarmelho()
-criarUnidadeVarmelho()
-criarUnidadeVarmelho()
+// criarUnidadeAzul()
+// criarUnidadeAzul()
+// criarUnidadeAzul()
+// criarUnidadeVarmelho()
+// criarUnidadeVarmelho()
+// criarUnidadeVarmelho()
 // criarUnidadeVarmelho()
 
 // setInterval(() => {
 //     criarUnidadeAzul()
 // }, 200)
-
 // setInterval(() => {
-//     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
-//     let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
-//     tabelaCaminho[_ind1][_ind2] = 'B'
-//     tabelaCaminho[9][22] = 'B'
-//     caminhoAlteracoes++
-//     atualizarCaminho()
-// }, 500)
+//     criarUnidadeVarmelho()
+// }, 200)
+
+// let ababa = 0
+// setInterval(() => {
+//     if (ababa < 150) {
+//         ababa++
+//         criarUnidadeVarmelho()
+//     }
+// }, 1)
+// let ababa2 = 0
+// setInterval(() => {
+//     if (ababa2 < 150) {
+//         ababa2++
+//         criarUnidadeAzul()
+//     }
+// }, 1)
 
 // setTimeout(() => {
 //     let _ind1 = Math.floor(Math.random()*(tabelaCaminho.length-1))
 //     let _ind2 = Math.floor(Math.random()*(tabelaCaminho[_ind1].length-1))
-//     tabelaCaminhoAzul[_ind1][_ind2] = 'B'
-//     tabelaCaminhoVermelho[_ind1][_ind2] = 'B'
-//     tabelaCaminhoAzul[9][22] = 'B'
-//     tabelaCaminhoVermelho[9][22] = 'B'
+//     atualizarCaminho()
+//     tabelaCaminhoAzul[_ind1][_ind2] = 'N'
+//     tabelaCaminhoVermelho[_ind1][_ind2] = 'N'
+//     tabelaCaminhoAzul[9][22] = 'N'
+//     tabelaCaminhoVermelho[9][22] = 'N'
 //     caminhoAlteracoes++
-//     atualizarCaminhoAzul()
-//     atualizarCaminhoVermelho()
 // }, 500)
 
 // setTimeout(() => {
-//     tabelaCaminho[9][22] = '.'
-//     caminhoAlteracoes++
 //     atualizarCaminho()
-// }, 5000)
+//     tabelaCaminhoAzul[9][22] = 'N'
+//     tabelaCaminhoVermelho[9][22] = 'N'
+//     caminhoAlteracoes++
+// }, 2000)
