@@ -6,11 +6,11 @@ let unidadeIndex = 1
 let caminhoAlteracoes = 0
 var tabelaVPositions = []
 
-const baseAzulPosition = [450, 25]
+const baseAzulPosition = [450, 1975]
 let baseAzulVida = 1500
 const baseAzulBarraId = document.getElementById('base-azul-barra')
 
-const baseVermelhoPosition = [450, 1975]
+const baseVermelhoPosition = [450, 25]
 let baseVermelhoVida = 1500
 const baseVermelhoBarraId = document.getElementById('base-vermelho-barra')
 
