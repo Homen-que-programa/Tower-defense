@@ -5,23 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" defer></script>
+    <script src="js/laterais.js"></script>
     <title>Tower defence muito bom</title>
 </head>
 <body>
     <div class="alinhar-buttons">
-        <div class="button-soldados" id="button-soldados">
+        <div class="button-soldados" id="button-soldados" onclick="abrirLateral(0)">
             <div class="icone"></div>
         </div>
-        <div class="button-brocas" id="button-brocas">
+        <div class="button-brocas" id="button-brocas" onclick="abrirLateral(1)">
             <div class="icone"></div>
         </div>
     </div>
     <div class="alinhar-corpo">
-        <div class="lateral-soldados" id="lateral-soldados">
-
-        </div>
-        <div class="lateral-brocas" id="lateral-brocas">
-
+        <div class="lateral">
+            <div class="lateral-soldados" id="lateral-soldados"></div>
+            <div class="lateral-brocas" id="lateral-brocas"></div>
         </div>
         <div class="corpo" id="corpo">
             <div class="base-azul" id="base-azul">
