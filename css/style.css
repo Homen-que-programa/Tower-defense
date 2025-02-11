@@ -2,12 +2,45 @@
     margin: 0;
     padding: 0;
 }
+#memoria {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+}
 .alinhar-buttons {
-    width: 100vw;
+    width: calc(100vw - 50px);
     position: absolute;
     top: 0;
     left: 0;
     display: flex;
+    justify-content: space-between;
+}
+.esquerda {
+    display: flex;
+}
+.direita {
+    display: flex;
+}
+.meio {
+    display: flex;
+    gap: 50px;
+}
+.recursos {
+    padding: 50px;
+    display: flex;
+    font-size: 60px;
+    font-weight: 700;
+    background-color: darkkhaki;
+    border: 10px solid rgb(122, 107, 65);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(102, 88, 48);
+}
+.recursos p {
+    color: rgb(114, 99, 59);
 }
 .button-soldados {
     width: 300px;
@@ -22,6 +55,10 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+.direita .button-soldados {
+    border-radius: 0 0 0 50px;
+    z-index: 109;
 }
 .button-soldados:hover {
     width: 400px;
@@ -45,6 +82,10 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+.direita .button-brocas {
+    border-radius: 0 0 0 50px;
+    z-index: 110;
 }
 .button-brocas:hover {
     width: 400px;
@@ -83,7 +124,7 @@
     background-color: rgb(158, 111, 23);
     transition: all 1s;
     padding-top: 300px;
-    gap: 30px;
+    gap: 50px;
 }
 .soldado-fuzileiro {
     width: 100%;
@@ -102,26 +143,106 @@
 
 .lateral-brocas {
     width: 0;
-    height: calc(100vh - 300px);
-    overflow: hidden;
+    gap: 50px;
     display: flex;
-    flex-direction: column;
-    background-color: rgb(158, 73, 23);
+    overflow: hidden;
     transition: all 1s;
     padding-top: 300px;
-    gap: 30px;
+    flex-direction: column;
+    height: calc(100vh - 300px);
+    background-color: rgb(158, 92, 48);
+}
+.espaco-broca {
+    width: 100%;
+    height: 400px;
+    color: black;
+    cursor: pointer;
+    font-size: 60px;
+    position: relative;
+    transition: all 0.2s;
+    background-color: rgb(190, 142, 102);
+}
+.espaco-broca:hover {
+    background-color: rgb(218, 153, 97);
+}
+.espaco-escolhas {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    transition: all 0.5s;
+    justify-content: space-around;
+}
+.broca-ouro {
+    width: 25%;
+    height: 80%;
+    background-color: rgb(236, 199, 117);
+    display: block;
+    justify-content: space-between;
+}
+.broca-comida {
+    width: 25%;
+    height: 80%;
+    background-color: rgb(165, 91, 42);
+    display: block;
+    justify-content: space-between;
+}
+.broca-recurso {
+    width: 25%;
+    height: 80%;
+    background-color: cadetblue;
+    display: block;
+    justify-content: space-between;
+}
+.espaco-broca-ouro {
+    width: 100% ;
+    height: 100%;
+    font-size: 50px;
+    position: absolute;
+}
+.broca-nome {
+    margin: 50px 0 0 50px;
+}
+.broca-stats {
+    margin: 0 0 0 50px;
+    display: flex;
+}
+.broca-upigrade {
+    gap: 20px;
+    left: 50px;
+    bottom: 50px;
+    display: flex;
+    position: absolute;
+}
+.broca-venda {
+    gap: 20px;
+    display: flex;
+    margin-left: 50px;
+}
+.broca-valor-venda {
+    margin-right: -15px;
+}
+.upigrade-preco {
+    margin-right: -15px;
+}
+.broca-deletar {
+    right: 50px;
+    bottom: 50px;
+    position: absolute;
 }
 
 
 .quadriculado {
-    position: absolute;
+    opacity: 0;
+    z-index: 11;
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
-    z-index: 11;
-    opacity: 0;
+    position: absolute;
     transition: all 0.5s;
+    flex-direction: column;
 }
 .linha {
     width: 100%;
@@ -129,29 +250,30 @@
     display: flex;
 }
 .coluna {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
     width: 5%;
     height: 100%;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: center;
+    justify-content: center;
 }
-.coluna::before {
-    content: '';
-    opacity: 0.3;
-    width: 80%;
-    height: 80%;
-    background-color: rgba(15, 195, 201);
+.coluna-quadrado {
+    width: 65%;
+    height: 65%;
+    opacity: 0.4;
     transition: all 0.2s;
+    background-color: rgba(15, 195, 201);
 }
-.coluna:hover::before {
+.coluna-quadrado:hover {
     width: 100%;
     height: 100%;
+    opacity: 0.6;
 }
 
 .corpo {
-    position: relative;
     z-index: 10;
+    position: relative;
 }
 .base-azul {
     position: absolute;
@@ -220,28 +342,32 @@
     position: absolute;
 }
 
-
+/*PAREDES*/
 .obstaculo {
-    width: 100px;
-    height: 500px;
     position: absolute;
-    top: 200px;
+    background-color: rgb(53, 177, 29);
+}
+.ob1{
+    height: 600px;
+    width: 100px;
     left: 300px;
-    background-color: rgb(53, 177, 29);
+    top: 200px;
 }
-.obstaculo1 {
+.ob2{
+    height: 800px;
     width: 100px;
-    height: 550px;
-    position: absolute;
-    top: 450px;
-    left: 1000px;
-    background-color: rgb(53, 177, 29);
+    left: 800px;
+    top: 200px;
 }
-.obstaculo2 {
+.ob3{
+    height: 800px;
     width: 100px;
-    height: 500px;
-    position: absolute;
+    left: 1100px;
     top: 0px;
-    left: 1150px;
-    background-color: rgb(53, 177, 29);
+}
+.ob4{
+    height: 600px;
+    width: 100px;
+    left: 1600px;
+    top: 200px;
 }
