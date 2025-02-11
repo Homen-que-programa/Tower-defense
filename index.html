@@ -10,17 +10,27 @@
 </head>
 <body>
     <div class="alinhar-buttons">
-        <div class="button-soldados" id="button-soldados" onclick="abrirLateral(0)">
-            <div class="icone"></div>
+        <div class="esquerda">
+            <div class="button-soldados" id="button-soldados" onclick="abrirLateralAzul(0)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-brocas" id="button-brocas" onclick="abrirLateralAzul(1)">
+                <div class="icone"></div>
+            </div>
         </div>
-        <div class="button-brocas" id="button-brocas" onclick="abrirLateral(1)">
-            <div class="icone"></div>
+        <div class="direita">
+            <div class="button-soldados" id="button-soldados" onclick="abrirLateralVermelho(0)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-brocas" id="button-brocas" onclick="abrirLateralVermelho(1)">
+                <div class="icone"></div>
+            </div>
         </div>
     </div>
     <div class="alinhar-corpo">
         <div class="lateral">
             <div class="lateral-soldados" id="lateral-soldados">
-                <div class="soldado-fuzileiro" id="soldado-fuzileiro" onclick="posicionarSoldados(false, 0)">
+                <div class="soldado-fuzileiro" id="soldado-fuzileiro" onclick="posicionarSoldados('azul', 0)">
                     fuzileiro
                 </div>
             </div>
@@ -266,7 +276,14 @@
             <div class="obstaculo1"></div>
             <div class="obstaculo2"></div>
         </div>
-        <div></div>
+        <div class="lateral-direita">
+            <div class="lateral-soldados" id="lateral-soldados">
+                <div class="soldado-fuzileiro" id="soldado-fuzileiro" onclick="posicionarSoldados('azul', 0)">
+                    fuzileiro
+                </div>
+            </div>
+            <div class="lateral-brocas" id="lateral-brocas"></div>
+        </div>
     </div>
 </body>
 </html>

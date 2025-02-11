@@ -91,7 +91,7 @@ for (let i = 0; i < Math.floor(2000/tabelaColisaoTamanho); i++) {
 
 // tabelaColisao[0][0].push(['alvo', 0, 'vermelho', 'circulo', 50, 150, 525, 225])
 
-function criarUnidadeAzul(x, y) {
+function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tamanho) {
     let _x = x
     let _y = y
     let _xposicaoTabela = Math.floor(_x/tabelaCaminhoTamanho)
@@ -99,12 +99,13 @@ function criarUnidadeAzul(x, y) {
     let _unidadeElement = document.createElement('div')
     let _unidadeElementVida = document.createElement('div')
 
-    let _unidadeVelocidade = 1
-    let _unidadeRange = 150
-    let _unidadeTamanho = 50
-    let _unidadeVida = 200
-    let _unidadeAtackVelocidade = 1000
-    let _unidadeAtackDano = 35
+    let _unidadeVida = vida
+    let _unidadeAtackDano = dano
+    let _unidadeAtackVelocidade = danoV
+    let _unidadeVelocidade = velocidade
+    let _unidadeRangeVisao = visao
+    let _unidadeRange = range
+    let _unidadeTamanho = tamanho
     let _unidadeIndexCopy = unidadeIndex
 
     let _caminhotab = []
@@ -120,13 +121,15 @@ function criarUnidadeAzul(x, y) {
     
     let _chegadaTrue = false
 
-    let _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
-    let _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
-    let _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
-    let _ycord2 = _y-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRange+(_unidadeTamanho/2)
+    let _xcord1 = _x+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRangeVisao+(_unidadeTamanho/2)
+    let _xcord2 = _x-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRangeVisao+(_unidadeTamanho/2)
+    let _ycord1 = _y+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRangeVisao+(_unidadeTamanho/2)
+    let _ycord2 = _y-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRangeVisao+(_unidadeTamanho/2)
 
     _unidadeElement.style.top = `${_y}px`
     _unidadeElement.style.left = `${_x}px`
+    _unidadeElement.style.width = `${_unidadeTamanho}px`
+    _unidadeElement.style.height = `${_unidadeTamanho}px`
     _unidadeElement.id = `fuzileiro${unidadeIndex}`
     _unidadeElement.className = 'fuzileiro'
 
@@ -137,7 +140,7 @@ function criarUnidadeAzul(x, y) {
     _unidadeElement.appendChild(_unidadeElementVida)
 
     // tabelaCaminhoAzul[_yposicaoTabela][_xposicaoTabela] = 'B'
-    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
 
     unidadeMensagemColisao.push((_colisao, _inimigo) => {
         let _inimigoIndex = -1
@@ -249,7 +252,7 @@ function criarUnidadeAzul(x, y) {
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
-        if (psliderDist <= 70) {
+        if (psliderDist <= _unidadeRange) {
             _chegadaTrue = true
             _atackLoad = setInterval(() => {
                 if (baseVermelhoVida - _unidadeAtackDano < 0) {
@@ -278,19 +281,19 @@ function criarUnidadeAzul(x, y) {
             document.getElementById('corpo').removeChild(_unidadeElement)
             return
         }
-        _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
-        _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
-        _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
-        _ycord2 = _y-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRange+(_unidadeTamanho/2)
-        tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+        _xcord1 = _x+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRangeVisao+(_unidadeTamanho/2)
+        _xcord2 = _x-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRangeVisao+(_unidadeTamanho/2)
+        _ycord1 = _y+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRangeVisao+(_unidadeTamanho/2)
+        _ycord2 = _y-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRangeVisao+(_unidadeTamanho/2)
+        tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         if (Math.floor(_xcord2/tabelaColisaoTamanho) != Math.floor((_xcord1)/tabelaColisaoTamanho)) {
             if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-                tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+                tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
             }
-            tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+            tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         }
         if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-            tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+            tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         }
     }
 
@@ -362,7 +365,7 @@ function criarUnidadeAzul(x, y) {
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
-        if (psliderDist <= 70) {
+        if (psliderDist <= _unidadeRange) {
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
@@ -598,20 +601,21 @@ function criarUnidadeAzul(x, y) {
 
 
 
-function criarUnidadeVarmelho() {
-    let _x = Math.floor(Math.random()*200+1800)
-    let _y = Math.floor(Math.random()*950)
+function criarUnidadeVarmelho(x, y, vida, dano, danoV, velocidade, visao, range, tamanho) {
+    let _x = x
+    let _y = y
     let _xposicaoTabela = Math.floor(_x/tabelaCaminhoTamanho)
     let _yposicaoTabela = Math.floor(_y/tabelaCaminhoTamanho)
     let _unidadeElement = document.createElement('div')
     let _unidadeElementVida = document.createElement('div')
 
-    let _unidadeVelocidade = 1
-    let _unidadeRange = 150
-    let _unidadeTamanho = 50
-    let _unidadeVida = 200
-    let _unidadeAtackVelocidade = 1000
-    let _unidadeAtackDano = 35
+    let _unidadeVida = vida
+    let _unidadeAtackDano = dano
+    let _unidadeAtackVelocidade = danoV
+    let _unidadeVelocidade = velocidade
+    let _unidadeRangeVisao = visao
+    let _unidadeRange = range
+    let _unidadeTamanho = tamanho
     let _unidadeIndexCopy = unidadeIndex
 
     let _caminhotab = []
@@ -627,13 +631,15 @@ function criarUnidadeVarmelho() {
     
     let _chegadaTrue = false
 
-    let _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
-    let _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
-    let _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
-    let _ycord2 = _y-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRange+(_unidadeTamanho/2)
+    let _xcord1 = _x+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRangeVisao+(_unidadeTamanho/2)
+    let _xcord2 = _x-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRangeVisao+(_unidadeTamanho/2)
+    let _ycord1 = _y+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRangeVisao+(_unidadeTamanho/2)
+    let _ycord2 = _y-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRangeVisao+(_unidadeTamanho/2)
 
     _unidadeElement.style.top = `${_y}px`
     _unidadeElement.style.left = `${_x}px`
+    _unidadeElement.style.width = `${_unidadeTamanho}px`
+    _unidadeElement.style.height = `${_unidadeTamanho}px`
     _unidadeElement.id = `fuzileiro${unidadeIndex}`
     _unidadeElement.className = 'fuzileiro'
 
