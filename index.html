@@ -21,6 +21,15 @@
                 <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
             </div>
         </div>
+        <div id="modelo-broca-direita-ouro">
+            <div class="espaco-broca-ouro">
+                <div class="broca-nome">Broca De Ouro</div>
+                <div class="broca-stats">Ouro por segundo: <div class="">4.5</div></div>
+                <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-valor-venda-ouro-1">400</div> O <div class="broca-valor-venda" id="broca-valor-venda-comida-1">70</div> C <div class="broca-valor-venda" id="broca-valor-venda-recursos-1">550</div> R</div>
+                <div class="broca-upigrade" onclick="">Upigrade: <div class="upigrade-preco-ouro upigrade-preco">230</div> O <div class="upigrade-preco-comida upigrade-preco">50</div> C <div class="upigrade-preco-recursos upigrade-preco">350</div> R</div>
+                <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+            </div>
+        </div>
     </div>
 
     <div class="alinhar-buttons">
@@ -69,77 +78,102 @@
             <div class="lateral-brocas" id="lateral-brocas">
                 <div class="espaco-broca" id="espaco-broca-1" onclick="clicarBroca(0)">
                     <div class="espaco-escolhas" id="espaco-escolha-1" onclick="espacoBroca(0)">
-                        <div class="broca-ouro" id="broca-ouro-1" onclick="escolhaBroca(0)">
+                        <div class="broca-ouro" id="broca-ouro-1" onclick="escolhaBroca(0, 0)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-1" onclick="escolhaBroca(1)">
+                        <div class="broca-comida" id="broca-comida-1" onclick="escolhaBroca(1, 0)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-1" onclick="escolhaBroca(2)">
+                        <div class="broca-recurso" id="broca-recurso-1" onclick="escolhaBroca(2, 0)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
                     </div>
-                    <div id="receber-broca-1">
+                    <div class="receber-broca" id="receber-broca-1">
+                        <div class="broca-nome">Broca De <div id="nome-broca-1"></div>: Nivel <div id="nivel-broca-1"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-1"></div> por segundo: <div id="recurso-broca-1"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-1"></div> O <div class="broca-valor-venda" id="broca-venda-comida-1"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-1"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(0)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-1"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-1"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-1"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
                     </div>
                 </div>
-                <div class="espaco-broca" id="espaco-broca-2">
+                <div class="espaco-broca" id="espaco-broca-2" onclick="clicarBroca(1)">
                     <div class="espaco-escolhas" id="espaco-escolha-2" onclick="espacoBroca(1)">
-                        <div class="broca-ouro" id="broca-ouro-2" onclick="escolhaBroca(0)">
+                        <div class="broca-ouro" id="broca-ouro-2" onclick="escolhaBroca(0, 1)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-2" onclick="escolhaBroca(1)">
+                        <div class="broca-comida" id="broca-comida-2" onclick="escolhaBroca(1, 1)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-2" onclick="escolhaBroca(2)">
+                        <div class="broca-recurso" id="broca-recurso-2" onclick="escolhaBroca(2, 1)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
                     </div>
-                    <div id="receber-broca-2">
+                    <div class="receber-broca" id="receber-broca-2">
+                        <div class="broca-nome">Broca De <div id="nome-broca-2"></div>: Nivel <div id="nivel-broca-2"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-2"></div> por segundo: <div id="recurso-broca-2"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-2"></div> O <div class="broca-valor-venda" id="broca-venda-comida-2"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-2"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(1)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-2"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-2"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-2"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
                     </div>
                 </div>
-                <div class="espaco-broca" id="espaco-broca-3">
+                <div class="espaco-broca" id="espaco-broca-3" onclick="clicarBroca(2)">
                     <div class="espaco-escolhas" id="espaco-escolha-3" onclick="espacoBroca(2)">
-                        <div class="broca-ouro" id="broca-ouro-3" onclick="escolhaBroca(0)">
+                        <div class="broca-ouro" id="broca-ouro-3" onclick="escolhaBroca(0, 2)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-3" onclick="escolhaBroca(1)">
+                        <div class="broca-comida" id="broca-comida-3" onclick="escolhaBroca(1, 2)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-3" onclick="escolhaBroca(2)">
+                        <div class="broca-recurso" id="broca-recurso-3" onclick="escolhaBroca(2, 2)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
                     </div>
-                    <div id="receber-broca-3">
+                    <div class="receber-broca" id="receber-broca-3">
+                        <div class="broca-nome">Broca De <div id="nome-broca-3"></div>: Nivel <div id="nivel-broca-3"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-3"></div> por segundo: <div id="recurso-broca-3"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-3"></div> O <div class="broca-valor-venda" id="broca-venda-comida-3"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-3"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(2)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-3"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-3"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-3"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
                     </div>
                 </div>
-                <div class="espaco-broca" id="espaco-broca-4">
+                <div class="espaco-broca" id="espaco-broca-4" onclick="clicarBroca(3)">
                     <div class="espaco-escolhas" id="espaco-escolha-4" onclick="espacoBroca(3)">
-                        <div class="broca-ouro" id="broca-ouro-4" onclick="escolhaBroca(0)">
+                        <div class="broca-ouro" id="broca-ouro-4" onclick="escolhaBroca(0, 3)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-4" onclick="escolhaBroca(1)">
+                        <div class="broca-comida" id="broca-comida-4" onclick="escolhaBroca(1, 3)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-4" onclick="escolhaBroca(2)">
+                        <div class="broca-recurso" id="broca-recurso-4" onclick="escolhaBroca(2, 3)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
                     </div>
-                    <div id="receber-broca-4">
+                    <div class="receber-broca" id="receber-broca-4">
+                        <div class="broca-nome">Broca De <div id="nome-broca-4"></div>: Nivel <div id="nivel-broca-4"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-4"></div> por segundo: <div id="recurso-broca-4"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-4"></div> O <div class="broca-valor-venda" id="broca-venda-comida-4"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-4"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(3)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-4"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-4"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-4"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
                     </div>
                 </div>
-                <div class="espaco-broca" id="espaco-broca-5">
+                <div class="espaco-broca" id="espaco-broca-5" onclick="clicarBroca(4)">
                     <div class="espaco-escolhas" id="espaco-escolha-5" onclick="espacoBroca(4)">
-                        <div class="broca-ouro" id="broca-ouro-5" onclick="escolhaBroca(0)">
+                        <div class="broca-ouro" id="broca-ouro-5" onclick="escolhaBroca(0, 4)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-5" onclick="escolhaBroca(1)">
+                        <div class="broca-comida" id="broca-comida-5" onclick="escolhaBroca(1, 4)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-5" onclick="escolhaBroca(2)">
+                        <div class="broca-recurso" id="broca-recurso-5" onclick="escolhaBroca(2, 4)">
                             <div>40 O</div> <div>0 C</div> <div>10 R</div>
                         </div>
                     </div>
-                    <div id="receber-broca-5">
+                    <div class="receber-broca" id="receber-broca-5">
+                        <div class="broca-nome">Broca De <div id="nome-broca-5"></div>: Nivel <div id="nivel-broca-5"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-5"></div> por segundo: <div id="recurso-broca-5"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-5"></div> O <div class="broca-valor-venda" id="broca-venda-comida-5"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-5"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(4)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-5"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-5"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-5"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
                     </div>
                 </div>
             </div>
@@ -398,7 +432,108 @@
                     Homem montado
                 </div>
             </div>
-            <div class="lateral-brocas" id="lateral-brocas-direita"></div>
+            <div class="lateral-brocas" id="lateral-brocas-direita">
+                <div class="espaco-broca" id="espaco-broca-direita-1" onclick="clicarBrocaDireita(0)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-1" onclick="espacoBrocaDireita(0)">
+                        <div class="broca-ouro" id="broca-direita-ouro-1" onclick="escolhaBrocaDireita(0, 0)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-comida" id="broca-direita-comida-1" onclick="escolhaBrocaDireita(1, 0)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-recurso" id="broca-direita-recurso-1" onclick="escolhaBrocaDireita(2, 0)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-1">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-1"></div>: Nivel <div id="direita-nivel-broca-1"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-1"></div> por segundo: <div id="direita-recurso-broca-1"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-1"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-1"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-1"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(0)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-1"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-1"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-1"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-2" onclick="clicarBrocaDireita(1)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-2" onclick="espacoBrocaDireita(1)">
+                        <div class="broca-ouro" id="broca-direita-ouro-2" onclick="escolhaBrocaDireita(0, 1)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-comida" id="broca-direita-comida-2" onclick="escolhaBrocaDireita(1, 1)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-recurso" id="broca-direita-recurso-2" onclick="escolhaBrocaDireita(2, 1)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-2">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-2"></div>: Nivel <div id="direita-nivel-broca-2"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-2"></div> por segundo: <div id="direita-recurso-broca-2"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-2"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-2"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-2"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(1)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-2"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-2"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-2"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-3" onclick="clicarBrocaDireita(2)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-3" onclick="espacoBrocaDireita(2)">
+                        <div class="broca-ouro" id="broca-direita-ouro-3" onclick="escolhaBrocaDireita(0, 2)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-comida" id="broca-direita-comida-3" onclick="escolhaBrocaDireita(1, 2)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-recurso" id="broca-direita-recurso-3" onclick="escolhaBrocaDireita(2, 2)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-3">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-3"></div>: Nivel <div id="direita-nivel-broca-3"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-3"></div> por segundo: <div id="direita-recurso-broca-3"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-3"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-3"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-3"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(2)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-3"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-3"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-3"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-4" onclick="clicarBrocaDireita(3)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-4" onclick="espacoBrocaDireita(3)">
+                        <div class="broca-ouro" id="broca-direita-ouro-4" onclick="escolhaBrocaDireita(0, 3)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-comida" id="broca-direita-comida-4" onclick="escolhaBrocaDireita(1, 3)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-recurso" id="broca-direita-recurso-4" onclick="escolhaBrocaDireita(2, 3)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-4">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-4"></div>: Nivel <div id="direita-nivel-broca-4"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-4"></div> por segundo: <div id="direita-recurso-broca-4"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-4"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-4"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-4"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(3)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-4"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-4"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-4"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-5" onclick="clicarBrocaDireita(4)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-5" onclick="espacoBrocaDireita(4)">
+                        <div class="broca-ouro" id="broca-direita-ouro-5" onclick="escolhaBrocaDireita(0, 4)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-comida" id="broca-direita-comida-5" onclick="escolhaBrocaDireita(1, 4)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                        <div class="broca-recurso" id="broca-direita-recurso-5" onclick="escolhaBrocaDireita(2, 4)">
+                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-5">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-5"></div>: Nivel <div id="direita-nivel-broca-5"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-5"></div> por segundo: <div id="direita-recurso-broca-5"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-5"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-5"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-5"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(4)">Upigrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-5"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-5"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-5"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
