@@ -128,7 +128,8 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
     unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
 
     let _unidadeColisao = () => {
-        unidadeInformacao[_unidadeIndexCopy] = [_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida]
+        unidadeInformacao[_unidadeIndexCopy][6] = _x+(_unidadeTamanho/2)
+        unidadeInformacao[_unidadeIndexCopy][7] = _y+(_unidadeTamanho/2)
     }
 
     unidadeMensagemColisao.push((_colisao, _inimigo) => {
@@ -138,7 +139,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                 _inimigoIndex = i
             }
         }
-        if (_colisao && _inimigoIndex == -1) {
+        if (_colisao && _inimigoIndex === -1) {
             let _xposicaoTabelaUnid = Math.floor(_x/tabelaCaminhoTamanho)
             let _yposicaoTabelaUnid = Math.floor(_y/tabelaCaminhoTamanho)
             let _xposicaoTabelaIni = Math.floor(_inimigo[6]/tabelaCaminhoTamanho)
@@ -177,15 +178,15 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                 _alvoTabela.push(_inimigo)
             } else {
                 _alvoTabela.splice(_inimigoIndex, 1)
-                _alvoTabela.length == 0 ? _alvoTrue = false : 0
+                _alvoTabela.length === 0 ? _alvoTrue = false : 0
             }
-        } else if (_colisao && _inimigoIndex != -1) {
+        } else if (_colisao && _inimigoIndex !== -1) {
             _alvoTabela[_inimigoIndex][6] = _inimigo[6]
             _alvoTabela[_inimigoIndex][7] = _inimigo[7]
             _alvoTabela[_inimigoIndex][1] = _inimigo[1]
-        } else if (!_colisao && _inimigoIndex != -1) {
+        } else if (!_colisao && _inimigoIndex !== -1) {
             _alvoTabela.splice(_inimigoIndex, 1)
-            _alvoTabela.length == 0 ? _alvoTrue = false : 0
+            _alvoTabela.length === 0 ? _alvoTrue = false : 0
         }
     })
 
@@ -327,8 +328,16 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
-                if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
+                psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
+                if (psliderDist > _unidadeRange || unidadeInformacao[_atackAlvo[1]][1] === 'morto') {
+                    _atackTrue = false
+                    if (_alvoTabela.length > 0) {
+                        _alvoTrue = true
+                    } else {
+                        _alvoTrue = false
+                    }
                     clearInterval(_atackLoad)
+                } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
                     _atackTrue = false
                     unidadeInformacao[_atackAlvo[1]][8] = 0
                     unidadeInformacao[_atackAlvo[1]][1] = 'morto'
@@ -339,6 +348,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                     } else {
                         _alvoTrue = false
                     }
+                    clearInterval(_atackLoad)
                 } else {
                     unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
                 }
@@ -623,7 +633,8 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
 
     let _unidadeColisao = () => {
-        unidadeInformacao[_unidadeIndexCopy] = [_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida]
+        unidadeInformacao[_unidadeIndexCopy][6] = _x+(_unidadeTamanho/2)
+        unidadeInformacao[_unidadeIndexCopy][7] = _y+(_unidadeTamanho/2)
     }
 
     unidadeMensagemColisao.push((_colisao, _inimigo) => {
@@ -757,6 +768,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                 _alvoTabela.splice(i, 1)
                 if (_alvoTabela.length==0) {
                     _monerDistancia = [0, 1000]
+                    _alvoTrue = false
                     return
                 }
             }
@@ -822,8 +834,16 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
-                if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
+                psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
+                if (psliderDist > _unidadeRange || unidadeInformacao[_atackAlvo[1]][1] === 'morto') {
+                    _atackTrue = false
+                    if (_alvoTabela.length > 0) {
+                        _alvoTrue = true
+                    } else {
+                        _alvoTrue = false
+                    }
                     clearInterval(_atackLoad)
+                } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
                     _atackTrue = false
                     unidadeInformacao[_atackAlvo[1]][8] = 0
                     unidadeInformacao[_atackAlvo[1]][1] = 'morto'
@@ -834,6 +854,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                     } else {
                         _alvoTrue = false
                     }
+                    clearInterval(_atackLoad)
                 } else {
                     unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
                 }
@@ -1048,6 +1069,8 @@ function atualizarCaminho() {
     caminhoAlteracoes++
 }
 
+// unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+
 setInterval(() => {
     if (baseAzulVida <= 0 && baseVermelhoVida > 0) {
         alert("Time VERMELHO venceu!")
@@ -1055,17 +1078,16 @@ setInterval(() => {
         alert("Time AZUL venceu!")
     }
     for (let i = 0; i < unidadeInformacao.length; i++) {
-        if (unidadeInformacao[i][1] != "morto") {
+        if (unidadeInformacao[i][1] !== "morto") {
             for (let e = 0; e < unidadeInformacao.length; e++) {
-                if (i !== e && unidadeInformacao[e][1] != "morto" && ( (unidadeInformacao[e][7] - unidadeInformacao[i][7])**2 + (unidadeInformacao[e][6] - unidadeInformacao[i][6])**2 )** 0.5 < unidadeInformacao[i][5]) {
+                console.log(unidadeInformacao[e][1])
+                if (i !== e && unidadeInformacao[e][2] !== unidadeInformacao[i][2] && unidadeInformacao[e][1] != "morto" && ( (unidadeInformacao[e][7] - unidadeInformacao[i][7])**2 + (unidadeInformacao[e][6] - unidadeInformacao[i][6])**2 )** 0.5 < unidadeInformacao[i][5]) {
                     console.log('ola')
-                    unidadeMensagemColisao[unidadeInformacao[e][1]](true, unidadeInformacao[i])
+                    unidadeMensagemColisao[e](true, unidadeInformacao[i])
                 } else {
-                    unidadeMensagemColisao[unidadeInformacao[e][1]](false, unidadeInformacao[i])
+                    unidadeMensagemColisao[e](false, unidadeInformacao[i])
                 }
             }
-        } else {
-            console.log('tchau')
         }
     }
 }, 100)

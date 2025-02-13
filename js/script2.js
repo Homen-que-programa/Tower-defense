@@ -371,8 +371,16 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
-                if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
+                psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
+                if (psliderDist > _unidadeRange || unidadeInformacao[_atackAlvo[1]][1] === 'morto') {
+                    _atackTrue = false
+                    if (_alvoTabela.length > 0) {
+                        _alvoTrue = true
+                    } else {
+                        _alvoTrue = false
+                    }
                     clearInterval(_atackLoad)
+                } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
                     _atackTrue = false
                     unidadeInformacao[_atackAlvo[1]][8] = 0
                     unidadeInformacao[_atackAlvo[1]][1] = 'morto'
@@ -383,6 +391,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                     } else {
                         _alvoTrue = false
                     }
+                    clearInterval(_atackLoad)
                 } else {
                     unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
                 }
@@ -832,6 +841,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                 _alvoTabela.splice(i, 1)
                 if (_alvoTabela.length==0) {
                     _monerDistancia = [0, 1000]
+                    _alvoTrue = false
                     return
                 }
             }
@@ -897,8 +907,16 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
-                if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
+                psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
+                if (psliderDist > _unidadeRange || unidadeInformacao[_atackAlvo[1]][1] === 'morto') {
+                    _atackTrue = false
+                    if (_alvoTabela.length > 0) {
+                        _alvoTrue = true
+                    } else {
+                        _alvoTrue = false
+                    }
                     clearInterval(_atackLoad)
+                } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
                     _atackTrue = false
                     unidadeInformacao[_atackAlvo[1]][8] = 0
                     unidadeInformacao[_atackAlvo[1]][1] = 'morto'
@@ -909,6 +927,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                     } else {
                         _alvoTrue = false
                     }
+                    clearInterval(_atackLoad)
                 } else {
                     unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
                 }
@@ -1092,7 +1111,6 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         _unidadeColisao()
         if (!_chegadaTrue) {
             if ((((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]+25) - _y) ** 2) ** 0.5 < _unidadeRangeVisao - _unidadeTamanho + 50) || (((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]-25) - _y) ** 2) ** 0.5 < _unidadeRangeVisao - _unidadeTamanho + 50)) {
-                console.log('ola')
                 _unidadeChegadaMovimento()
             } else {
                 _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
@@ -1103,8 +1121,6 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                 } else {
                     _movimentoCaminho()
                 }
-            }
-            if (Math.floor(_x/tabelaCaminhoTamanho) != _xposicaoTabela || Math.floor(_y/tabelaCaminhoTamanho) != _yposicaoTabela) {
             }
         }
     }, 10)
