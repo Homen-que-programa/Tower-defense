@@ -16,8 +16,8 @@ var esquerdaSoldados = 0
 var esquerdaBrocas = 0
 var esquerdaBrocasEscolhas = 0
 
+
 document.onkeydown = () => {
-    console.log(event.keyCode)
     if (event.keyCode === 37) {
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[0] > 0) {
@@ -292,7 +292,7 @@ document.onkeydown = () => {
     }
     else if (event.keyCode === 13) {
         if (direitaAtivos[0]) {
-            document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+11}`).onclick()
+            document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).onclick()
             posicionarSoldados('cancelarVermelho', direitaSoldados)
         } else if (direitaAtivos[1]) {
             if (lateralMatrizVermelho[0][1]) {
@@ -332,7 +332,7 @@ document.onkeydown = () => {
     }
     else if (event.keyCode === 32) {
         if (esquerdaAtivos[0]) {
-            document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+11}`).onclick()
+            document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
             posicionarSoldados('cancelarAzul', esquerdaSoldados)
         } else if (esquerdaAtivos[1]) {
             if (lateralMatrizAzul[0][1]) {
@@ -342,7 +342,6 @@ document.onkeydown = () => {
             esquerdaAtivos[1] = false
             esquerdaAtivos[2] = false
             esquerdaAtivos[3] = false
-            console.log('ola')
             posicionarSoldados('azul', esquerdaSoldados)
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)

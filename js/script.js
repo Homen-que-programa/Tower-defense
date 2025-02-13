@@ -549,7 +549,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
-        if (psliderDist <= 5) {
+        if (psliderDist <= _unidadeVelocidade * 3) {
             _unidadeVisaoCaminho()
         }
     }
@@ -564,7 +564,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
         _unidadeElementVida.style.width = `${_unidadeVida}px`
         _unidadeColisao()
         if (!_chegadaTrue) {
-            if ((((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]+25) - _y) ** 2) ** 0.5 < 100) || (((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]-25) - _y) ** 2) ** 0.5 < 100)) {
+            if ((((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]+25) - _y) ** 2) ** 0.5 <  _unidadeRangeVisao - _unidadeTamanho + 50) || (((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]-25) - _y) ** 2) ** 0.5 <  _unidadeRangeVisao - _unidadeTamanho + 50)) {
                 _unidadeChegadaMovimento()
             } else {
                 _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
@@ -1074,7 +1074,8 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         _unidadeElementVida.style.width = `${_unidadeVida}px`
         _unidadeColisao()
         if (!_chegadaTrue) {
-            if ((((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]+25) - _y) ** 2) ** 0.5 < 100) || (((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]-25) - _y) ** 2) ** 0.5 < 100)) {
+            if ((((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]+25) - _y) ** 2) ** 0.5 < _unidadeRangeVisao - _unidadeTamanho + 50) || (((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]-25) - _y) ** 2) ** 0.5 < _unidadeRangeVisao - _unidadeTamanho + 50)) {
+                console.log('ola')
                 _unidadeChegadaMovimento()
             } else {
                 _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0

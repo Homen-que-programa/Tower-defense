@@ -86,7 +86,6 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
             if (posicionarAtulizacaoCopyAzul !== posicionarAtulizacao || caminhoAlteracoesCopyAzul !== caminhoAlteracoes) {
                 posicionarAtulizacaoCopyAzul = posicionarAtulizacao
                 caminhoAlteracoesCopyAzul = caminhoAlteracoes
-                console.log('ola')
                 for (let i = 0; i < tabelaCaminhoAzul.length; i+=2) {
                     for (let e = 0; e < tabelaCaminhoAzul[i].length; e+=2) {
                         if (e >= tabelaCaminhoAzul[i].length/2-4) {
@@ -101,11 +100,11 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).style.cssText += 'filter: none;'
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).onclick = () => {
                                 if (_unidadeEscolhida === 0) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 1, 300, 70, 50, 'background: brown;')
+                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 3, 300, 70, 50, 'background: brown;')
                                 } else if (_unidadeEscolhida === 1) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 1, 300, 70, 50, 'background: grey;')
+                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 3, 300, 70, 50, 'background: grey;')
                                 } else if (_unidadeEscolhida === 2) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 1, 300, 70, 50, 'background: green;')
+                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 3, 300, 70, 50, 'background: green;')
                                 }
                                 posicionarSoldados('cancelarAzul', 0)
                             }
@@ -123,7 +122,6 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
             if (posicionarAtulizacaoCopyVermelho !== posicionarAtulizacao || caminhoAlteracoesCopyVermelho !== caminhoAlteracoes) {
                 posicionarAtulizacaoCopyVermelho = posicionarAtulizacao
                 caminhoAlteracoesCopyVermelho = caminhoAlteracoes
-                console.log('ola')
                 for (let i = 0; i < tabelaCaminhoVermelho.length; i+=2) {
                     for (let e = 0; e < tabelaCaminhoVermelho[i].length; e+=2) {
                         if (e < tabelaCaminhoVermelho[i].length/2+4) {
@@ -138,6 +136,7 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).style.cssText += 'filter: none;'
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).onclick = () => {
                                 if (_unidadeEscolhida === 0) {
+                console.log('ola')
                                     criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 1, 300, 70, 50, 'background: brown;')
                                 } else if (_unidadeEscolhida === 1) {
                                     criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 35, 1000, 1, 300, 70, 50, 'background: grey;')
