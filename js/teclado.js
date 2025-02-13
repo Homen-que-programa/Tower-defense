@@ -53,13 +53,13 @@ document.onkeydown = () => {
             }
         } else if (direitaAtivos[1]) {
             if (direitaSoldados > 0) {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 direitaSoldados--
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 direitaSoldados = direitaSoldadosIds.length-1
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
         } else if (direitaAtivos[2] || direitaAtivos[3] || direitaAtivos[4]) {
             direitaAtivos[2] = true
@@ -111,13 +111,13 @@ document.onkeydown = () => {
             }
         } else if (direitaAtivos[1]) {
             if (direitaSoldados < direitaSoldadosIds.length-1) {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 direitaSoldados++
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 direitaSoldados = 0
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
         } else if (direitaAtivos[2] || direitaAtivos[3] || direitaAtivos[4]) {
             direitaAtivos[2] = true
@@ -170,13 +170,13 @@ document.onkeydown = () => {
             }
         } else if (esquerdaAtivos[1]) {
             if (esquerdaSoldados > 0) {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados--
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados = esquerdaSoldadosIds.length-1
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3] || esquerdaAtivos[4]) {
             esquerdaAtivos[2] = true
@@ -228,13 +228,13 @@ document.onkeydown = () => {
             }
         } else if (esquerdaAtivos[1]) {
             if (esquerdaSoldados < esquerdaSoldadosIds.length-1) {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados++
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgba(117, 68, 28, 0.5)'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados = 0
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(117, 68, 28);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3] || esquerdaAtivos[4]) {
             esquerdaAtivos[2] = true
@@ -295,14 +295,15 @@ document.onkeydown = () => {
             document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).onclick()
             posicionarSoldados('cancelarVermelho', direitaSoldados)
         } else if (direitaAtivos[1]) {
-            if (lateralMatrizVermelho[0][1]) {
-                abrirLateralVermelho(0)
+            if (posicionarSoldados('vermelho', direitaSoldados)) {
+                if (lateralMatrizVermelho[0][1]) {
+                    abrirLateralVermelho(0)
+                }
+                direitaAtivos[0] = true
+                direitaAtivos[1] = false
+                direitaAtivos[2] = false
+                direitaAtivos[3] = false
             }
-            direitaAtivos[0] = true
-            direitaAtivos[1] = false
-            direitaAtivos[2] = false
-            direitaAtivos[3] = false
-            posicionarSoldados('vermelho', direitaSoldados)
         } else if (direitaAtivos[2] && !direitaBrocasEstados[direitaBrocas]) {
             espacoBrocaDireita(direitaBrocas)
             direitaAtivos[3] = true
@@ -335,14 +336,15 @@ document.onkeydown = () => {
             document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
             posicionarSoldados('cancelarAzul', esquerdaSoldados)
         } else if (esquerdaAtivos[1]) {
-            if (lateralMatrizAzul[0][1]) {
-                abrirLateralAzul(0)
+            if (posicionarSoldados('azul', esquerdaSoldados)) {
+                if (lateralMatrizAzul[0][1]) {
+                    abrirLateralAzul(0)
+                }
+                esquerdaAtivos[0] = true
+                esquerdaAtivos[1] = false
+                esquerdaAtivos[2] = false
+                esquerdaAtivos[3] = false
             }
-            esquerdaAtivos[0] = true
-            esquerdaAtivos[1] = false
-            esquerdaAtivos[2] = false
-            esquerdaAtivos[3] = false
-            posicionarSoldados('azul', esquerdaSoldados)
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)
             esquerdaAtivos[3] = true

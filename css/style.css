@@ -1,6 +1,11 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
+}
+body {
+    background-image: url(../img/background.png);
+    background-size: cover;
 }
 #memoria {
     width: 0;
@@ -105,7 +110,7 @@
     top: 0;
     right: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -113,6 +118,15 @@
     display: flex;
     height: 100vh;
     z-index: 20;
+    position: absolute;
+}
+
+.lateral-esquerda {
+    left: 0;
+}
+
+.lateral-direita {
+    right: 0;
 }
 
 .lateral-soldados {
@@ -125,18 +139,37 @@
     transition: all 1s;
     padding-top: 300px;
     gap: 50px;
+    background-image: url(../img/fundoClashDosRoyale.png);
 }
 .soldado-fuzileiro {
-    width: 1000px;
+    width: 1400px;
     height: 400px;
-    background-color: rgba(117, 68, 28, 0.5);
+    background-color: rgb(69, 109, 218);
     font-size: 60px;
-    color: black;
+    color: rgb(231, 241, 255);
     cursor: pointer;
     transition: all 0.2s;
+    padding: 20px 40px;
+    display: flex;
+    
+}
+.soldado-fuzileiro p:first-child {
+    font-size: 90px;
+    font-weight: 700;
+}
+
+.soldado-fuzileiro div {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    justify-content: space-around;
+}
+.soldado-fuzileiro img {
+ margin-left: 0;
 }
 .soldado-fuzileiro:hover {
-    background-color: rgb(117, 68, 28);
+    background-color: rgb(46, 78, 219);
 }
 
 
@@ -151,6 +184,8 @@
     flex-direction: column;
     height: calc(100vh - 300px);
     background-color: rgb(158, 92, 48);
+    background-image: url(../img/fundoClashDosRoyale.png);
+    filter: hue-rotate(160deg);
 }
 .receber-broca {
     width: 0;
@@ -161,7 +196,8 @@
     padding: 0;
 }
 .espaco-broca {
-    width: 1000px;
+    filter: hue-rotate(-160deg);
+    width: 1400px;
     height: 400px;
     color: black;
     cursor: pointer;
@@ -311,14 +347,22 @@
 .corpo {
     z-index: 10;
     position: relative;
+    background-image: url(../img/grama.avif);
+    filter: brightness(120%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 100px 500px 200px rgb(255, 255, 255);
 }
 .base-azul {
     position: absolute;
     width: 100px;
     height: 200px;
     top: 400px;
-    left: -50px;
-    background-color: black;
+    left: -100px;
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    background-color: rgb(76, 101, 156);
     display: flex;
     justify-content: center;
 }
@@ -334,8 +378,10 @@
     width: 100px;
     height: 200px;
     top: 400px;
-    left: 1950px;
-    background-color: black;
+    left: 2000px;
+    background-color: rgb(153, 58, 58);
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
     display: flex;
     justify-content: center;
 }
@@ -351,17 +397,8 @@
 .quadrado {
     width: 2000px;
     height: 1000px;
-    border: 2px solid red;
 }
-.alvo-circulo {
-    width: 50px;
-    height: 50px;
-    background-color: rgb(68, 218, 49);
-    border-radius: 50%;
-    position: absolute;
-    top: 200px;
-    left: 500px;
-}
+
 .fuzileiro {
     width: 50px;
     height: 50px;
@@ -382,7 +419,9 @@
 /*PAREDES*/
 .obstaculo {
     position: absolute;
-    background-color: rgb(53, 177, 29);
+    background-image: url(../img/pedra.jpg);
+    background-size: cover;
+    box-shadow: 0px 0px 30px black;
 }
 .ob1{
     height: 600px;

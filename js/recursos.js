@@ -1,13 +1,13 @@
 var recursosAzul = {
-    ouro: [1000, document.getElementById('ouro-azul')],
-    comida: [1000, document.getElementById('comida-azul')],
-    recurso: [1000, document.getElementById('recurso-azul')],
+    ouro: [400, document.getElementById('ouro-azul')],
+    comida: [50, document.getElementById('comida-azul')],
+    recurso: [100, document.getElementById('recurso-azul')],
     producao: [0, 0, 0]
 }
 var recursosVermelho = {
-    ouro: [1000, document.getElementById('ouro-vermelho')],
-    comida: [1000, document.getElementById('comida-vermelho')],
-    recurso: [1000, document.getElementById('recurso-vermelho')],
+    ouro: [400, document.getElementById('ouro-vermelho')],
+    comida: [50, document.getElementById('comida-vermelho')],
+    recurso: [100, document.getElementById('recurso-vermelho')],
     producao: [0, 0, 0]
 }
 
@@ -76,7 +76,7 @@ function escolhaBroca(numeroEscolha, origemEspaco) {
                     recursosAzul.comida[1].innerHTML = recursosAzul.comida[0]
                     recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
                     brocasAzul[i] = ["ouro", matrizUpigradesOuro[0][2], 0, matrizUpigradesOuro[0][1], matrizUpigradesOuro[0][0]]
-                    document.getElementById(`receber-broca-${i+1}`).style.cssText += 'width: 1000px;height: 400px;'
+                    document.getElementById(`receber-broca-${i+1}`).style.cssText += 'width: 1400px;height: 400px;'
                     document.getElementById(`nome-broca-${i+1}`).innerHTML = "Ouro"
                     document.getElementById(`nome2-broca-${i+1}`).innerHTML = "Ouro"
                     document.getElementById(`recurso-broca-${i+1}`).innerHTML = brocasAzul[i][1]
@@ -97,7 +97,7 @@ function escolhaBroca(numeroEscolha, origemEspaco) {
                     recursosAzul.comida[1].innerHTML = recursosAzul.comida[0]
                     recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
                     brocasAzul[i] = ["comida", matrizUpigradesComida[0][2], 0, matrizUpigradesComida[0][1], matrizUpigradesComida[0][0]]
-                    document.getElementById(`receber-broca-${i+1}`).style.cssText += 'width: 1000px;height: 400px;'
+                    document.getElementById(`receber-broca-${i+1}`).style.cssText += 'width: 1400px;height: 400px;'
                     document.getElementById(`nome-broca-${i+1}`).innerHTML = "Comida"
                     document.getElementById(`nome2-broca-${i+1}`).innerHTML = "Comida"
                     document.getElementById(`recurso-broca-${i+1}`).innerHTML = brocasAzul[i][1]
@@ -118,7 +118,7 @@ function escolhaBroca(numeroEscolha, origemEspaco) {
                     recursosAzul.comida[1].innerHTML = recursosAzul.comida[0]
                     recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
                     brocasAzul[i] = ["recurso", matrizUpigradesRecurso[0][2], 0, matrizUpigradesRecurso[0][1], matrizUpigradesRecurso[0][0]]
-                    document.getElementById(`receber-broca-${i+1}`).style.cssText += 'width: 1000px;height: 400px;'
+                    document.getElementById(`receber-broca-${i+1}`).style.cssText += 'width: 1400px;height: 400px;'
                     document.getElementById(`nome-broca-${i+1}`).innerHTML = "Recurso"
                     document.getElementById(`nome2-broca-${i+1}`).innerHTML = "Recurso"
                     document.getElementById(`recurso-broca-${i+1}`).innerHTML = brocasAzul[i][1]
@@ -165,10 +165,10 @@ function upigrades(origemEspaco) {
             recursosAzul.ouro[0] -= matrizUpigradesOuro[brocasAzul[origemEspaco][2]][0][0]
             recursosAzul.comida[0] -= matrizUpigradesOuro[brocasAzul[origemEspaco][2]][0][1]
             recursosAzul.recurso[0] -= matrizUpigradesOuro[brocasAzul[origemEspaco][2]][0][2]
+            brocasAzul[origemEspaco][2]++
             brocasAzul[origemEspaco][1] = matrizUpigradesOuro[brocasAzul[origemEspaco][2]][2]
             brocasAzul[origemEspaco][3] = matrizUpigradesOuro[brocasAzul[origemEspaco][2]][1]
             brocasAzul[origemEspaco][4] = matrizUpigradesOuro[brocasAzul[origemEspaco][2]][0]
-            brocasAzul[origemEspaco][2]++
         }
     } else if (brocasAzul[origemEspaco][0] === "comida") {
         if (
@@ -180,10 +180,10 @@ function upigrades(origemEspaco) {
             recursosAzul.ouro[0] -= matrizUpigradesComida[brocasAzul[origemEspaco][2]][0][0]
             recursosAzul.comida[0] -= matrizUpigradesComida[brocasAzul[origemEspaco][2]][0][1]
             recursosAzul.recurso[0] -= matrizUpigradesComida[brocasAzul[origemEspaco][2]][0][2]
+            brocasAzul[origemEspaco][2]++
             brocasAzul[origemEspaco][1] = matrizUpigradesComida[brocasAzul[origemEspaco][2]][2]
             brocasAzul[origemEspaco][3] = matrizUpigradesComida[brocasAzul[origemEspaco][2]][1]
             brocasAzul[origemEspaco][4] = matrizUpigradesComida[brocasAzul[origemEspaco][2]][0]
-            brocasAzul[origemEspaco][2]++
         }
     } else if (brocasAzul[origemEspaco][0] === "recurso") {
         if (
@@ -195,10 +195,10 @@ function upigrades(origemEspaco) {
             recursosAzul.ouro[0] -= matrizUpigradesRecurso[brocasAzul[origemEspaco][2]][0][0]
             recursosAzul.comida[0] -= matrizUpigradesRecurso[brocasAzul[origemEspaco][2]][0][1]
             recursosAzul.recurso[0] -= matrizUpigradesRecurso[brocasAzul[origemEspaco][2]][0][2]
+            brocasAzul[origemEspaco][2]++
             brocasAzul[origemEspaco][1] = matrizUpigradesRecurso[brocasAzul[origemEspaco][2]][2]
             brocasAzul[origemEspaco][3] = matrizUpigradesRecurso[brocasAzul[origemEspaco][2]][1]
             brocasAzul[origemEspaco][4] = matrizUpigradesRecurso[brocasAzul[origemEspaco][2]][0]
-            brocasAzul[origemEspaco][2]++
         }
     }
     if (verificacao === 0) return
@@ -244,7 +244,7 @@ function escolhaBrocaDireita(numeroEscolha, origemEspaco) {
                     recursosVermelho.comida[1].innerHTML = recursosVermelho.comida[0]
                     recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
                     brocasVermelho[i] = ["ouro", matrizUpigradesOuro[0][2], 0, matrizUpigradesOuro[0][1], matrizUpigradesOuro[0][0]]
-                    document.getElementById(`receber-broca-direita-${i+1}`).style.cssText += 'width: 1000px;height: 400px;'
+                    document.getElementById(`receber-broca-direita-${i+1}`).style.cssText += 'width: 1400px;height: 400px;'
                     document.getElementById(`direita-nome-broca-${i+1}`).innerHTML = "Ouro"
                     document.getElementById(`direita-nome2-broca-${i+1}`).innerHTML = "Ouro"
                     document.getElementById(`direita-recurso-broca-${i+1}`).innerHTML = brocasVermelho[i][1]
@@ -265,7 +265,7 @@ function escolhaBrocaDireita(numeroEscolha, origemEspaco) {
                     recursosVermelho.comida[1].innerHTML = recursosVermelho.comida[0]
                     recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
                     brocasVermelho[i] = ["comida", matrizUpigradesOuro[0][2], 0, matrizUpigradesOuro[0][1], matrizUpigradesOuro[0][0]]
-                    document.getElementById(`receber-broca-direita-${i+1}`).style.cssText += 'width: 1000px;height: 400px;'
+                    document.getElementById(`receber-broca-direita-${i+1}`).style.cssText += 'width: 1400px;height: 400px;'
                     document.getElementById(`direita-nome-broca-${i+1}`).innerHTML = "Comida"
                     document.getElementById(`direita-nome2-broca-${i+1}`).innerHTML = "Comida"
                     document.getElementById(`direita-recurso-broca-${i+1}`).innerHTML = brocasVermelho[i][1]
@@ -286,7 +286,7 @@ function escolhaBrocaDireita(numeroEscolha, origemEspaco) {
                     recursosVermelho.comida[1].innerHTML = recursosVermelho.comida[0]
                     recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
                     brocasVermelho[i] = ["recurso", matrizUpigradesOuro[0][2], 0, matrizUpigradesOuro[0][1], matrizUpigradesOuro[0][0]]
-                    document.getElementById(`receber-broca-direita-${i+1}`).style.cssText += 'width: 1000px;height: 400px;'
+                    document.getElementById(`receber-broca-direita-${i+1}`).style.cssText += 'width: 1400px;height: 400px;'
                     document.getElementById(`direita-nome-broca-${i+1}`).innerHTML = "Recurso"
                     document.getElementById(`direita-nome2-broca-${i+1}`).innerHTML = "Recurso"
                     document.getElementById(`direita-recurso-broca-${i+1}`).innerHTML = brocasVermelho[i][1]
@@ -333,10 +333,10 @@ function upigradesDireita(origemEspaco) {
             recursosVermelho.ouro[0] -= matrizUpigradesOuro[brocasVermelho[origemEspaco][2]][0][0]
             recursosVermelho.comida[0] -= matrizUpigradesOuro[brocasVermelho[origemEspaco][2]][0][1]
             recursosVermelho.recurso[0] -= matrizUpigradesOuro[brocasVermelho[origemEspaco][2]][0][2]
+            brocasVermelho[origemEspaco][2]++
             brocasVermelho[origemEspaco][1] = matrizUpigradesOuro[brocasVermelho[origemEspaco][2]][2]
             brocasVermelho[origemEspaco][3] = matrizUpigradesOuro[brocasVermelho[origemEspaco][2]][1]
             brocasVermelho[origemEspaco][4] = matrizUpigradesOuro[brocasVermelho[origemEspaco][2]][0]
-            brocasVermelho[origemEspaco][2]++
         }
     } else if (brocasVermelho[origemEspaco][0] === "comida") {
         if (
@@ -348,10 +348,10 @@ function upigradesDireita(origemEspaco) {
             recursosVermelho.ouro[0] -= matrizUpigradesComida[brocasVermelho[origemEspaco][2]][0][0]
             recursosVermelho.comida[0] -= matrizUpigradesComida[brocasVermelho[origemEspaco][2]][0][1]
             recursosVermelho.recurso[0] -= matrizUpigradesComida[brocasVermelho[origemEspaco][2]][0][2]
+            brocasVermelho[origemEspaco][2]++
             brocasVermelho[origemEspaco][1] = matrizUpigradesComida[brocasVermelho[origemEspaco][2]][2]
             brocasVermelho[origemEspaco][3] = matrizUpigradesComida[brocasVermelho[origemEspaco][2]][1]
             brocasVermelho[origemEspaco][4] = matrizUpigradesComida[brocasVermelho[origemEspaco][2]][0]
-            brocasVermelho[origemEspaco][2]++
         }
     } else if (brocasVermelho[origemEspaco][0] === "recurso") {
         if (
@@ -363,10 +363,10 @@ function upigradesDireita(origemEspaco) {
             recursosVermelho.ouro[0] -= matrizUpigradesRecurso[brocasVermelho[origemEspaco][2]][0][0]
             recursosVermelho.comida[0] -= matrizUpigradesRecurso[brocasVermelho[origemEspaco][2]][0][1]
             recursosVermelho.recurso[0] -= matrizUpigradesRecurso[brocasVermelho[origemEspaco][2]][0][2]
+            brocasVermelho[origemEspaco][2]++
             brocasVermelho[origemEspaco][1] = matrizUpigradesRecurso[brocasVermelho[origemEspaco][2]][2]
             brocasVermelho[origemEspaco][3] = matrizUpigradesRecurso[brocasVermelho[origemEspaco][2]][1]
             brocasVermelho[origemEspaco][4] = matrizUpigradesRecurso[brocasVermelho[origemEspaco][2]][0]
-            brocasVermelho[origemEspaco][2]++
         }
     }
     if (verificacao === 0) return

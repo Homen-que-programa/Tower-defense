@@ -1,10 +1,7 @@
-const tabelaColisao = []
-const tabelaColisaoTamanho = 500
-let unidadeInformacao = [200]
-let unidadeMensagemColisao = [(_colisao, _inimigo) => {}]
-let unidadeIndex = 1
+let unidadeInformacao = []
+let unidadeMensagemColisao = []
+let unidadeIndex = 0
 let caminhoAlteracoes = 0
-var tabelaVPositions = []
 
 const baseAzulPosition = [450, 1975]
 let baseAzulVida = 1500
@@ -12,6 +9,7 @@ const baseAzulBarraId = document.getElementById('base-azul-barra')
 
 const baseVermelhoPosition = [450, 25]
 let baseVermelhoVida = 1500
+
 const baseVermelhoBarraId = document.getElementById('base-vermelho-barra')
 
 const tabelaCaminhoTamanho = 50
@@ -53,7 +51,7 @@ const tabelaCaminhoAzul = [
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
@@ -75,21 +73,12 @@ const tabelaCaminhoVermelho = [
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
+    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
 ]
-
-for (let i = 0; i < Math.floor(2000/tabelaColisaoTamanho); i++) {
-    tabelaColisao.push([])
-    for (let e = 0; e < Math.floor(1000/tabelaColisaoTamanho); e++) {
-        tabelaColisao[i].push([])
-    }
-}
-
-// tabelaColisao[0][0].push(['alvo', 0, 'vermelho', 'circulo', 50, 150, 525, 225])
 
 function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor) {
     let _x = x
@@ -121,11 +110,6 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
     
     let _chegadaTrue = false
 
-    let _xcord1 = _x+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRangeVisao+(_unidadeTamanho/2)
-    let _xcord2 = _x-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRangeVisao+(_unidadeTamanho/2)
-    let _ycord1 = _y+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRangeVisao+(_unidadeTamanho/2)
-    let _ycord2 = _y-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRangeVisao+(_unidadeTamanho/2)
-
     _unidadeElement.style.top = `${_y}px`
     _unidadeElement.style.left = `${_x}px`
     _unidadeElement.style.width = `${_unidadeTamanho}px`
@@ -142,6 +126,10 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
 
     // tabelaCaminhoAzul[_yposicaoTabela][_xposicaoTabela] = 'B'
     unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+
+    let _unidadeColisao = () => {
+        unidadeInformacao[_unidadeIndexCopy] = [_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida]
+    }
 
     unidadeMensagemColisao.push((_colisao, _inimigo) => {
         let _inimigoIndex = -1
@@ -264,37 +252,6 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                     baseVermelhoBarraId.style.width = `${Math.floor(baseVermelhoVida/3)}px`
                 }
             }, _unidadeAtackVelocidade)
-        }
-    }
-
-    let _unidadeColisao = () => {
-        for (let i = 0; i < tabelaColisao.length; i++) {
-            for (let e = 0; e < tabelaColisao[i].length; e++) {
-                for (let a = 0; a < tabelaColisao[i][e].length; a++) {
-                    if (tabelaColisao[i][e][a][0] == _unidadeElement.id) {
-                        tabelaColisao[i][e].splice(a, 1)
-                    }
-                }
-            }
-        }
-        if (unidadeInformacao[_unidadeIndexCopy][1] == 'morto') {
-            clearInterval(_unidadeIntervalo)
-            document.getElementById('corpo').removeChild(_unidadeElement)
-            return
-        }
-        _xcord1 = _x+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRangeVisao+(_unidadeTamanho/2)
-        _xcord2 = _x-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRangeVisao+(_unidadeTamanho/2)
-        _ycord1 = _y+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRangeVisao+(_unidadeTamanho/2)
-        _ycord2 = _y-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRangeVisao+(_unidadeTamanho/2)
-        tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
-        if (Math.floor(_xcord2/tabelaColisaoTamanho) != Math.floor((_xcord1)/tabelaColisaoTamanho)) {
-            if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-                tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
-            }
-            tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
-        }
-        if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-            tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         }
     }
 
@@ -549,7 +506,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
-        if (psliderDist <= _unidadeVelocidade * 3) {
+        if (psliderDist <= _unidadeVelocidade * 5) {
             _unidadeVisaoCaminho()
         }
     }
@@ -558,6 +515,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
         if (unidadeInformacao[_unidadeIndexCopy][8] <= 0) {
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
+            document.getElementById('corpo').removeChild(_unidadeElement)
             console.log('morreu')
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
@@ -602,7 +560,23 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
 
 
 
-function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor, XPmorte) {
     let _x = x
     let _y = y
     let _xposicaoTabela = Math.floor(_x/tabelaCaminhoTamanho)
@@ -632,11 +606,6 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     
     let _chegadaTrue = false
 
-    let _xcord1 = _x+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRangeVisao+(_unidadeTamanho/2)
-    let _xcord2 = _x-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRangeVisao+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRangeVisao+(_unidadeTamanho/2)
-    let _ycord1 = _y+_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRangeVisao+(_unidadeTamanho/2)
-    let _ycord2 = _y-_unidadeRangeVisao+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRangeVisao+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRangeVisao+(_unidadeTamanho/2)
-
     _unidadeElement.style.top = `${_y}px`
     _unidadeElement.style.left = `${_x}px`
     _unidadeElement.style.width = `${_unidadeTamanho}px`
@@ -651,7 +620,11 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     document.getElementById('corpo').appendChild(_unidadeElement)
     _unidadeElement.appendChild(_unidadeElementVida)
 
-    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+
+    let _unidadeColisao = () => {
+        unidadeInformacao[_unidadeIndexCopy] = [_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida]
+    }
 
     unidadeMensagemColisao.push((_colisao, _inimigo) => {
         let _inimigoIndex = -1
@@ -763,7 +736,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
-        if (psliderDist <= 70) {
+        if (psliderDist <= _unidadeRange) {
             _chegadaTrue = true
             _atackLoad = setInterval(() => {
                 if (baseAzulVida - _unidadeAtackDano < 0) {
@@ -774,37 +747,6 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                     baseAzulBarraId.style.width = `${Math.floor(baseAzulVida/3)}px`
                 }
             }, _unidadeAtackVelocidade)
-        }
-    }
-
-    let _unidadeColisao = () => {
-        for (let i = 0; i < tabelaColisao.length; i++) {
-            for (let e = 0; e < tabelaColisao[i].length; e++) {
-                for (let a = 0; a < tabelaColisao[i][e].length; a++) {
-                    if (tabelaColisao[i][e][a][0] == _unidadeElement.id) {
-                        tabelaColisao[i][e].splice(a, 1)
-                    }
-                }
-            }
-        }
-        if (unidadeInformacao[_unidadeIndexCopy][1] == 'morto') {
-            clearInterval(_unidadeIntervalo)
-            document.getElementById('corpo').removeChild(_unidadeElement)
-            return
-        }
-        _xcord1 = _x+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x+_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x+_unidadeRange+(_unidadeTamanho/2)
-        _xcord2 = _x-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _x-_unidadeRange+(_unidadeTamanho/2) >= 1990 ? 1990 : _x-_unidadeRange+(_unidadeTamanho/2)
-        _ycord1 = _y+_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y+_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y+_unidadeRange+(_unidadeTamanho/2)
-        _ycord2 = _y-_unidadeRange+(_unidadeTamanho/2) < 0 ? 1 : _y-_unidadeRange+(_unidadeTamanho/2) >= 990 ? 990 : _y-_unidadeRange+(_unidadeTamanho/2)
-        tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
-        if (Math.floor(_xcord2/tabelaColisaoTamanho) != Math.floor((_xcord1)/tabelaColisaoTamanho)) {
-            if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-                tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
-            }
-            tabelaColisao[Math.floor((_xcord1)/tabelaColisaoTamanho)][Math.floor(_ycord2/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
-        }
-        if (Math.floor(_ycord2/tabelaColisaoTamanho) != Math.floor((_ycord1)/tabelaColisaoTamanho)) {
-            tabelaColisao[Math.floor(_xcord2/tabelaColisaoTamanho)][Math.floor((_ycord1)/tabelaColisaoTamanho)].push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRange, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
         }
     }
 
@@ -876,7 +818,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
-        if (psliderDist <= 70) {
+        if (psliderDist <= _unidadeRange) {
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
@@ -1068,6 +1010,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         if (unidadeInformacao[_unidadeIndexCopy][8] <= 0) {
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
+            document.getElementById('corpo').removeChild(_unidadeElement)
             console.log('morreu')
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
@@ -1075,7 +1018,6 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         _unidadeColisao()
         if (!_chegadaTrue) {
             if ((((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]+25) - _y) ** 2) ** 0.5 < _unidadeRangeVisao - _unidadeTamanho + 50) || (((baseVermelhoPosition[1] - _x) ** 2 + ((baseVermelhoPosition[0]-25) - _y) ** 2) ** 0.5 < _unidadeRangeVisao - _unidadeTamanho + 50)) {
-                console.log('ola')
                 _unidadeChegadaMovimento()
             } else {
                 _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
@@ -1094,13 +1036,6 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     unidadeIndex++
 }
 
-
-
-
-
-
-
-
 function atualizarCaminho() {
     for (let e = 0; e < tabelaCaminhoVermelho.length; e++) {
         for (let a = 0; a < tabelaCaminhoVermelho[e].length; a++) {
@@ -1112,6 +1047,28 @@ function atualizarCaminho() {
     }
     caminhoAlteracoes++
 }
+
+setInterval(() => {
+    if (baseAzulVida <= 0 && baseVermelhoVida > 0) {
+        alert("Time VERMELHO venceu!")
+    } else if (baseVermelhoVida <= 0 && baseAzulVida > 0) {
+        alert("Time AZUL venceu!")
+    }
+    for (let i = 0; i < unidadeInformacao.length; i++) {
+        if (unidadeInformacao[i][1] != "morto") {
+            for (let e = 0; e < unidadeInformacao.length; e++) {
+                if (i !== e && unidadeInformacao[e][1] != "morto" && ( (unidadeInformacao[e][7] - unidadeInformacao[i][7])**2 + (unidadeInformacao[e][6] - unidadeInformacao[i][6])**2 )** 0.5 < unidadeInformacao[i][5]) {
+                    console.log('ola')
+                    unidadeMensagemColisao[unidadeInformacao[e][1]](true, unidadeInformacao[i])
+                } else {
+                    unidadeMensagemColisao[unidadeInformacao[e][1]](false, unidadeInformacao[i])
+                }
+            }
+        } else {
+            console.log('tchau')
+        }
+    }
+}, 100)
 
 
 
@@ -1279,28 +1236,6 @@ function atualizarCaminho() {
 //     console.log(tabelaCaminhoVermelho)
 //     console.log(_tabelaCaminhoCopy)
 // }
-
-setInterval(() => {
-    for (let i = 0; i < tabelaColisao.length; i++) {
-        for (let e = 0; e < tabelaColisao[i].length; e++) {
-            if (tabelaColisao[i][e].length > 1) {
-                for (let a = 0; a < tabelaColisao[i][e].length; a++) {
-                    for (let x = 0; x < tabelaColisao[i][e].length; x++) {
-                        if (tabelaColisao[i][e][a][2] != tabelaColisao[i][e][x][2] && x != a && unidadeInformacao[tabelaColisao[i][e][x][1]][1] != 'morto' && unidadeInformacao[tabelaColisao[i][e][a][1]][1] != 'morto') {
-                            if (tabelaColisao[i][e][a][3] == 'circulo' && tabelaColisao[i][e][x][3] == 'circulo') {
-                                if ((((tabelaColisao[i][e][a][6] - tabelaColisao[i][e][x][6])**2) + ((tabelaColisao[i][e][a][7] - tabelaColisao[i][e][x][7])**2))**0.5 < (tabelaColisao[i][e][a][5] + (tabelaColisao[i][e][x][4]/2))) {
-                                    unidadeMensagemColisao[tabelaColisao[i][e][a][1]](true, tabelaColisao[i][e][x])
-                                } else {
-                                    unidadeMensagemColisao[tabelaColisao[i][e][a][1]](false, tabelaColisao[i][e][x])
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-}, 100)
 
 // setInterval(() => {
 //     for (let i = 0; i < tabelaColisao.length; i++) {
