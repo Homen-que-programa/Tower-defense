@@ -4,11 +4,11 @@ let unidadeIndex = 0
 let caminhoAlteracoes = 0
 
 const baseAzulPosition = [450, 1975]
-let baseAzulVida = 1500
+let baseAzulVida = 2500
 const baseAzulBarraId = document.getElementById('base-azul-barra')
 
 const baseVermelhoPosition = [450, 25]
-let baseVermelhoVida = 1500
+let baseVermelhoVida = 2500
 
 const baseVermelhoBarraId = document.getElementById('base-vermelho-barra')
 
@@ -329,8 +329,11 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
             _atackTrue = true
             _atackLoad = setInterval(() => {
                 psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-                if (psliderDist > _unidadeRange || unidadeInformacao[_atackAlvo[1]][1] === 'morto') {
+                if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
                     _atackTrue = false
+                    _alvoTabela.splice(_monerDistancia[0], 1)
+                    _atackAlvo = []
+                    _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
                         _alvoTrue = true
                     } else {
@@ -343,6 +346,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                     unidadeInformacao[_atackAlvo[1]][1] = 'morto'
                     _alvoTabela.splice(_monerDistancia[0], 1)
                     _atackAlvo = []
+                    _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
                         _alvoTrue = true
                     } else {
@@ -526,7 +530,6 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
             document.getElementById('corpo').removeChild(_unidadeElement)
-            console.log('morreu')
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
         _unidadeElementVida.style.width = `${_unidadeVida}px`
@@ -835,8 +838,11 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
             _atackTrue = true
             _atackLoad = setInterval(() => {
                 psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-                if (psliderDist > _unidadeRange || unidadeInformacao[_atackAlvo[1]][1] === 'morto') {
+                if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
                     _atackTrue = false
+                    _atackTrue = false
+                    _alvoTabela.splice(_monerDistancia[0], 1)
+                    _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
                         _alvoTrue = true
                     } else {
@@ -849,6 +855,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                     unidadeInformacao[_atackAlvo[1]][1] = 'morto'
                     _alvoTabela.splice(_monerDistancia[0], 1)
                     _atackAlvo = []
+                    _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
                         _alvoTrue = true
                     } else {
@@ -1032,7 +1039,6 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
             document.getElementById('corpo').removeChild(_unidadeElement)
-            console.log('morreu')
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
         _unidadeElementVida.style.width = `${_unidadeVida}px`
@@ -1080,9 +1086,7 @@ setInterval(() => {
     for (let i = 0; i < unidadeInformacao.length; i++) {
         if (unidadeInformacao[i][1] !== "morto") {
             for (let e = 0; e < unidadeInformacao.length; e++) {
-                console.log(unidadeInformacao[e][1])
                 if (i !== e && unidadeInformacao[e][2] !== unidadeInformacao[i][2] && unidadeInformacao[e][1] != "morto" && ( (unidadeInformacao[e][7] - unidadeInformacao[i][7])**2 + (unidadeInformacao[e][6] - unidadeInformacao[i][6])**2 )** 0.5 < unidadeInformacao[i][5]) {
-                    console.log('ola')
                     unidadeMensagemColisao[e](true, unidadeInformacao[i])
                 } else {
                     unidadeMensagemColisao[e](false, unidadeInformacao[i])

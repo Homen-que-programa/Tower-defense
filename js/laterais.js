@@ -3,7 +3,7 @@ var lateralMatrizVermelho = [["lateral-soldados-direita", false], ["lateral-broc
 var posicionarAtivo = [false, false]
 var posicionarAtulizacao = 0
 
-var matrizPrecoUnidades = [[0, 30, 5], [0, 80, 10], [10, 250, 30], [10, 100, 15]]
+var matrizPrecoUnidades = [[0, 10, 0], [0, 30, 10], [10, 100, 30], [10, 100, 15]]
 
 var intervaloPosicionarAzul
 var intervaloPosicionarVermelho
