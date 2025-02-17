@@ -1,13 +1,13 @@
 var recursosAzul = {
-    ouro: [5000, document.getElementById('ouro-azul')],
-    comida: [2000, document.getElementById('comida-azul')],
-    recurso: [3000, document.getElementById('recurso-azul')],
+    ouro: [50, document.getElementById('ouro-azul')],
+    comida: [20, document.getElementById('comida-azul')],
+    recurso: [30, document.getElementById('recurso-azul')],
     producao: [0, 0, 0]
 }
 var recursosVermelho = {
-    ouro: [5000, document.getElementById('ouro-vermelho')],
-    comida: [2000, document.getElementById('comida-vermelho')],
-    recurso: [3000, document.getElementById('recurso-vermelho')],
+    ouro: [50, document.getElementById('ouro-vermelho')],
+    comida: [20, document.getElementById('comida-vermelho')],
+    recurso: [30, document.getElementById('recurso-vermelho')],
     producao: [0, 0, 0]
 }
 
