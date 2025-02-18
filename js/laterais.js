@@ -43,12 +43,12 @@ function abrirLateralVermelho(_numLateral) {
 
 function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
     if (_timeOuCansel === 'azul') {
-        if (matrizPrecoUnidades[_unidadeEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosAzul.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosAzul.recurso[0]) {
+        if (quantiaUnidadeAzul >= quantiaUnidadeLimite || matrizPrecoUnidades[_unidadeEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosAzul.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosAzul.recurso[0]) {
             return false
         }
     }
     if (_timeOuCansel === 'vermelho') {
-        if (matrizPrecoUnidades[_unidadeEscolhida][0] > recursosVermelho.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosVermelho.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosVermelho.recurso[0]) {
+        if (quantiaUnidadeVermelho >= quantiaUnidadeLimite || matrizPrecoUnidades[_unidadeEscolhida][0] > recursosVermelho.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosVermelho.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosVermelho.recurso[0]) {
             return false
         }
     }
@@ -118,13 +118,13 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                                 recursosAzul.comida[1].innerHTML = recursosAzul.comida[0]
                                 recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
                                 if (_unidadeEscolhida === 0) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 35, 1000, 1, 300, 70, 50, 'background: brown;')
+                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 35, 1000, 1, 300, 70, 50, 'background: brown;', 1)
                                 } else if (_unidadeEscolhida === 1) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 20, 500, 1, 500, 250, 50, 'background: grey;')
+                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 20, 500, 1, 500, 250, 50, 'background: grey;', 2)
                                 } else if (_unidadeEscolhida === 2) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 600, 150, 2500, 2, 300, 70, 75, 'background: green;')
+                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 600, 150, 2500, 2, 300, 70, 75, 'background: green;', 3)
                                 } else if (_unidadeEscolhida === 3) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 1.5, 800, 600, 50, 'background: blue;')
+                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 1.5, 800, 600, 50, 'background: blue;', 1)
                                 }
                                 posicionarSoldados('cancelarAzul', 0)
                             }
@@ -162,13 +162,13 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                                 recursosVermelho.comida[1].innerHTML = recursosVermelho.comida[0]
                                 recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
                                 if (_unidadeEscolhida === 0) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 35, 1000, 1, 300, 70, 50, 'background: brown;')
+                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 35, 1000, 1, 300, 70, 50, 'background: brown;', 1)
                                 } else if (_unidadeEscolhida === 1) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 20, 500, 1, 500, 250, 50, 'background: grey;')
+                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 20, 500, 1, 500, 250, 50, 'background: grey;', 2)
                                 } else if (_unidadeEscolhida === 2) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 600, 150, 2500, 2, 300, 70, 75, 'background: green;')
+                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 600, 150, 2500, 2, 300, 70, 75, 'background: green;', 3)
                                 } else if (_unidadeEscolhida === 3) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 2, 800, 600, 50, 'background: blue;')
+                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 2, 800, 600, 50, 'background: blue;', 1)
                                 }
                                 posicionarSoldados('cancelarVermelho', 0)
                             }

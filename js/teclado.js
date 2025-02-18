@@ -311,7 +311,7 @@ document.onkeydown = () => {
             direitaAtivos[1] = false
             direitaAtivos[2] = false
         } else if (direitaAtivos[3]) {
-            if (recursosVermelho.ouro[0] >= 20 && recursosVermelho.comida[0] >= 0 && recursosVermelho.recurso[0] >= 10) {
+            if (recursosVermelho.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesOuro[0][0][2]) {
                 escolhaBrocaDireita(direitaBrocasEscolhas, direitaBrocas)
                 espacoBrocaDireita(7)
                 direitaBrocasEstados[direitaBrocas] = true
@@ -352,7 +352,7 @@ document.onkeydown = () => {
             esquerdaAtivos[1] = false
             esquerdaAtivos[2] = false
         } else if (esquerdaAtivos[3]) {
-            if (recursosAzul.ouro[0] >= 20 && recursosAzul.comida[0] >= 0 && recursosAzul.recurso[0] >= 10) {
+            if (recursosAzul.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesOuro[0][0][2]) {
                 escolhaBroca(esquerdaBrocasEscolhas, esquerdaBrocas)
                 espacoBroca(7)
                 esquerdaBrocasEstados[esquerdaBrocas] = true

@@ -1,14 +1,18 @@
-let unidadeInformacao = []
-let unidadeMensagemColisao = []
-let unidadeIndex = 0
-let caminhoAlteracoes = 0
+var unidadeInformacao = []
+var unidadeMensagemColisao = []
+var unidadeIndex = 0
+var caminhoAlteracoes = 0
+
+var quantiaUnidadeLimite = 15
+var quantiaUnidadeAzul = 0
+var quantiaUnidadeVermelho = 0
 
 const baseAzulPosition = [450, 1975]
-let baseAzulVida = 2500
+var baseAzulVida = 2500
 const baseAzulBarraId = document.getElementById('base-azul-barra')
 
 const baseVermelhoPosition = [450, 25]
-let baseVermelhoVida = 2500
+var baseVermelhoVida = 2500
 
 const baseVermelhoBarraId = document.getElementById('base-vermelho-barra')
 
@@ -80,7 +84,7 @@ const tabelaCaminhoVermelho = [
     ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
 ]
 
-function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor) {
+function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor, espaco) {
     let _x = x
     let _y = y
     let _xposicaoTabela = Math.floor(_x/tabelaCaminhoTamanho)
@@ -96,6 +100,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
     let _unidadeRange = range
     let _unidadeTamanho = tamanho
     let _unidadeIndexCopy = unidadeIndex
+    let _unidadeEspaco = espaco
 
     let _caminhotab = []
     let _caminhoAlteracoesCopy = caminhoAlteracoes
@@ -125,7 +130,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
     _unidadeElement.appendChild(_unidadeElementVida)
 
     // tabelaCaminhoAzul[_yposicaoTabela][_xposicaoTabela] = 'B'
-    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'azul', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida, _unidadeEspaco])
 
     let _unidadeColisao = () => {
         unidadeInformacao[_unidadeIndexCopy][6] = _x+(_unidadeTamanho/2)
@@ -193,52 +198,68 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
     
     let _unidadeChegadaMovimento = () => {
         let _unidadeAlvoXY = [baseAzulPosition[0]-(_unidadeTamanho/2), baseAzulPosition[1]-(_unidadeTamanho/2)]
-        let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
-        let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-        if (_x > _unidadeAlvoXY[1]) {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
+        if (_x === _unidadeAlvoXY[1]) {
+            if (_y < _unidadeAlvoXY[0]) {
+                _y += _unidadeVelocidade
+            } else {
+                _y -= _unidadeVelocidade
+            }
+        } else if (_y === _unidadeAlvoXY[0]) {
+            if (_x < _unidadeAlvoXY[1]) {
+                _x += _unidadeVelocidade
+            } else {
+                _x -= _unidadeVelocidade
+            }
+        } else {
+            let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+            let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+            if (_x > _unidadeAlvoXY[1]) {
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
             else {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
-        }
-        else {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
-            else {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
+            _x = Math.floor(_x)
+            _y = Math.floor(_y)
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
@@ -266,7 +287,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                     return
                 }
             }
-            if (_alvoTabela[i][3] == 'circulo') {
+            if (_alvoTabela.length >= i ? false : _alvoTabela[i][3] == 'circulo') {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
                     _monerDistancia[0] = i
@@ -275,52 +296,68 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
         }
 
         let _unidadeAlvoXY = [_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2), _alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2)]
-        let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
-        let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-        if (_x > _unidadeAlvoXY[1]) {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
+        if (_x === _unidadeAlvoXY[1]) {
+            if (_y < _unidadeAlvoXY[0]) {
+                _y += _unidadeVelocidade
+            } else {
+                _y -= _unidadeVelocidade
+            }
+        } else if (_y === _unidadeAlvoXY[0]) {
+            if (_x < _unidadeAlvoXY[1]) {
+                _x += _unidadeVelocidade
+            } else {
+                _x -= _unidadeVelocidade
+            }
+        } else {
+            let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+            let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+            if (_x > _unidadeAlvoXY[1]) {
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
             else {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
-        }
-        else {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
-            else {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
+            _x = Math.floor(_x)
+            _y = Math.floor(_y)
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
@@ -330,8 +367,8 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
             _atackLoad = setInterval(() => {
                 psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
                 if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
-                    _atackTrue = false
                     _alvoTabela.splice(_monerDistancia[0], 1)
+                    _atackTrue = false
                     _atackAlvo = []
                     _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
@@ -341,10 +378,10 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                     }
                     clearInterval(_atackLoad)
                 } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
-                    _atackTrue = false
                     unidadeInformacao[_atackAlvo[1]][8] = 0
                     unidadeInformacao[_atackAlvo[1]][1] = 'morto'
                     _alvoTabela.splice(_monerDistancia[0], 1)
+                    _atackTrue = false
                     _atackAlvo = []
                     _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
@@ -471,52 +508,68 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
 
     let _movimentoCaminho = () => {
         let _unidadeAlvoXY = [Math.max(1, _caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
-        let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
-        let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-        if (_x > _unidadeAlvoXY[1]) {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
+        if (_x === _unidadeAlvoXY[1]) {
+            if (_y < _unidadeAlvoXY[0]) {
+                _y += _unidadeVelocidade
+            } else {
+                _y -= _unidadeVelocidade
+            }
+        } else if (_y === _unidadeAlvoXY[0]) {
+            if (_x < _unidadeAlvoXY[1]) {
+                _x += _unidadeVelocidade
+            } else {
+                _x -= _unidadeVelocidade
+            }
+        } else {
+            let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+            let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+            if (_x > _unidadeAlvoXY[1]) {
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
             else {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
-        }
-        else {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
-            else {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
+            _x = Math.floor(_x)
+            _y = Math.floor(_y)
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
@@ -529,13 +582,14 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
         if (unidadeInformacao[_unidadeIndexCopy][8] <= 0) {
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
+            unidadeInformacao[_unidadeIndexCopy][1] = "morto"
             document.getElementById('corpo').removeChild(_unidadeElement)
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
         _unidadeElementVida.style.width = `${_unidadeVida}px`
         _unidadeColisao()
         if (!_chegadaTrue) {
-            if ((((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]+25) - _y) ** 2) ** 0.5 <  _unidadeRangeVisao - _unidadeTamanho + 50) || (((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]-25) - _y) ** 2) ** 0.5 <  _unidadeRangeVisao - _unidadeTamanho + 50)) {
+            if ((((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]+25) - _y) ** 2) ** 0.5 <  _unidadeRangeVisao - _unidadeTamanho) || (((baseAzulPosition[1] - _x) ** 2 + ((baseAzulPosition[0]-25) - _y) ** 2) ** 0.5 <  _unidadeRangeVisao - _unidadeTamanho)) {
                 _unidadeChegadaMovimento()
             } else {
                 _caminhoAlteracoesCopy != caminhoAlteracoes ? _unidadeVisaoCaminho() : 0
@@ -589,7 +643,7 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
 
 
 
-function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor, XPmorte) {
+function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor, espaco,XPmorte) {
     let _x = x
     let _y = y
     let _xposicaoTabela = Math.floor(_x/tabelaCaminhoTamanho)
@@ -605,6 +659,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     let _unidadeRange = range
     let _unidadeTamanho = tamanho
     let _unidadeIndexCopy = unidadeIndex
+    let _unidadeEspaco = espaco
 
     let _caminhotab = []
     let _caminhoAlteracoesCopy = caminhoAlteracoes
@@ -633,7 +688,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     document.getElementById('corpo').appendChild(_unidadeElement)
     _unidadeElement.appendChild(_unidadeElementVida)
 
-    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
+    unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida, _unidadeEspaco])
 
     let _unidadeColisao = () => {
         unidadeInformacao[_unidadeIndexCopy][6] = _x+(_unidadeTamanho/2)
@@ -701,52 +756,68 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     
     let _unidadeChegadaMovimento = () => {
         let _unidadeAlvoXY = [baseVermelhoPosition[0]-(_unidadeTamanho/2), baseVermelhoPosition[1]-(_unidadeTamanho/2)]
-        let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
-        let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-        if (_x > _unidadeAlvoXY[1]) {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
+        if (_x === _unidadeAlvoXY[1]) {
+            if (_y < _unidadeAlvoXY[0]) {
+                _y += _unidadeVelocidade
+            } else {
+                _y -= _unidadeVelocidade
+            }
+        } else if (_y === _unidadeAlvoXY[0]) {
+            if (_x < _unidadeAlvoXY[1]) {
+                _x += _unidadeVelocidade
+            } else {
+                _x -= _unidadeVelocidade
+            }
+        } else {
+            let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+            let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+            if (_x > _unidadeAlvoXY[1]) {
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
             else {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
-        }
-        else {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
-            else {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
+            _x = Math.floor(_x)
+            _y = Math.floor(_y)
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
@@ -775,7 +846,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                     return
                 }
             }
-            if (_alvoTabela[i][3] == 'circulo') {
+            if (_alvoTabela.length >= i ? false : _alvoTabela[i][3] == 'circulo') {
                 if (_monerDistancia[1] > ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5) {
                     _monerDistancia[1] = ((_alvoTabela[i][6] - _x) ** 2 + (_alvoTabela[i][7] - _y) ** 2) ** 0.5
                     _monerDistancia[0] = i
@@ -784,52 +855,68 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         }
 
         let _unidadeAlvoXY = [_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2), _alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2)]
-        let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
-        let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-        if (_x > _unidadeAlvoXY[1]) {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
+        if (_x === _unidadeAlvoXY[1]) {
+            if (_y < _unidadeAlvoXY[0]) {
+                _y += _unidadeVelocidade
+            } else {
+                _y -= _unidadeVelocidade
+            }
+        } else if (_y === _unidadeAlvoXY[0]) {
+            if (_x < _unidadeAlvoXY[1]) {
+                _x += _unidadeVelocidade
+            } else {
+                _x -= _unidadeVelocidade
+            }
+        } else {
+            let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+            let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+            if (_x > _unidadeAlvoXY[1]) {
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
             else {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
-        }
-        else {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
-            else {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
+            _x = Math.floor(_x)
+            _y = Math.floor(_y)
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
@@ -840,8 +927,8 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                 psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
                 if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
                     _atackTrue = false
-                    _atackTrue = false
                     _alvoTabela.splice(_monerDistancia[0], 1)
+                    _atackAlvo = []
                     _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
                         _alvoTrue = true
@@ -980,52 +1067,68 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
 
     let _movimentoCaminho = () => {
         let _unidadeAlvoXY = [Math.max(1, _caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
-        let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
-        let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
         psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-        if (_x > _unidadeAlvoXY[1]) {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
+        if (_x === _unidadeAlvoXY[1]) {
+            if (_y < _unidadeAlvoXY[0]) {
+                _y += _unidadeVelocidade
+            } else {
+                _y -= _unidadeVelocidade
+            }
+        } else if (_y === _unidadeAlvoXY[0]) {
+            if (_x < _unidadeAlvoXY[1]) {
+                _x += _unidadeVelocidade
+            } else {
+                _x -= _unidadeVelocidade
+            }
+        } else {
+            let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+            let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+            if (_x > _unidadeAlvoXY[1]) {
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x -= _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
             else {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
+                if (_a < 0) {
+                    if (Math.abs(_a) > 1) {
+                        _y -= _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
                 else {
-                    _x -= _unidadeVelocidade
-                    _y = (_x * _a) + _b
+                    if (Math.abs(_a) > 1) {
+                        _y += _unidadeVelocidade
+                        _x = (_y - _b) / _a
+                    }
+                    else {
+                        _x += _unidadeVelocidade
+                        _y = (_x * _a) + _b
+                    }
                 }
             }
-        }
-        else {
-            if (_a < 0) {
-                if (Math.abs(_a) > 1) {
-                    _y -= _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
-            else {
-                if (Math.abs(_a) > 1) {
-                    _y += _unidadeVelocidade
-                    _x = (_y - _b) / _a
-                }
-                else {
-                    _x += _unidadeVelocidade
-                    _y = (_x * _a) + _b
-                }
-            }
+            _x = Math.floor(_x)
+            _y = Math.floor(_y)
         }
         _unidadeElement.style.top = `${_y}px`
         _unidadeElement.style.left = `${_x}px`
@@ -1038,6 +1141,7 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
         if (unidadeInformacao[_unidadeIndexCopy][8] <= 0) {
             clearInterval(_atackLoad)
             clearInterval(_unidadeIntervalo)
+            unidadeInformacao[_unidadeIndexCopy][1] = "morto"
             document.getElementById('corpo').removeChild(_unidadeElement)
         }
         _unidadeVida = unidadeInformacao[_unidadeIndexCopy][8]
@@ -1078,6 +1182,8 @@ function atualizarCaminho() {
 // unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, 'vermelho', 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida])
 
 setInterval(() => {
+    let quantiaUnidadeAzulCopy = 0
+    let quantiaUnidadeVermelhoCopy = 0
     if (baseAzulVida <= 0 && baseVermelhoVida > 0) {
         alert("Time VERMELHO venceu!")
     } else if (baseVermelhoVida <= 0 && baseAzulVida > 0) {
@@ -1085,6 +1191,11 @@ setInterval(() => {
     }
     for (let i = 0; i < unidadeInformacao.length; i++) {
         if (unidadeInformacao[i][1] !== "morto") {
+            if (unidadeInformacao[i][2] === "azul") {
+                quantiaUnidadeAzulCopy += unidadeInformacao[i][9]
+            } else {
+                quantiaUnidadeVermelhoCopy += unidadeInformacao[i][9]
+            }
             for (let e = 0; e < unidadeInformacao.length; e++) {
                 if (i !== e && unidadeInformacao[e][2] !== unidadeInformacao[i][2] && unidadeInformacao[e][1] != "morto" && ( (unidadeInformacao[e][7] - unidadeInformacao[i][7])**2 + (unidadeInformacao[e][6] - unidadeInformacao[i][6])**2 )** 0.5 < unidadeInformacao[i][5]) {
                     unidadeMensagemColisao[e](true, unidadeInformacao[i])
@@ -1094,6 +1205,10 @@ setInterval(() => {
             }
         }
     }
+    quantiaUnidadeAzul = quantiaUnidadeAzulCopy
+    quantiaUnidadeVermelho = quantiaUnidadeVermelhoCopy
+    document.getElementById('azul-quantia-unidade').innerHTML = quantiaUnidadeAzulCopy
+    document.getElementById('vermelho-quantia-unidade').innerHTML = quantiaUnidadeVermelhoCopy
 }, 100)
 
 
@@ -1349,3 +1464,68 @@ setInterval(() => {
 //     tabelaCaminhoVermelho[9][22] = 'N'
 //     caminhoAlteracoes++
 // }, 2000)
+
+
+
+
+
+
+// let _movimentoCaminho = () => {
+//     console.log(_x+' ; '+_y)
+//     let _unidadeAlvoXY = [Math.max(1, _caminhotab[0][0]*tabelaCaminhoTamanho), Math.max(1, _caminhotab[0][1]*tabelaCaminhoTamanho)]
+//     let _a = (_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)
+//     let _b = _y - (((_unidadeAlvoXY[0] - _y) / (_unidadeAlvoXY[1] - _x)) * _x)
+//     console.log(_a+' ; '+_b)
+//     psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
+//     if (_x > _unidadeAlvoXY[1]) {
+//         if (_a < 0) {
+//             if (Math.abs(_a) > 1) {
+//                 _y += _unidadeVelocidade
+//                 _x = (_y - _b) / _a
+//             }
+//             else {
+//                 _x -= _unidadeVelocidade
+//                 _y = (_x * _a) + _b
+//             }
+//         }
+//         else {
+//             if (Math.abs(_a) > 1) {
+//                 _y -= _unidadeVelocidade
+//                 _x = (_y - _b) / _a
+//             }
+//             else {
+//                 _x -= _unidadeVelocidade
+//                 _y = (_x * _a) + _b
+//             }
+//         }
+//     }
+//     else {
+//         if (_a < 0) {
+//             if (Math.abs(_a) > 1) {
+//                 _y -= _unidadeVelocidade
+//                 _x = (_y - _b) / _a
+//             }
+//             else {
+//                 _x += _unidadeVelocidade
+//                 _y = (_x * _a) + _b
+//             }
+//         }
+//         else {
+//             if (Math.abs(_a) > 1) {
+//                 _y += _unidadeVelocidade
+//                 _x = (_y - _b) / _a
+//             }
+//             else {
+//                 _x += _unidadeVelocidade
+//                 _y = (_x * _a) + _b
+//             }
+//         }
+//     }
+//     _a = 0
+//     _b = 0
+//     _unidadeElement.style.top = `${_y}px`
+//     _unidadeElement.style.left = `${_x}px`
+//     if (psliderDist <= 5) {
+//         _unidadeVisaoCaminho()
+//     }
+// }
