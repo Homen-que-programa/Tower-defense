@@ -64,7 +64,7 @@ document.onkeydown = () => {
         } else if (direitaAtivos[2] || direitaAtivos[3] || direitaAtivos[4]) {
             direitaAtivos[2] = true
             direitaAtivos[3] = false
-            direitaBrocasEscolhas = 0
+            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBrocaDireita(7)
             if (direitaBrocas > 0) {
                 document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
@@ -122,7 +122,7 @@ document.onkeydown = () => {
         } else if (direitaAtivos[2] || direitaAtivos[3] || direitaAtivos[4]) {
             direitaAtivos[2] = true
             direitaAtivos[3] = false
-            direitaBrocasEscolhas = 0
+            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBrocaDireita(7)
             if (direitaBrocas < 4) {
                 document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
@@ -181,7 +181,7 @@ document.onkeydown = () => {
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3] || esquerdaAtivos[4]) {
             esquerdaAtivos[2] = true
             esquerdaAtivos[3] = false
-            esquerdaBrocasEscolhas = 0
+            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBroca(7)
             if (esquerdaBrocas > 0) {
                 document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
@@ -239,7 +239,7 @@ document.onkeydown = () => {
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3] || esquerdaAtivos[4]) {
             esquerdaAtivos[2] = true
             esquerdaAtivos[3] = false
-            esquerdaBrocasEscolhas = 0
+            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBroca(7)
             if (esquerdaBrocas < 4) {
                 document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
@@ -306,12 +306,19 @@ document.onkeydown = () => {
             }
         } else if (direitaAtivos[2] && !direitaBrocasEstados[direitaBrocas]) {
             espacoBrocaDireita(direitaBrocas)
+            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
             direitaAtivos[3] = true
             direitaAtivos[0] = false
             direitaAtivos[1] = false
             direitaAtivos[2] = false
         } else if (direitaAtivos[3]) {
-            if (recursosVermelho.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesOuro[0][0][2]) {
+            if (direitaBrocasEscolhas === 0 && !(recursosVermelho.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
+                
+            } else if (direitaBrocasEscolhas === 1 && !(recursosVermelho.ouro[0] >= matrizUpigradesComida[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesComida[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesComida[0][0][2])) {
+                
+            } else if (direitaBrocasEscolhas === 2 && !(recursosVermelho.ouro[0] >= matrizUpigradesRecurso[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesRecurso[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesRecurso[0][0][2])) {
+                
+            } else {
                 escolhaBrocaDireita(direitaBrocasEscolhas, direitaBrocas)
                 espacoBrocaDireita(7)
                 direitaBrocasEstados[direitaBrocas] = true
@@ -347,12 +354,19 @@ document.onkeydown = () => {
             }
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)
+            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
             esquerdaAtivos[3] = true
             esquerdaAtivos[0] = false
             esquerdaAtivos[1] = false
             esquerdaAtivos[2] = false
         } else if (esquerdaAtivos[3]) {
-            if (recursosAzul.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesOuro[0][0][2]) {
+            if (esquerdaBrocasEscolhas === 0 && !(recursosAzul.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
+                
+            } else if (esquerdaBrocasEscolhas === 1 && !(recursosAzul.ouro[0] >= matrizUpigradesComida[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesComida[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesComida[0][0][2])) {
+                
+            } else if (esquerdaBrocasEscolhas === 2 && !(recursosAzul.ouro[0] >= matrizUpigradesRecurso[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesRecurso[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesRecurso[0][0][2])) {
+                
+            } else {
                 escolhaBroca(esquerdaBrocasEscolhas, esquerdaBrocas)
                 espacoBroca(7)
                 esquerdaBrocasEstados[esquerdaBrocas] = true

@@ -122,6 +122,8 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
     _unidadeElement.style.cssText += cor
     _unidadeElement.id = `fuzileiro${unidadeIndex}`
     _unidadeElement.className = 'fuzileiro'
+    _unidadeElementVida.style.opacity = '0.35'
+    _unidadeElementVida.style.backgroundColor = 'blue'
 
     _unidadeElement.id = `barra-vida${unidadeIndex}`
     _unidadeElementVida.className = 'barra-vida'
@@ -365,23 +367,10 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
-                psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-                if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
-                    _alvoTabela.splice(_monerDistancia[0], 1)
+                if (_alvoTabela.length <= 0) {
+                    console.log('ababa')
                     _atackTrue = false
-                    _atackAlvo = []
-                    _unidadeVisaoCaminho()
-                    if (_alvoTabela.length > 0) {
-                        _alvoTrue = true
-                    } else {
-                        _alvoTrue = false
-                    }
-                    clearInterval(_atackLoad)
-                } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
-                    unidadeInformacao[_atackAlvo[1]][8] = 0
-                    unidadeInformacao[_atackAlvo[1]][1] = 'morto'
                     _alvoTabela.splice(_monerDistancia[0], 1)
-                    _atackTrue = false
                     _atackAlvo = []
                     _unidadeVisaoCaminho()
                     if (_alvoTabela.length > 0) {
@@ -391,7 +380,34 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
                     }
                     clearInterval(_atackLoad)
                 } else {
-                    unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
+                    psliderDist = ((_alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2) - _x) ** 2 + (_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2) - _y) ** 2) ** 0.5
+                    if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
+                        _atackTrue = false
+                        _alvoTabela.splice(_monerDistancia[0], 1)
+                        _atackAlvo = []
+                        _unidadeVisaoCaminho()
+                        if (_alvoTabela.length > 0) {
+                            _alvoTrue = true
+                        } else {
+                            _alvoTrue = false
+                        }
+                        clearInterval(_atackLoad)
+                    } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
+                        _atackTrue = false
+                        unidadeInformacao[_atackAlvo[1]][8] = 0
+                        unidadeInformacao[_atackAlvo[1]][1] = 'morto'
+                        _alvoTabela.splice(_monerDistancia[0], 1)
+                        _atackAlvo = []
+                        _unidadeVisaoCaminho()
+                        if (_alvoTabela.length > 0) {
+                            _alvoTrue = true
+                        } else {
+                            _alvoTrue = false
+                        }
+                        clearInterval(_atackLoad)
+                    } else {
+                        unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
+                    }
                 }
             }, _unidadeAtackVelocidade)
         }
@@ -681,6 +697,8 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
     _unidadeElement.style.cssText += cor
     _unidadeElement.id = `fuzileiro${unidadeIndex}`
     _unidadeElement.className = 'fuzileiro'
+    _unidadeElementVida.style.opacity = '0.35'
+    _unidadeElementVida.style.backgroundColor = 'red'
 
     _unidadeElement.id = `barra-vida${unidadeIndex}`
     _unidadeElementVida.className = 'barra-vida'
@@ -924,22 +942,9 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
             _atackAlvo = _alvoTabela[_monerDistancia[0]]
             _atackTrue = true
             _atackLoad = setInterval(() => {
-                psliderDist = ((_unidadeAlvoXY[1] - _x) ** 2 + (_unidadeAlvoXY[0] - _y) ** 2) ** 0.5
-                if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
+                if (_alvoTabela.length <= 0) {
+                    console.log('ababa')
                     _atackTrue = false
-                    _alvoTabela.splice(_monerDistancia[0], 1)
-                    _atackAlvo = []
-                    _unidadeVisaoCaminho()
-                    if (_alvoTabela.length > 0) {
-                        _alvoTrue = true
-                    } else {
-                        _alvoTrue = false
-                    }
-                    clearInterval(_atackLoad)
-                } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
-                    _atackTrue = false
-                    unidadeInformacao[_atackAlvo[1]][8] = 0
-                    unidadeInformacao[_atackAlvo[1]][1] = 'morto'
                     _alvoTabela.splice(_monerDistancia[0], 1)
                     _atackAlvo = []
                     _unidadeVisaoCaminho()
@@ -950,7 +955,34 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
                     }
                     clearInterval(_atackLoad)
                 } else {
-                    unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
+                    psliderDist = ((_alvoTabela[_monerDistancia[0]][6]-(_unidadeTamanho/2) - _x) ** 2 + (_alvoTabela[_monerDistancia[0]][7]-(_unidadeTamanho/2) - _y) ** 2) ** 0.5
+                    if (psliderDist > _unidadeRange || _atackAlvo[1] == 'morto') {
+                        _atackTrue = false
+                        _alvoTabela.splice(_monerDistancia[0], 1)
+                        _atackAlvo = []
+                        _unidadeVisaoCaminho()
+                        if (_alvoTabela.length > 0) {
+                            _alvoTrue = true
+                        } else {
+                            _alvoTrue = false
+                        }
+                        clearInterval(_atackLoad)
+                    } else if (unidadeInformacao[_atackAlvo[1]][8] - _unidadeAtackDano < 0) {
+                        _atackTrue = false
+                        unidadeInformacao[_atackAlvo[1]][8] = 0
+                        unidadeInformacao[_atackAlvo[1]][1] = 'morto'
+                        _alvoTabela.splice(_monerDistancia[0], 1)
+                        _atackAlvo = []
+                        _unidadeVisaoCaminho()
+                        if (_alvoTabela.length > 0) {
+                            _alvoTrue = true
+                        } else {
+                            _alvoTrue = false
+                        }
+                        clearInterval(_atackLoad)
+                    } else {
+                        unidadeInformacao[_atackAlvo[1]][8] -= _unidadeAtackDano
+                    }
                 }
             }, _unidadeAtackVelocidade)
         }
@@ -1199,6 +1231,7 @@ setInterval(() => {
             for (let e = 0; e < unidadeInformacao.length; e++) {
                 if (i !== e && unidadeInformacao[e][2] !== unidadeInformacao[i][2] && unidadeInformacao[e][1] != "morto" && ( (unidadeInformacao[e][7] - unidadeInformacao[i][7])**2 + (unidadeInformacao[e][6] - unidadeInformacao[i][6])**2 )** 0.5 < unidadeInformacao[i][5]) {
                     unidadeMensagemColisao[e](true, unidadeInformacao[i])
+                    console.log(i+' : '+e)
                 } else {
                     unidadeMensagemColisao[e](false, unidadeInformacao[i])
                 }

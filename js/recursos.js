@@ -1,13 +1,13 @@
 var recursosAzul = {
-    ouro: [50, document.getElementById('ouro-azul')],
-    comida: [20, document.getElementById('comida-azul')],
-    recurso: [30, document.getElementById('recurso-azul')],
+    ouro: [500, document.getElementById('ouro-azul')],
+    comida: [500, document.getElementById('comida-azul')],
+    recurso: [500, document.getElementById('recurso-azul')],
     producao: [0, 0, 0]
 }
 var recursosVermelho = {
-    ouro: [50, document.getElementById('ouro-vermelho')],
-    comida: [20, document.getElementById('comida-vermelho')],
-    recurso: [30, document.getElementById('recurso-vermelho')],
+    ouro: [500, document.getElementById('ouro-vermelho')],
+    comida: [500, document.getElementById('comida-vermelho')],
+    recurso: [500, document.getElementById('recurso-vermelho')],
     producao: [0, 0, 0]
 }
 
@@ -15,25 +15,25 @@ var brocasAzul = [[], [], [], [], []]
 var brocasVermelho = [[], [], [], [], []]
 
 var matrizUpigradesOuro = [
-    [[20, 0, 10], [10, 0, 5], 1],
-    [[50, 10, 25], [25, 10, 15], 2],
-    [[100, 20, 60], [50, 10, 30], 4],
-    [[250, 80, 120], [125, 40, 60], 10],
-    [[600, 200, 300], [300, 100, 150], 20]
+    [[0, 10, 20], [0, 10, 20], 1],
+    [[10, 25, 50], [5, 15, 25], 2],
+    [[25, 60, 100], [15, 30, 50], 4],
+    [[80, 120, 250], [40, 60, 125], 10],
+    [[200, 400, 650], [100, 200, 325], 20]
 ]
 var matrizUpigradesComida = [
-    [[20, 0, 10], [10, 0, 5], 1],
+    [[20, 0, 10], [20, 0, 10], 1],
     [[50, 10, 25], [25, 10, 15], 2],
-    [[100, 20, 60], [50, 10, 30], 4],
+    [[100, 25, 60], [50, 15, 30], 4],
     [[250, 80, 120], [125, 40, 60], 10],
-    [[600, 200, 300], [300, 100, 150], 20]
+    [[650, 200, 400], [325, 100, 200], 20]
 ]
 var matrizUpigradesRecurso = [
-    [[20, 0, 10], [10, 0, 5], 1],
-    [[50, 10, 25], [25, 10, 15], 2],
-    [[100, 20, 60], [50, 10, 30], 4],
-    [[250, 80, 120], [125, 40, 60], 10],
-    [[600, 200, 300], [300, 100, 150], 20]
+    [[5, 20, 5], [5, 20, 5], 1],
+    [[20, 40, 20], [10, 20, 10], 2],
+    [[50, 100, 50], [25, 50, 25], 4],
+    [[115, 220, 115], [60, 110, 60], 10],
+    [[300, 550, 300], [150, 275, 150], 20]
 ]
 
 recursosAzul.ouro[1].innerHTML = recursosAzul.ouro[0]
@@ -45,6 +45,34 @@ recursosVermelho.comida[1].innerHTML = recursosVermelho.comida[0]
 recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
 
 
+let elementPrecoCompraOuro = document.getElementsByClassName('broca-ouro')
+let elementPrecoCompraComida = document.getElementsByClassName('broca-comida')
+let elementPrecoCompraRecurso = document.getElementsByClassName('broca-recurso')
+for (let i = 0; i < elementPrecoCompraOuro.length; i++) {
+    elementPrecoCompraOuro[i].querySelector('.preco-compra-ouro').innerHTML = matrizUpigradesOuro[0][0][0]
+    elementPrecoCompraOuro[i].querySelector('.preco-compra-comida').innerHTML = matrizUpigradesOuro[0][0][1]
+    elementPrecoCompraOuro[i].querySelector('.preco-compra-recurso').innerHTML = matrizUpigradesOuro[0][0][2]
+}
+for (let i = 0; i < elementPrecoCompraComida.length; i++) {
+    elementPrecoCompraComida[i].querySelector('.preco-compra-ouro').innerHTML = matrizUpigradesComida[0][0][0]
+    elementPrecoCompraComida[i].querySelector('.preco-compra-comida').innerHTML = matrizUpigradesComida[0][0][1]
+    elementPrecoCompraComida[i].querySelector('.preco-compra-recurso').innerHTML = matrizUpigradesComida[0][0][2]
+}
+for (let i = 0; i < elementPrecoCompraRecurso.length; i++) {
+    elementPrecoCompraRecurso[i].querySelector('.preco-compra-ouro').innerHTML = matrizUpigradesRecurso[0][0][0]
+    elementPrecoCompraRecurso[i].querySelector('.preco-compra-comida').innerHTML = matrizUpigradesRecurso[0][0][1]
+    elementPrecoCompraRecurso[i].querySelector('.preco-compra-recurso').innerHTML = matrizUpigradesRecurso[0][0][2]
+}
+for (let i = 0; i < esquerdaSoldadosIds.length; i++) {
+    document.querySelector(`#${esquerdaSoldadosIds[i]} .preco-unidade-ouro`).innerHTML = matrizPrecoUnidades[i][0]
+    document.querySelector(`#${esquerdaSoldadosIds[i]} .preco-unidade-comida`).innerHTML = matrizPrecoUnidades[i][1]
+    document.querySelector(`#${esquerdaSoldadosIds[i]} .preco-unidade-recurso`).innerHTML = matrizPrecoUnidades[i][2]
+}
+for (let i = 0; i < direitaSoldadosIds.length; i++) {
+    document.querySelector(`#${direitaSoldadosIds[i]} .preco-unidade-ouro`).innerHTML = matrizPrecoUnidades[i][0]
+    document.querySelector(`#${direitaSoldadosIds[i]} .preco-unidade-comida`).innerHTML = matrizPrecoUnidades[i][1]
+    document.querySelector(`#${direitaSoldadosIds[i]} .preco-unidade-recurso`).innerHTML = matrizPrecoUnidades[i][2]
+}
 
 
 var matrizEscolhaAzul = [false, false, false, false, false]
@@ -53,6 +81,8 @@ var matrizEscolhaVermelho = [false, false, false, false, false]
 var clickBrocaVermelho = 7
 
 function espacoBroca(numeroEspaco) {
+    esquerdaAtivos[2] = true
+    esquerdaAtivos[3] = false
     for (let i = 0; i < matrizEscolhaAzul.length; i++) {
         if (numeroEspaco === i && matrizEscolhaAzul[i]) {
             matrizEscolhaAzul[i] = false
@@ -90,6 +120,11 @@ function escolhaBroca(numeroEscolha, origemEspaco) {
                     document.getElementById(`broca-preco-ouro-${i+1}`).innerHTML = matrizUpigradesOuro[1][0][0]
                     document.getElementById(`broca-preco-comida-${i+1}`).innerHTML = matrizUpigradesOuro[1][0][1]
                     document.getElementById(`broca-preco-recurso-${i+1}`).innerHTML = matrizUpigradesOuro[1][0][2]
+                    esquerdaBrocasEstados[esquerdaBrocas] = true
+                    esquerdaAtivos[2] = true
+                    esquerdaAtivos[0] = false
+                    esquerdaAtivos[1] = false
+                    esquerdaAtivos[3] = false
                 }
             } else if (numeroEscolha === 1) {
                 if (recursosAzul.ouro[0] >= matrizUpigradesComida[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesComida[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesComida[0][0][2]) {
@@ -111,6 +146,11 @@ function escolhaBroca(numeroEscolha, origemEspaco) {
                     document.getElementById(`broca-preco-ouro-${i+1}`).innerHTML = matrizUpigradesComida[1][0][0]
                     document.getElementById(`broca-preco-comida-${i+1}`).innerHTML = matrizUpigradesComida[1][0][1]
                     document.getElementById(`broca-preco-recurso-${i+1}`).innerHTML = matrizUpigradesComida[1][0][2]
+                    esquerdaBrocasEstados[esquerdaBrocas] = true
+                    esquerdaAtivos[2] = true
+                    esquerdaAtivos[0] = false
+                    esquerdaAtivos[1] = false
+                    esquerdaAtivos[3] = false
                 }
             } else if (numeroEscolha === 2) {
                 if (recursosAzul.ouro[0] >= matrizUpigradesRecurso[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesRecurso[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesRecurso[0][0][2]) {
@@ -132,6 +172,11 @@ function escolhaBroca(numeroEscolha, origemEspaco) {
                     document.getElementById(`broca-preco-ouro-${i+1}`).innerHTML = matrizUpigradesRecurso[1][0][0]
                     document.getElementById(`broca-preco-comida-${i+1}`).innerHTML = matrizUpigradesRecurso[1][0][1]
                     document.getElementById(`broca-preco-recurso-${i+1}`).innerHTML = matrizUpigradesRecurso[1][0][2]
+                    esquerdaBrocasEstados[esquerdaBrocas] = true
+                    esquerdaAtivos[2] = true
+                    esquerdaAtivos[0] = false
+                    esquerdaAtivos[1] = false
+                    esquerdaAtivos[3] = false
                 }
             }
             break
@@ -246,6 +291,8 @@ function upigrades(origemEspaco) {
 
 
 function espacoBrocaDireita(numeroEspaco) {
+    direitaAtivos[2] = true
+    direitaAtivos[3] = false
     for (let i = 0; i < matrizEscolhaVermelho.length; i++) {
         if (numeroEspaco === i && matrizEscolhaVermelho[i]) {
             matrizEscolhaVermelho[i] = false
@@ -283,6 +330,11 @@ function escolhaBrocaDireita(numeroEscolha, origemEspaco) {
                     document.getElementById(`direita-broca-preco-ouro-${i+1}`).innerHTML = matrizUpigradesOuro[1][0][0]
                     document.getElementById(`direita-broca-preco-comida-${i+1}`).innerHTML = matrizUpigradesOuro[1][0][1]
                     document.getElementById(`direita-broca-preco-recurso-${i+1}`).innerHTML = matrizUpigradesOuro[1][0][2]
+                    direitaBrocasEstados[direitaBrocas] = true
+                    direitaAtivos[2] = true
+                    direitaAtivos[0] = false
+                    direitaAtivos[1] = false
+                    direitaAtivos[3] = false
                 }
             } else if (numeroEscolha === 1) {
                 if (recursosVermelho.ouro[0] >= matrizUpigradesComida[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesComida[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesComida[0][0][2]) {
@@ -304,6 +356,11 @@ function escolhaBrocaDireita(numeroEscolha, origemEspaco) {
                     document.getElementById(`direita-broca-preco-ouro-${i+1}`).innerHTML = matrizUpigradesComida[1][0][0]
                     document.getElementById(`direita-broca-preco-comida-${i+1}`).innerHTML = matrizUpigradesComida[1][0][1]
                     document.getElementById(`direita-broca-preco-recurso-${i+1}`).innerHTML = matrizUpigradesComida[1][0][2]
+                    direitaBrocasEstados[direitaBrocas] = true
+                    direitaAtivos[2] = true
+                    direitaAtivos[0] = false
+                    direitaAtivos[1] = false
+                    direitaAtivos[3] = false
                 }
             } else if (numeroEscolha === 2) {
                 if (recursosVermelho.ouro[0] >= matrizUpigradesRecurso[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesRecurso[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesRecurso[0][0][2]) {
@@ -325,6 +382,11 @@ function escolhaBrocaDireita(numeroEscolha, origemEspaco) {
                     document.getElementById(`direita-broca-preco-ouro-${i+1}`).innerHTML = matrizUpigradesRecurso[1][0][0]
                     document.getElementById(`direita-broca-preco-comida-${i+1}`).innerHTML = matrizUpigradesRecurso[1][0][1]
                     document.getElementById(`direita-broca-preco-recurso-${i+1}`).innerHTML = matrizUpigradesRecurso[1][0][2]
+                    direitaBrocasEstados[direitaBrocas] = true
+                    direitaAtivos[2] = true
+                    direitaAtivos[0] = false
+                    direitaAtivos[1] = false
+                    direitaAtivos[3] = false
                 }
             }
             break
@@ -440,7 +502,7 @@ function upigradesDireita(origemEspaco) {
 
 setInterval(() => {
     for (let i = 0; i < brocasVermelho.length; i++) {
-        if (brocasVermelho[i].length > -1) {
+        if (brocasVermelho[i].length > 0) {
             if (brocasVermelho[i][0] === "ouro") {
                 recursosVermelho.ouro[0] += brocasVermelho[i][1]
                 recursosVermelho.ouro[1].innerHTML = recursosVermelho.ouro[0]
@@ -454,7 +516,7 @@ setInterval(() => {
         }
     }
     for (let i = 0; i < brocasAzul.length; i++) {
-        if (brocasAzul[i].length > -1) {
+        if (brocasAzul[i].length > 0) {
             if (brocasAzul[i][0] === "ouro") {
                 recursosAzul.ouro[0] += brocasAzul[i][1]
                 recursosAzul.ouro[1].innerHTML = recursosAzul.ouro[0]

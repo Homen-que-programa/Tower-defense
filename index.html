@@ -70,43 +70,101 @@
                 <div class="soldado-fuzileiro" id="soldado-esquerda-homem-caverna" onclick="posicionarSoldados('azul', 0)">
                     <div>
                         <P>Homem caverna</P>
-                        <P>Custo: 0 O - 10 C - 0 R</P>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
                     </div>
                     <img src="img/homemCaverna.png" width="400px" height="400px">
                 </div>
                 <div class="soldado-fuzileiro" id="soldado-esquerda-homem-que-taca-pedra" onclick="posicionarSoldados('azul', 1)">
                     <div>
                         <p>Homem que taca pedra</p>
-                        <P>Custo: 0 O - 30 C - 10 R</P>   
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
                     </div>
                     <img src="img/homemPedra.png" width="400px" height="400px">
                 </div>
                 <div class="soldado-fuzileiro" id="soldado-esquerda-homem-montado" onclick="posicionarSoldados('azul', 2)">
                     <div>
                         <p>Homem montado</p>
-                        <P>Custo: 10 O - 100 C - 30 R</P>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
                     </div>
                     <img src="img/homemMontado.png" width="400px" height="400px">
                 </div>
-                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-lanca" onclick="posicionarSoldados('azul', 3)">
+                <!-- <div class="soldado-fuzileiro" id="soldado-esquerda-homem-lanca" onclick="posicionarSoldados('azul', 3)">
                     <div>
                         <p>Homem com lança</p>
-                        <P>Custo: 10 O - 100 C - 15 R</P>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
                     </div>
                     <img src="img/homemLanca.png" width="400px" height="400px">
-                </div>
+                </div> -->
             </div>
             <div class="lateral-brocas" id="lateral-brocas">
                 <div class="espaco-broca" id="espaco-broca-1" onclick="clicarBroca(0)">
                     <div class="espaco-escolhas" id="espaco-escolha-1" onclick="espacoBroca(0)">
-                        <div class="broca-ouro" id="broca-ouro-1" onclick="escolhaBroca(0, 0)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-1" onclick="escolhaBroca(0, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-1" onclick="escolhaBroca(1, 0)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-1" onclick="escolhaBroca(1, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-1" onclick="escolhaBroca(2, 0)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-1" onclick="escolhaBroca(2, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-1">
@@ -119,14 +177,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-2" onclick="clicarBroca(1)">
                     <div class="espaco-escolhas" id="espaco-escolha-2" onclick="espacoBroca(1)">
-                        <div class="broca-ouro" id="broca-ouro-2" onclick="escolhaBroca(0, 1)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-2" onclick="escolhaBroca(0, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-2" onclick="escolhaBroca(1, 1)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-2" onclick="escolhaBroca(1, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-2" onclick="escolhaBroca(2, 1)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-2" onclick="escolhaBroca(2, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-2">
@@ -139,14 +203,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-3" onclick="clicarBroca(2)">
                     <div class="espaco-escolhas" id="espaco-escolha-3" onclick="espacoBroca(2)">
-                        <div class="broca-ouro" id="broca-ouro-3" onclick="escolhaBroca(0, 2)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-3" onclick="escolhaBroca(0, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-3" onclick="escolhaBroca(1, 2)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-3" onclick="escolhaBroca(1, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-3" onclick="escolhaBroca(2, 2)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-3" onclick="escolhaBroca(2, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-3">
@@ -159,14 +229,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-4" onclick="clicarBroca(3)">
                     <div class="espaco-escolhas" id="espaco-escolha-4" onclick="espacoBroca(3)">
-                        <div class="broca-ouro" id="broca-ouro-4" onclick="escolhaBroca(0, 3)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-4" onclick="escolhaBroca(0, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-4" onclick="escolhaBroca(1, 3)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-4" onclick="escolhaBroca(1, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-4" onclick="escolhaBroca(2, 3)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-4" onclick="escolhaBroca(2, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-4">
@@ -179,14 +255,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-5" onclick="clicarBroca(4)">
                     <div class="espaco-escolhas" id="espaco-escolha-5" onclick="espacoBroca(4)">
-                        <div class="broca-ouro" id="broca-ouro-5" onclick="escolhaBroca(0, 4)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-5" onclick="escolhaBroca(0, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-comida-5" onclick="escolhaBroca(1, 4)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-5" onclick="escolhaBroca(1, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-recurso-5" onclick="escolhaBroca(2, 4)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-5" onclick="escolhaBroca(2, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-5">
@@ -445,21 +527,60 @@
                 <div class="soldado-fuzileiro" id="soldado-direita-homem-caverna" onclick="posicionarSoldados('vermelho', 0)">
                     <div>
                         <P>Homem caverna</P>
-                        <P>Custo: 0 O - 10 C - 0 R</P>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
                     </div>
                     <img src="img/homemCaverna.png" width="400px" height="400px">
                 </div>
                 <div class="soldado-fuzileiro" id="soldado-direita-homem-que-taca-pedra" onclick="posicionarSoldados('vermelho', 1)">
                     <div>
                         <p>Homem que taca pedra</p>
-                        <P>Custo: 0 O - 30 C - 10 R</P>   
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
                     </div>
                     <img src="img/homemPedra.png" width="400px" height="400px">
                 </div>
                 <div class="soldado-fuzileiro" id="soldado-direita-homem-montado" onclick="posicionarSoldados('vermelho', 2)">
                     <div>
                         <p>Homem montado</p>
-                        <P>Custo: 10 O - 100 C - 30 R</P>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
                     </div>
                     <img src="img/homemMontado.png" width="400px" height="400px">
                 </div>
@@ -467,14 +588,20 @@
             <div class="lateral-brocas" id="lateral-brocas-direita">
                 <div class="espaco-broca" id="espaco-broca-direita-1" onclick="clicarBrocaDireita(0)">
                     <div class="espaco-escolhas" id="espaco-escolha-direita-1" onclick="espacoBrocaDireita(0)">
-                        <div class="broca-ouro" id="broca-direita-ouro-1" onclick="escolhaBrocaDireita(0, 0)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-1" onclick="escolhaBrocaDireita(0, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-direita-comida-1" onclick="escolhaBrocaDireita(1, 0)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-1" onclick="escolhaBrocaDireita(1, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-direita-recurso-1" onclick="escolhaBrocaDireita(2, 0)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-1" onclick="escolhaBrocaDireita(2, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-direita-1">
@@ -487,14 +614,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-direita-2" onclick="clicarBrocaDireita(1)">
                     <div class="espaco-escolhas" id="espaco-escolha-direita-2" onclick="espacoBrocaDireita(1)">
-                        <div class="broca-ouro" id="broca-direita-ouro-2" onclick="escolhaBrocaDireita(0, 1)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-2" onclick="escolhaBrocaDireita(0, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-direita-comida-2" onclick="escolhaBrocaDireita(1, 1)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-2" onclick="escolhaBrocaDireita(1, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-direita-recurso-2" onclick="escolhaBrocaDireita(2, 1)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-2" onclick="escolhaBrocaDireita(2, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-direita-2">
@@ -507,14 +640,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-direita-3" onclick="clicarBrocaDireita(2)">
                     <div class="espaco-escolhas" id="espaco-escolha-direita-3" onclick="espacoBrocaDireita(2)">
-                        <div class="broca-ouro" id="broca-direita-ouro-3" onclick="escolhaBrocaDireita(0, 2)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-3" onclick="escolhaBrocaDireita(0, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-direita-comida-3" onclick="escolhaBrocaDireita(1, 2)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-3" onclick="escolhaBrocaDireita(1, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-direita-recurso-3" onclick="escolhaBrocaDireita(2, 2)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-3" onclick="escolhaBrocaDireita(2, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-direita-3">
@@ -527,14 +666,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-direita-4" onclick="clicarBrocaDireita(3)">
                     <div class="espaco-escolhas" id="espaco-escolha-direita-4" onclick="espacoBrocaDireita(3)">
-                        <div class="broca-ouro" id="broca-direita-ouro-4" onclick="escolhaBrocaDireita(0, 3)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-4" onclick="escolhaBrocaDireita(0, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-direita-comida-4" onclick="escolhaBrocaDireita(1, 3)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-4" onclick="escolhaBrocaDireita(1, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-direita-recurso-4" onclick="escolhaBrocaDireita(2, 3)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-4" onclick="escolhaBrocaDireita(2, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-direita-4">
@@ -547,14 +692,20 @@
                 </div>
                 <div class="espaco-broca" id="espaco-broca-direita-5" onclick="clicarBrocaDireita(4)">
                     <div class="espaco-escolhas" id="espaco-escolha-direita-5" onclick="espacoBrocaDireita(4)">
-                        <div class="broca-ouro" id="broca-direita-ouro-5" onclick="escolhaBrocaDireita(0, 4)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-5" onclick="escolhaBrocaDireita(0, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-comida" id="broca-direita-comida-5" onclick="escolhaBrocaDireita(1, 4)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-5" onclick="escolhaBrocaDireita(1, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
-                        <div class="broca-recurso" id="broca-direita-recurso-5" onclick="escolhaBrocaDireita(2, 4)">
-                            <div>40 O</div> <div>0 C</div> <div>10 R</div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-5" onclick="escolhaBrocaDireita(2, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
                         </div>
                     </div>
                     <div class="receber-broca" id="receber-broca-direita-5">

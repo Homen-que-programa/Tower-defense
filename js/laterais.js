@@ -3,7 +3,7 @@ var lateralMatrizVermelho = [["lateral-soldados-direita", false], ["lateral-broc
 var posicionarAtivo = [false, false]
 var posicionarAtulizacao = 0
 
-var matrizPrecoUnidades = [[0, 10, 0], [0, 30, 10], [10, 100, 30], [10, 100, 15]]
+var matrizPrecoUnidades = [[0, 20, 10], [0, 30, 20], [10, 70, 35], [10, 100, 15]]
 
 var intervaloPosicionarAzul
 var intervaloPosicionarVermelho
@@ -43,12 +43,12 @@ function abrirLateralVermelho(_numLateral) {
 
 function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
     if (_timeOuCansel === 'azul') {
-        if (quantiaUnidadeAzul >= quantiaUnidadeLimite || matrizPrecoUnidades[_unidadeEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosAzul.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosAzul.recurso[0]) {
+        if (matrizPrecoUnidades[_unidadeEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosAzul.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosAzul.recurso[0]) {
             return false
         }
     }
     if (_timeOuCansel === 'vermelho') {
-        if (quantiaUnidadeVermelho >= quantiaUnidadeLimite || matrizPrecoUnidades[_unidadeEscolhida][0] > recursosVermelho.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosVermelho.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosVermelho.recurso[0]) {
+        if (matrizPrecoUnidades[_unidadeEscolhida][0] > recursosVermelho.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosVermelho.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosVermelho.recurso[0]) {
             return false
         }
     }
@@ -111,20 +111,35 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                         } else {
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).style.cssText += 'filter: none;'
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).onclick = () => {
-                                recursosAzul.ouro[0] -= matrizPrecoUnidades[_unidadeEscolhida][0]
-                                recursosAzul.comida[0] -= matrizPrecoUnidades[_unidadeEscolhida][1]
-                                recursosAzul.recurso[0] -= matrizPrecoUnidades[_unidadeEscolhida][2]
-                                recursosAzul.ouro[1].innerHTML = recursosAzul.ouro[0]
-                                recursosAzul.comida[1].innerHTML = recursosAzul.comida[0]
-                                recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
+                                let verificacao = false
                                 if (_unidadeEscolhida === 0) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 35, 1000, 1, 300, 70, 50, 'background: brown;', 1)
+                                    if (quantiaUnidadeAzul < quantiaUnidadeLimite) {
+                                        criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 25, 1000, 1, 500, 70, 50, 'background: brown;', 1)
+                                        verificacao = true
+                                    }
                                 } else if (_unidadeEscolhida === 1) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 20, 500, 1, 500, 250, 50, 'background: grey;', 2)
+                                    if (quantiaUnidadeAzul < quantiaUnidadeLimite-1) {
+                                        criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 30, 500, 1, 650, 250, 50, 'background: grey;', 2)
+                                        verificacao = true
+                                    }
                                 } else if (_unidadeEscolhida === 2) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 600, 150, 2500, 2, 300, 70, 75, 'background: green;', 3)
+                                    if (quantiaUnidadeAzul < quantiaUnidadeLimite-2) {
+                                        criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 800, 100, 1700, 1.5, 500, 70, 75, 'background: green;', 3)
+                                        verificacao = true
+                                    }
                                 } else if (_unidadeEscolhida === 3) {
-                                    criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 1.5, 800, 600, 50, 'background: blue;', 1)
+                                    if (quantiaUnidadeAzul < quantiaUnidadeLimite-2) {
+                                        criarUnidadeAzul((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 1.5, 800, 600, 50, 'background: blue;', 3)
+                                        verificacao = true
+                                    }
+                                }
+                                if (verificacao) {
+                                    recursosAzul.ouro[0] -= matrizPrecoUnidades[_unidadeEscolhida][0]
+                                    recursosAzul.comida[0] -= matrizPrecoUnidades[_unidadeEscolhida][1]
+                                    recursosAzul.recurso[0] -= matrizPrecoUnidades[_unidadeEscolhida][2]
+                                    recursosAzul.ouro[1].innerHTML = recursosAzul.ouro[0]
+                                    recursosAzul.comida[1].innerHTML = recursosAzul.comida[0]
+                                    recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
                                 }
                                 posicionarSoldados('cancelarAzul', 0)
                             }
@@ -155,20 +170,35 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                         } else {
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).style.cssText += 'filter: none;'
                             document.getElementById(`coluna-${i/2+1}-${e/2+1}`).onclick = () => {
-                                recursosVermelho.ouro[0] -= matrizPrecoUnidades[_unidadeEscolhida][0]
-                                recursosVermelho.comida[0] -= matrizPrecoUnidades[_unidadeEscolhida][1]
-                                recursosVermelho.recurso[0] -= matrizPrecoUnidades[_unidadeEscolhida][2]
-                                recursosVermelho.ouro[1].innerHTML = recursosVermelho.ouro[0]
-                                recursosVermelho.comida[1].innerHTML = recursosVermelho.comida[0]
-                                recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
+                                let verificacao = false
                                 if (_unidadeEscolhida === 0) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 35, 1000, 1, 300, 70, 50, 'background: brown;', 1)
+                                    if (quantiaUnidadeVermelho < quantiaUnidadeLimite) {
+                                        criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 35, 1000, 1, 500, 70, 50, 'background: brown;', 1)
+                                        verificacao = true
+                                    }
                                 } else if (_unidadeEscolhida === 1) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 200, 20, 500, 1, 500, 250, 50, 'background: grey;', 2)
+                                    if (quantiaUnidadeVermelho < quantiaUnidadeLimite-1) {
+                                        criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 150, 30, 500, 1, 650, 250, 50, 'background: grey;', 2)
+                                        verificacao = true
+                                    }
                                 } else if (_unidadeEscolhida === 2) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 600, 150, 2500, 2, 300, 70, 75, 'background: green;', 3)
+                                    if (quantiaUnidadeVermelho < quantiaUnidadeLimite-2) {
+                                        criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 800, 100, 1700, 1.5, 500, 70, 75, 'background: green;', 3)
+                                        verificacao = true
+                                    }
                                 } else if (_unidadeEscolhida === 3) {
-                                    criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 2, 800, 600, 50, 'background: blue;', 1)
+                                    if (quantiaUnidadeVermelho < quantiaUnidadeLimite-2) {
+                                        criarUnidadeVermelho((e+0.5)*tabelaCaminhoTamanho, (i+0.5)*tabelaCaminhoTamanho, 400, 100, 1500, 2, 800, 600, 50, 'background: blue;', 3)
+                                        verificacao = true
+                                    }
+                                }
+                                if (verificacao) {
+                                    recursosVermelho.ouro[0] -= matrizPrecoUnidades[_unidadeEscolhida][0]
+                                    recursosVermelho.comida[0] -= matrizPrecoUnidades[_unidadeEscolhida][1]
+                                    recursosVermelho.recurso[0] -= matrizPrecoUnidades[_unidadeEscolhida][2]
+                                    recursosVermelho.ouro[1].innerHTML = recursosVermelho.ouro[0]
+                                    recursosVermelho.comida[1].innerHTML = recursosVermelho.comida[0]
+                                    recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
                                 }
                                 posicionarSoldados('cancelarVermelho', 0)
                             }
