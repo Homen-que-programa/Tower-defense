@@ -147,39 +147,82 @@ function criarUnidadeAzul(x, y, vida, dano, danoV, velocidade, visao, range, tam
             }
         }
         if (_colisao && _inimigoIndex === -1) {
-            let _xposicaoTabelaUnid = Math.floor(_x/tabelaCaminhoTamanho)
-            let _yposicaoTabelaUnid = Math.floor(_y/tabelaCaminhoTamanho)
+            let _xposicaoTabelaUnid = Math.floor((_x+25)/tabelaCaminhoTamanho)
+            let _yposicaoTabelaUnid = Math.floor((_y+25)/tabelaCaminhoTamanho)
             let _xposicaoTabelaIni = Math.floor(_inimigo[6]/tabelaCaminhoTamanho)
             let _yposicaoTabelaIni = Math.floor(_inimigo[7]/tabelaCaminhoTamanho)
             let _obstaculoCaminhoTrue = true
-            while (true) {
-                if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
-                    _xposicaoTabelaUnid++
-                } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
-                    _xposicaoTabelaUnid--
-                }
-                if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                    if (tabelaCaminhoAzul[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                        _obstaculoCaminhoTrue = false
-                        break
+
+            let _verificacao = 0
+            let _e = 1
+            let _whileBreak = true
+            let _xytab = [[_yposicaoTabelaUnid, _xposicaoTabelaUnid]]
+            let _tabelaCaminhoCopy = []
+            for (let i = 0; i < tabelaCaminhoAzul.length; i++) {
+                _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminhoAzul[i]))
+            }
+            _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
+
+            while (_whileBreak) {
+                let _xytabSub = []
+                for (let i = 0; i < _xytab.length; i++) {
+                    for (let _forI = -1; _forI < 2; _forI++) {
+                        for (let _forE = -1; _forE < 2; _forE++) {
+                            if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
+                                _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
+                                _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
+                                // console.log(`${_xytab[i][0]+_forI} : ${_yposicaoTabelaIni} ---- ${_xytab[i][1]+_forE} : ${_xposicaoTabelaIni}`)
+                                if (_xytab[i][0]+_forI == _yposicaoTabelaIni && _xytab[i][1]+_forE == _xposicaoTabelaIni) {
+                                    _whileBreak = false
+                                }
+                            }
+                        }
                     }
-                } else {
-                    break
                 }
-                if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
-                    _yposicaoTabelaUnid++
-                } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
-                    _yposicaoTabelaUnid--
+                _verificacao++
+                _xytab = _xytabSub
+                _e++
+                if (_verificacao >= 40) break
+            }
+            if (Math.abs(_xposicaoTabelaUnid - _xposicaoTabelaIni) > Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)) {
+                if (_e-1 > Math.abs(_xposicaoTabelaUnid - _xposicaoTabelaIni)) {
+                    _obstaculoCaminhoTrue = false
                 }
-                if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                    if (tabelaCaminhoAzul[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                        _obstaculoCaminhoTrue = false
-                        break
-                    }
-                } else {
-                    break
+            } else {
+                if (_e-1 > Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)) {
+                    _obstaculoCaminhoTrue = false
                 }
             }
+
+            // while (true) {
+            //     if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
+            //         _xposicaoTabelaUnid++
+            //     } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
+            //         _xposicaoTabelaUnid--
+            //     }
+            //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+            //         if (tabelaCaminhoAzul[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+            //             _obstaculoCaminhoTrue = false
+            //             break
+            //         }
+            //     } else {
+            //         break
+            //     }
+            //     if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
+            //         _yposicaoTabelaUnid++
+            //     } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
+            //         _yposicaoTabelaUnid--
+            //     }
+            //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+            //         if (tabelaCaminhoAzul[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+            //             _obstaculoCaminhoTrue = false
+            //             break
+            //         }
+            //     } else {
+            //         break
+            //     }
+            // }
+
             if (_obstaculoCaminhoTrue) {
                 _alvoTrue = true
                 _alvoTabela.push(_inimigo)
@@ -721,39 +764,85 @@ function criarUnidadeVermelho(x, y, vida, dano, danoV, velocidade, visao, range,
             }
         }
         if (_colisao && _inimigoIndex == -1) {
-            let _xposicaoTabelaUnid = Math.floor(_x/tabelaCaminhoTamanho)
-            let _yposicaoTabelaUnid = Math.floor(_y/tabelaCaminhoTamanho)
+            let _xposicaoTabelaUnid = Math.floor((_x+25)/tabelaCaminhoTamanho)
+            let _yposicaoTabelaUnid = Math.floor((_y+25)/tabelaCaminhoTamanho)
             let _xposicaoTabelaIni = Math.floor(_inimigo[6]/tabelaCaminhoTamanho)
             let _yposicaoTabelaIni = Math.floor(_inimigo[7]/tabelaCaminhoTamanho)
             let _obstaculoCaminhoTrue = true
-            while (true) {
-                if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
-                    _xposicaoTabelaUnid++
-                } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
-                    _xposicaoTabelaUnid--
-                }
-                if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                    if (tabelaCaminhoVermelho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                        _obstaculoCaminhoTrue = false
-                        break
+
+            let _verificacao = 0
+            let _e = 1
+            let _whileBreak = true
+            let _xytab = [[_yposicaoTabelaUnid, _xposicaoTabelaUnid]]
+            let _tabelaCaminhoCopy = []
+            for (let i = 0; i < tabelaCaminhoVermelho.length; i++) {
+                _tabelaCaminhoCopy.push(Object.assign([], tabelaCaminhoVermelho[i]))
+            }
+            _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
+
+            while (_whileBreak) {
+                let _xytabSub = []
+                for (let i = 0; i < _xytab.length; i++) {
+                    for (let _forI = -1; _forI < 2; _forI++) {
+                        for (let _forE = -1; _forE < 2; _forE++) {
+                            if ((_forI != 0 || _forE != 0) && _xytab[i][0]+_forI >= 0 && _xytab[i][0]+_forI < 20 && _xytab[i][1]+_forE >= 0 && _xytab[i][1]+_forE < 40 ? _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] == '.' && (_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]])) && (_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE] == '.' || !isNaN(_tabelaCaminhoCopy[_xytab[i][0]][_xytab[i][1]+_forE])) : false) {
+                                _xytabSub.push([_xytab[i][0]+_forI, _xytab[i][1]+_forE])
+                                _tabelaCaminhoCopy[_xytab[i][0]+_forI][_xytab[i][1]+_forE] = _e
+                                // console.log(`${_xytab[i][0]+_forI} : ${_yposicaoTabelaIni} ---- ${_xytab[i][1]+_forE} : ${_xposicaoTabelaIni}`)
+                                if (_xytab[i][0]+_forI == _yposicaoTabelaIni && _xytab[i][1]+_forE == _xposicaoTabelaIni) {
+                                    _whileBreak = false
+                                }
+                            }
+                        }
                     }
-                } else {
-                    break
                 }
-                if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
-                    _yposicaoTabelaUnid++
-                } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
-                    _yposicaoTabelaUnid--
+                _verificacao++
+                _xytab = _xytabSub
+                _e++
+                if (_verificacao >= 40) break
+            }
+            if (Math.abs(_xposicaoTabelaUnid - _xposicaoTabelaIni) > Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)) {
+                if (_e-1 > Math.abs(_xposicaoTabelaUnid - _xposicaoTabelaIni)) {
+                    _obstaculoCaminhoTrue = false
                 }
-                if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
-                    if (tabelaCaminhoVermelho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
-                        _obstaculoCaminhoTrue = false
-                        break
-                    }
-                } else {
-                    break
+            } else {
+                if (_e-1 > Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)) {
+                    _obstaculoCaminhoTrue = false
                 }
             }
+            // console.log(_tabelaCaminhoCopy)
+
+            // while (true) {
+            //     if (_xposicaoTabelaUnid - _xposicaoTabelaIni < 0) {
+            //         _xposicaoTabelaUnid++
+            //     } else if (_xposicaoTabelaUnid - _xposicaoTabelaIni > 0) {
+            //         _xposicaoTabelaUnid--
+            //     }
+            //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+            //         if (tabelaCaminhoVermelho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+            //             _obstaculoCaminhoTrue = false
+            //             break
+            //         }
+            //     } else {
+            //         break
+            //     }
+            //     if (_yposicaoTabelaUnid - _yposicaoTabelaIni < 0) {
+            //         _yposicaoTabelaUnid++
+            //     } else if (_yposicaoTabelaUnid - _yposicaoTabelaIni > 0) {
+            //         _yposicaoTabelaUnid--
+            //     }
+            //     if (_xposicaoTabelaUnid != _xposicaoTabelaIni || _yposicaoTabelaUnid != _yposicaoTabelaIni) {
+            //         if (tabelaCaminhoVermelho[_yposicaoTabelaUnid][_xposicaoTabelaUnid] != '.') {
+            //             _obstaculoCaminhoTrue = false
+            //             break
+            //         }
+            //     } else {
+            //         break
+            //     }
+            // }
+
+
+
             if (_obstaculoCaminhoTrue) {
                 _alvoTrue = true
                 _alvoTabela.push(_inimigo)
