@@ -63,7 +63,7 @@ body {
 }
 .direita .button-soldados {
     border-radius: 0 0 0 50px;
-    z-index: 109;
+    z-index: 108    ;
 }
 .button-soldados:hover {
     width: 400px;
@@ -90,13 +90,40 @@ body {
 }
 .direita .button-brocas {
     border-radius: 0 0 0 50px;
-    z-index: 110;
+    z-index: 109;
 }
 .button-brocas:hover {
     width: 400px;
 }
 .button-brocas .icone {
     background-color: brown;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.button-torres {
+    width: 300px;
+    height: 150px;
+    border-radius: 0 0 50px 0;
+    margin-right: -50px;
+    background-color: burlywood;
+    box-shadow: 0 5px 20px black;
+    transition: all 0.2s;
+    z-index: 108;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.direita .button-torres {
+    border-radius: 0 0 0 50px;
+    z-index: 110;
+}
+.button-torres:hover {
+    width: 400px;
+}
+.button-torres .icone {
+    background-color: darkgreen;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -173,7 +200,7 @@ body {
     justify-content: space-around;
 }
 .soldado-fuzileiro img {
- margin-left: 0;
+    margin-left: 0;
 }
 .soldado-fuzileiro:hover {
     background-color: rgb(46, 78, 219);
@@ -305,6 +332,57 @@ body {
     background-color: rgb(151, 115, 85);
 }
 
+.lateral-torres {
+    width: 0;
+    gap: 50px;
+    display: flex;
+    overflow: hidden;
+    transition: all 1s;
+    padding-top: 300px;
+    flex-direction: column;
+    height: calc(100vh - 300px);
+    background-color: rgb(158, 92, 48);
+    background-image: url(../img/fundoClashDosRoyale.png);
+    filter: hue-rotate(230deg);
+}
+.container-torre {
+    width: 1400px;
+    height: 400px;
+    background-color: rgb(64, 179, 41);
+    font-size: 60px;
+    color: rgb(231, 241, 255);
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 20px 40px;
+    display: flex;
+    filter: hue-rotate(-230deg);
+}
+.container-torre .preco-torre {
+    display: flex;
+    gap: 15px;
+    flex-direction: row;
+}
+.preco-torre .letras {
+    display: flex;
+}
+.container-torre p:first-child {
+    font-size: 90px;
+    font-weight: 700;
+}
+
+.container-torre div {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+    justify-content: space-around;
+}
+.container-torre img {
+    margin-left: 0;
+}
+.container-torre:hover {
+    background-color: rgb(46, 141, 27);
+}
 
 .quadriculado {
     opacity: 0;

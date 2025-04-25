@@ -73,6 +73,11 @@ for (let i = 0; i < direitaSoldadosIds.length; i++) {
     document.querySelector(`#${direitaSoldadosIds[i]} .preco-unidade-comida`).innerHTML = matrizPrecoUnidades[i][1]
     document.querySelector(`#${direitaSoldadosIds[i]} .preco-unidade-recurso`).innerHTML = matrizPrecoUnidades[i][2]
 }
+for (let i = 0; i < esquerdaTorresIds.length; i++) {
+    document.querySelector(`#${esquerdaTorresIds[i]} .preco-torre-ouro`).innerHTML = matrizPrecoTorres[i][0]
+    document.querySelector(`#${esquerdaTorresIds[i]} .preco-torre-comida`).innerHTML = matrizPrecoTorres[i][1]
+    document.querySelector(`#${esquerdaTorresIds[i]} .preco-torre-recurso`).innerHTML = matrizPrecoTorres[i][2]
+}
 
 
 var matrizEscolhaAzul = [false, false, false, false, false]

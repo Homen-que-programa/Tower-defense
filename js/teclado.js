@@ -8,6 +8,7 @@ var direitaBrocas = 0
 var direitaBrocasEscolhas = 0
 
 var esquerdaSoldadosIds = ["soldado-esquerda-homem-caverna", "soldado-esquerda-homem-que-taca-pedra", "soldado-esquerda-homem-montado"]
+var esquerdaTorresIds = ["torre-esquerda-mulher-na-torre"]
 var esquerdaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var esquerdaBrocasEstados = [false, false, false, false, false]
 var esquerdaAtivos = [false, false, false, false]
@@ -19,6 +20,7 @@ var esquerdaBrocasEscolhas = 0
 
 document.onkeydown = () => {
     if (event.keyCode === 37) {
+        // <
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[0] > 0) {
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -41,6 +43,7 @@ document.onkeydown = () => {
             }
         }
     } else if (event.keyCode === 38) {
+        // ^
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[1] > 0) {
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -61,7 +64,7 @@ document.onkeydown = () => {
                 direitaSoldados = direitaSoldadosIds.length-1
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
-        } else if (direitaAtivos[2] || direitaAtivos[3] || direitaAtivos[4]) {
+        } else if (direitaAtivos[2] || direitaAtivos[3]) {
             direitaAtivos[2] = true
             direitaAtivos[3] = false
             document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -77,6 +80,7 @@ document.onkeydown = () => {
             }
         }
     } else if (event.keyCode === 39) {
+        // >
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[0] < 7) {
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -99,6 +103,7 @@ document.onkeydown = () => {
             }
         }
     } else if (event.keyCode === 40) {
+        // V
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[1] < 9) {
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -134,8 +139,9 @@ document.onkeydown = () => {
                 document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
             }
         }
-    }
+    }    
     else if (event.keyCode === 65) {
+        // A
         if (esquerdaAtivos[0]) {
             if (esquerdaQuadriculado[0] > 0) {
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -158,6 +164,7 @@ document.onkeydown = () => {
             }
         }
     } else if (event.keyCode === 87) {
+        // W
         if (esquerdaAtivos[0]) {
             if (esquerdaQuadriculado[1] > 0) {
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -194,6 +201,7 @@ document.onkeydown = () => {
             }
         }
     } else if (event.keyCode === 68) {
+        // D
         if (esquerdaAtivos[0]) {
             if (esquerdaQuadriculado[0] < 7) {
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -216,6 +224,7 @@ document.onkeydown = () => {
             }
         }
     } else if (event.keyCode === 83) {
+        // S
         if (esquerdaAtivos[0]) {
             if (esquerdaQuadriculado[1] < 9) {
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
@@ -236,7 +245,7 @@ document.onkeydown = () => {
                 esquerdaSoldados = 0
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
-        } else if (esquerdaAtivos[2] || esquerdaAtivos[3] || esquerdaAtivos[4]) {
+        } else if (esquerdaAtivos[2] || esquerdaAtivos[3]) {
             esquerdaAtivos[2] = true
             esquerdaAtivos[3] = false
             document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -253,6 +262,7 @@ document.onkeydown = () => {
         }
     }
     else if (event.keyCode === 193) {
+        // /
         posicionarSoldados('cancelarVermelho', direitaSoldados)
         abrirLateralVermelho(0)
         direitaAtivos[1] = lateralMatrizVermelho[0][1]
@@ -262,6 +272,7 @@ document.onkeydown = () => {
             direitaAtivos[0] = false
         }
     } else if (event.keyCode === 191) {
+        // ;
         posicionarSoldados('cancelarVermelho', direitaSoldados)
         abrirLateralVermelho(1)
         direitaAtivos[2] = lateralMatrizVermelho[1][1]
@@ -272,6 +283,7 @@ document.onkeydown = () => {
         }
     }
     else if (event.keyCode === 90) {
+        // Z
         posicionarSoldados('cancelarAzul', esquerdaSoldados)
         abrirLateralAzul(0)
         esquerdaAtivos[1] = lateralMatrizAzul[0][1]
@@ -281,6 +293,7 @@ document.onkeydown = () => {
             esquerdaAtivos[0] = false
         }
     } else if (event.keyCode === 86) {
+        // V
         posicionarSoldados('cancelarAzul', esquerdaSoldados)
         abrirLateralAzul(1)
         esquerdaAtivos[2] = lateralMatrizAzul[1][1]
@@ -291,6 +304,7 @@ document.onkeydown = () => {
         }
     }
     else if (event.keyCode === 13) {
+        // Enter
         if (direitaAtivos[0]) {
             document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).onclick()
             posicionarSoldados('cancelarVermelho', direitaSoldados)
@@ -332,6 +346,7 @@ document.onkeydown = () => {
         }
     }
     else if (event.keyCode === 8) {
+        // Apagar
         if (direitaAtivos[2] && direitaBrocasEstados[direitaBrocas]) {
             direitaBrocasEstados[direitaBrocas] = false
             clickBrocaVermelho = direitaBrocas
@@ -339,6 +354,7 @@ document.onkeydown = () => {
         }
     }
     else if (event.keyCode === 32) {
+        // Espaço
         if (esquerdaAtivos[0]) {
             document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
             posicionarSoldados('cancelarAzul', esquerdaSoldados)
@@ -380,6 +396,7 @@ document.onkeydown = () => {
         }
     }
     else if (event.keyCode === 84) {
+        // T
         if (esquerdaAtivos[2] && esquerdaBrocasEstados[esquerdaBrocas]) {
             esquerdaBrocasEstados[esquerdaBrocas] = false
             clickBrocaAzul = esquerdaBrocas
