@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.33">
@@ -8,7 +8,7 @@
     <script src="js/laterais.js" defer></script>
     <script src="js/teclado.js" defer></script>
     <script src="js/recursos.js" defer></script>
-    <title>TOWER DEFENSE 🔥🔥🔥</title>
+    <title>TOWER DEFENSE</title>
 </head>
 <body>
     <div id="memoria">
@@ -43,6 +43,9 @@
             <div class="button-torres" id="button-torres" onclick="abrirLateralAzul(2)">
                 <div class="icone"></div>
             </div>
+            <div class="button-upgrades" id="button-upgrades" onclick="abrirLateralAzul(3)">
+                <div class="icone"></div>
+            </div>
         </div>
         <div class="meio">
             <div class="recursos-azul recursos">
@@ -63,6 +66,12 @@
                 <div class="icone"></div>
             </div>
             <div class="button-brocas" id="button-brocas" onclick="abrirLateralVermelho(1)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-torres" id="button-torres" onclick="abrirLateralVermelho(2)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-upgrades" id="button-upgrades" onclick="abrirLateralVermelho(3)">
                 <div class="icone"></div>
             </div>
         </div>
@@ -150,6 +159,26 @@
                     </div>
                     <img src="img/homemLanca.png" width="400px" height="400px">
                 </div> -->
+                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-que-da-buff" onclick="posicionarSoldados('azul', 3)">
+                    <div>
+                        <p>Homem que da buff</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
             </div>
             <div class="lateral-brocas" id="lateral-brocas">
                 <div class="espaco-broca" id="espaco-broca-1" onclick="clicarBroca(0)">
@@ -284,7 +313,27 @@
                 </div>
             </div>
             <div class="lateral-torres" id="lateral-torres">
-                <div class="container-torre" id="torre-esquerda-mulher-na-torre" onclick="posicionarTorres('azul', 0)">
+                <div class="container-torre" id="torre-esquerda-cercado" onclick="posicionarTorres('azul', 0)">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-esquerda-mulher-na-torre" onclick="posicionarTorres('azul', 1)">
                     <div>
                         <P>Mulher na torre</P>
                         <div class="preco-torre">
@@ -303,6 +352,110 @@
                         </div>
                     </div>
                     <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-esquerda-homen-que-taca-bomba" onclick="posicionarTorres('azul', 2)">
+                    <div>
+                        <P>Homen que taca bomba</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-esquerda-homen-que-taca-boleadeira" onclick="posicionarTorres('azul', 3)">
+                    <div>
+                        <P>Homen que taca boleadeira</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-upgrades" id="lateral-upgrades">
+                <div class="container-upgrade" id="upgrade-esquerda-base" onclick="baseUpgrade('azul')">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-upgrade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-upgrade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-upgrade" id="upgrade-esquerda-torres" onclick="upgradeTorres('azul')">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-upgrade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-upgrade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-mostrar-upgrade" id="lateral-mostrar-upgrade">
+                <div>
+                    <h2 class="mostrar-upgrade-nome"></h2>
+                    <h3 class="mostrar-upgrade-nivel"></h3>
+                    <div>
+                        <h3>Vida: </h3>
+                        <h3 class="mostrar-upgrade-vida-atual"></h3>
+                        /
+                        <h3 class="mostrar-upgrade-vida-maxima"></h3>
+                    </div>
+                    <h3 class="mostrar-upgrade-dano"></h3>
+                    <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
+                    <h3 class="mostrar-upgrade-range"></h3>
+                    <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                    <br>
+                    <h3>Curto de compra</h3>
+                    <h3 class="mostrar-upgrade-preco-ouro"></h3>
+                    <h3 class="mostrar-upgrade-preco-comida"></h3>
+                    <h3 class="mostrar-upgrade-preco-recurso"></h3>
+                    <button class="mostrar-upgrade-comprar">comprar</button>
                 </div>
             </div>
         </div>
@@ -609,6 +762,26 @@
                     </div>
                     <img src="img/homemMontado.png" width="400px" height="400px">
                 </div>
+                <div class="soldado-fuzileiro" id="soldado-direita-homem-que-da-buff" onclick="posicionarSoldados('vermelho', 3)">
+                    <div>
+                        <p>Homem que da buff</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
             </div>
             <div class="lateral-brocas" id="lateral-brocas-direita">
                 <div class="espaco-broca" id="espaco-broca-direita-1" onclick="clicarBrocaDireita(0)">
@@ -740,6 +913,152 @@
                         <div class="broca-upigrade" onclick="upigradesDireita(4)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-5"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-5"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-5"></div> R</div>
                         <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
                     </div>
+                </div>
+            </div>
+            <div class="lateral-torres" id="lateral-torres-direita">
+                <div class="container-torre" id="torre-direita-cercado" onclick="posicionarTorres('vermelho', 0)">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-direita-mulher-na-torre" onclick="posicionarTorres('vermelho', 1)">
+                    <div>
+                        <P>Mulher na torre</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-direita-homen-que-taca-bomba" onclick="posicionarTorres('vermelho', 2)">
+                    <div>
+                        <P>Homen que taca bomba</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-direita-homen-que-taca-boleadeira" onclick="posicionarTorres('vermelho', 3)">
+                    <div>
+                        <P>Homen que taca boleadeira</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-upgrades" id="lateral-upgrades-direita">
+                <div class="container-upgrade" id="upgrade-direita-base" onclick="posicionarUpgrades('azul', 0)">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-upgrade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-upgrade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-upgrade" id="upgrade-direita-torres" onclick="upgradeTorres('vermelho')">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-upgrade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-upgrade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-mostrar-upgrade" id="lateral-mostrar-upgrade-direita">
+                <div>
+                    <h2 class="mostrar-upgrade-nome"></h2>
+                    <h3 class="mostrar-upgrade-nivel"></h3>
+                    <div>
+                        <h3>Vida: </h3>
+                        <h3 class="mostrar-upgrade-vida-atual"></h3>
+                        /
+                        <h3 class="mostrar-upgrade-vida-maxima"></h3>
+                    </div>
+                    <h3 class="mostrar-upgrade-dano"></h3>
+                    <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
+                    <h3 class="mostrar-upgrade-range"></h3>
+                    <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                    <br>
+                    <h3>Curto de compra</h3>
+                    <h3 class="mostrar-upgrade-preco-ouro"></h3>
+                    <h3 class="mostrar-upgrade-preco-comida"></h3>
+                    <h3 class="mostrar-upgrade-preco-recurso"></h3>
+                    <button class="mostrar-upgrade-comprar">comprar</button>
                 </div>
             </div>
         </div>

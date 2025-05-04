@@ -1,13 +1,13 @@
 var recursosAzul = {
-    ouro: [500, document.getElementById('ouro-azul')],
-    comida: [500, document.getElementById('comida-azul')],
-    recurso: [500, document.getElementById('recurso-azul')],
+    ouro: [5000, document.getElementById('ouro-azul')],
+    comida: [5000, document.getElementById('comida-azul')],
+    recurso: [5000, document.getElementById('recurso-azul')],
     producao: [0, 0, 0]
 }
 var recursosVermelho = {
-    ouro: [500, document.getElementById('ouro-vermelho')],
-    comida: [500, document.getElementById('comida-vermelho')],
-    recurso: [500, document.getElementById('recurso-vermelho')],
+    ouro: [5000, document.getElementById('ouro-vermelho')],
+    comida: [5000, document.getElementById('comida-vermelho')],
+    recurso: [5000, document.getElementById('recurso-vermelho')],
     producao: [0, 0, 0]
 }
 
@@ -77,6 +77,11 @@ for (let i = 0; i < esquerdaTorresIds.length; i++) {
     document.querySelector(`#${esquerdaTorresIds[i]} .preco-torre-ouro`).innerHTML = matrizPrecoTorres[i][0]
     document.querySelector(`#${esquerdaTorresIds[i]} .preco-torre-comida`).innerHTML = matrizPrecoTorres[i][1]
     document.querySelector(`#${esquerdaTorresIds[i]} .preco-torre-recurso`).innerHTML = matrizPrecoTorres[i][2]
+}
+for (let i = 0; i < direitaTorresIds.length; i++) {
+    document.querySelector(`#${direitaTorresIds[i]} .preco-torre-ouro`).innerHTML = matrizPrecoTorres[i][0]
+    document.querySelector(`#${direitaTorresIds[i]} .preco-torre-comida`).innerHTML = matrizPrecoTorres[i][1]
+    document.querySelector(`#${direitaTorresIds[i]} .preco-torre-recurso`).innerHTML = matrizPrecoTorres[i][2]
 }
 
 

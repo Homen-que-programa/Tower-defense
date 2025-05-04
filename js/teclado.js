@@ -1,35 +1,41 @@
-var direitaSoldadosIds = ["soldado-direita-homem-caverna", "soldado-direita-homem-que-taca-pedra", "soldado-direita-homem-montado"]
+var direitaSoldadosIds = ["soldado-direita-homem-caverna", "soldado-direita-homem-que-taca-pedra", "soldado-direita-homem-montado", "soldado-direita-homem-que-da-buff"]
+var direitaTorresIds = ["torre-direita-cercado", "torre-direita-mulher-na-torre", "torre-direita-homen-que-taca-bomba", "torre-direita-homen-que-taca-boleadeira"]
+var direitaUpgradesIds = ["upgrade-direita-base", "upgrade-direita-torres"]
 var direitaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var direitaBrocasEstados = [false, false, false, false, false]
-var direitaAtivos = [false, false, false, false]
+var direitaAtivos = [false, false, false, false, false]
 var direitaQuadriculado = [0, 0]
+var direitaTorres = 0
 var direitaSoldados = 0
 var direitaBrocas = 0
 var direitaBrocasEscolhas = 0
 
-var esquerdaSoldadosIds = ["soldado-esquerda-homem-caverna", "soldado-esquerda-homem-que-taca-pedra", "soldado-esquerda-homem-montado"]
-var esquerdaTorresIds = ["torre-esquerda-mulher-na-torre"]
+var esquerdaSoldadosIds = ["soldado-esquerda-homem-caverna", "soldado-esquerda-homem-que-taca-pedra", "soldado-esquerda-homem-montado", "soldado-esquerda-homem-que-da-buff"]
+var esquerdaTorresIds = ["torre-esquerda-cercado", "torre-esquerda-mulher-na-torre", "torre-esquerda-homen-que-taca-bomba", "torre-esquerda-homen-que-taca-boleadeira"]
+var esquerdaUpgradesIds = ["upgrade-esquerda-base", "upgrade-esquerda-torres"]
 var esquerdaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var esquerdaBrocasEstados = [false, false, false, false, false]
-var esquerdaAtivos = [false, false, false, false]
+var esquerdaAtivos = [false, false, false, false, false]
 var esquerdaQuadriculado = [0, 0]
+var esquerdaTorres = 0
 var esquerdaSoldados = 0
 var esquerdaBrocas = 0
 var esquerdaBrocasEscolhas = 0
 
+var torreVerticalHorizontal = [true, true]
 
 document.onkeydown = () => {
     if (event.keyCode === 37) {
         // <
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[0] > 0) {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 direitaQuadriculado[0]--
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             } else {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
-                direitaQuadriculado[0] = 7
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                direitaQuadriculado[0] = 6
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas > 0) {
@@ -46,13 +52,13 @@ document.onkeydown = () => {
         // ^
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[1] > 0) {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 direitaQuadriculado[1]--
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             } else {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 direitaQuadriculado[1] = 9
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
         } else if (direitaAtivos[1]) {
             if (direitaSoldados > 0) {
@@ -78,18 +84,28 @@ document.onkeydown = () => {
                 direitaBrocas = 4
                 document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
             }
+        } else if (direitaAtivos[4]) {
+            if (direitaTorres > 0) {
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                direitaTorres--
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            } else {
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                direitaTorres = direitaTorresIds.length-1
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            }
         }
     } else if (event.keyCode === 39) {
         // >
         if (direitaAtivos[0]) {
-            if (direitaQuadriculado[0] < 7) {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+            if (direitaQuadriculado[0] < 6) {
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 direitaQuadriculado[0]++
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             } else {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 direitaQuadriculado[0] = 0
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas < 2) {
@@ -106,13 +122,13 @@ document.onkeydown = () => {
         // V
         if (direitaAtivos[0]) {
             if (direitaQuadriculado[1] < 9) {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 direitaQuadriculado[1]++
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             } else {
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 direitaQuadriculado[1] = 0
-                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+                document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
         } else if (direitaAtivos[1]) {
             if (direitaSoldados < direitaSoldadosIds.length-1) {
@@ -124,7 +140,7 @@ document.onkeydown = () => {
                 direitaSoldados = 0
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
-        } else if (direitaAtivos[2] || direitaAtivos[3] || direitaAtivos[4]) {
+        } else if (direitaAtivos[2] || direitaAtivos[3]) {
             direitaAtivos[2] = true
             direitaAtivos[3] = false
             document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -138,6 +154,16 @@ document.onkeydown = () => {
                 direitaBrocas = 0
                 document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
             }
+        } else if (direitaAtivos[4]) {
+            if (direitaTorres < direitaTorresIds.length-1) {
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                direitaTorres++
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            } else {
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                direitaTorres = 0
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            }
         }
     }    
     else if (event.keyCode === 65) {
@@ -149,7 +175,7 @@ document.onkeydown = () => {
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             } else {
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
-                esquerdaQuadriculado[0] = 7
+                esquerdaQuadriculado[0] = 6
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
         } else if (esquerdaAtivos[3]) {
@@ -185,7 +211,7 @@ document.onkeydown = () => {
                 esquerdaSoldados = esquerdaSoldadosIds.length-1
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
             }
-        } else if (esquerdaAtivos[2] || esquerdaAtivos[3] || esquerdaAtivos[4]) {
+        } else if (esquerdaAtivos[2] || esquerdaAtivos[3]) {
             esquerdaAtivos[2] = true
             esquerdaAtivos[3] = false
             document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -199,11 +225,21 @@ document.onkeydown = () => {
                 esquerdaBrocas = 4
                 document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
             }
+        } else if (esquerdaAtivos[4]) {
+            if (esquerdaTorres > 0) {
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                esquerdaTorres--
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            } else {
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                esquerdaTorres = esquerdaTorresIds.length-1
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            }
         }
     } else if (event.keyCode === 68) {
         // D
         if (esquerdaAtivos[0]) {
-            if (esquerdaQuadriculado[0] < 7) {
+            if (esquerdaQuadriculado[0] < 6) {
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
                 esquerdaQuadriculado[0]++
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
@@ -259,9 +295,30 @@ document.onkeydown = () => {
                 esquerdaBrocas = 0
                 document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
             }
+        } else if (esquerdaAtivos[4]) {
+            if (esquerdaTorres < esquerdaTorresIds.length-1) {
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                esquerdaTorres++
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            } else {
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                esquerdaTorres = 0
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+            }
         }
     }
-    else if (event.keyCode === 193) {
+    else if (event.keyCode === 190) {
+        // .
+        posicionarTorres('cancelarVermelho', direitaTorres)
+        abrirLateralVermelho(2)
+        direitaAtivos[4] = lateralMatrizVermelho[2][1]
+        if (direitaAtivos[4]) {
+            direitaAtivos[3] = false
+            direitaAtivos[2] = false
+            direitaAtivos[1] = false
+            direitaAtivos[0] = false
+        }
+    } else if (event.keyCode === 193) {
         // /
         posicionarSoldados('cancelarVermelho', direitaSoldados)
         abrirLateralVermelho(0)
@@ -282,12 +339,24 @@ document.onkeydown = () => {
             direitaAtivos[0] = false
         }
     }
-    else if (event.keyCode === 90) {
-        // Z
+    else if (event.keyCode === 88) {
+        // X
+        posicionarTorres('cancelarAzul', esquerdaTorres)
+        abrirLateralAzul(2)
+        esquerdaAtivos[4] = lateralMatrizAzul[2][1]
+        if (esquerdaAtivos[4]) {
+            esquerdaAtivos[3] = false
+            esquerdaAtivos[2] = false
+            esquerdaAtivos[1] = false
+            esquerdaAtivos[0] = false
+        }
+    } else if (event.keyCode === 67) {
+        // C
         posicionarSoldados('cancelarAzul', esquerdaSoldados)
         abrirLateralAzul(0)
         esquerdaAtivos[1] = lateralMatrizAzul[0][1]
         if (esquerdaAtivos[1]) {
+            esquerdaAtivos[4] = false
             esquerdaAtivos[3] = false
             esquerdaAtivos[2] = false
             esquerdaAtivos[0] = false
@@ -298,15 +367,23 @@ document.onkeydown = () => {
         abrirLateralAzul(1)
         esquerdaAtivos[2] = lateralMatrizAzul[1][1]
         if (esquerdaAtivos[2]) {
+            esquerdaAtivos[4] = false
             esquerdaAtivos[3] = false
             esquerdaAtivos[1] = false
             esquerdaAtivos[0] = false
         }
     }
+    else if (event.keyCode === 90) {
+        // Z
+        torreVerticalHorizontal[0] = !torreVerticalHorizontal[0]
+    } else if (event.keyCode === 186) {
+        // Ç
+        torreVerticalHorizontal[1] = !torreVerticalHorizontal[1]
+    }
     else if (event.keyCode === 13) {
         // Enter
         if (direitaAtivos[0]) {
-            document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+13}`).onclick()
+            document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).onclick()
             posicionarSoldados('cancelarVermelho', direitaSoldados)
         } else if (direitaAtivos[1]) {
             if (posicionarSoldados('vermelho', direitaSoldados)) {
@@ -316,7 +393,8 @@ document.onkeydown = () => {
                 direitaAtivos[0] = true
                 direitaAtivos[1] = false
                 direitaAtivos[2] = false
-                direitaAtivos[3] = false
+                direitaAtivos[3] = true
+                direitaAtivos[4] = false
             }
         } else if (direitaAtivos[2] && !direitaBrocasEstados[direitaBrocas]) {
             espacoBrocaDireita(direitaBrocas)
@@ -340,9 +418,21 @@ document.onkeydown = () => {
                 direitaAtivos[0] = false
                 direitaAtivos[1] = false
                 direitaAtivos[3] = false
+                direitaAtivos[4] = false
             }
         } else if (direitaAtivos[2] && direitaBrocasEstados[direitaBrocas]) {
             upigradesDireita(direitaBrocas)
+        } else if (direitaAtivos[4]) {
+            if (posicionarTorres('vermelho', direitaTorres)) {
+                if (lateralMatrizVermelho[2][1]) {
+                    abrirLateralVermelho(2)
+                }
+                direitaAtivos[0] = true
+                direitaAtivos[1] = false
+                direitaAtivos[2] = false
+                direitaAtivos[3] = false
+                direitaAtivos[4] = true
+            }
         }
     }
     else if (event.keyCode === 8) {
@@ -357,7 +447,11 @@ document.onkeydown = () => {
         // Espaço
         if (esquerdaAtivos[0]) {
             document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
-            posicionarSoldados('cancelarAzul', esquerdaSoldados)
+            if (esquerdaAtivos[3]) {
+                posicionarSoldados('cancelarAzul', esquerdaSoldados)
+            } else if (esquerdaAtivos[4]) {
+                posicionarTorres('cancelarAzul', esquerdaTorres)
+            }
         } else if (esquerdaAtivos[1]) {
             if (posicionarSoldados('azul', esquerdaSoldados)) {
                 if (lateralMatrizAzul[0][1]) {
@@ -366,7 +460,8 @@ document.onkeydown = () => {
                 esquerdaAtivos[0] = true
                 esquerdaAtivos[1] = false
                 esquerdaAtivos[2] = false
-                esquerdaAtivos[3] = false
+                esquerdaAtivos[3] = true
+                esquerdaAtivos[4] = false
             }
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)
@@ -375,6 +470,7 @@ document.onkeydown = () => {
             esquerdaAtivos[0] = false
             esquerdaAtivos[1] = false
             esquerdaAtivos[2] = false
+            esquerdaAtivos[4] = false
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas === 0 && !(recursosAzul.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
                 
@@ -390,9 +486,21 @@ document.onkeydown = () => {
                 esquerdaAtivos[0] = false
                 esquerdaAtivos[1] = false
                 esquerdaAtivos[3] = false
+                esquerdaAtivos[4] = false
             }
         } else if (esquerdaAtivos[2] && esquerdaBrocasEstados[esquerdaBrocas]) {
             upigrades(esquerdaBrocas)
+        } else if (esquerdaAtivos[4]) {
+            if (posicionarTorres('azul', esquerdaTorres)) {
+                if (lateralMatrizAzul[2][1]) {
+                    abrirLateralAzul(2)
+                }
+                esquerdaAtivos[0] = true
+                esquerdaAtivos[1] = false
+                esquerdaAtivos[2] = false
+                esquerdaAtivos[3] = false
+                esquerdaAtivos[4] = true
+            }
         }
     }
     else if (event.keyCode === 84) {
