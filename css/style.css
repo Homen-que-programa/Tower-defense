@@ -7,6 +7,11 @@ body {
     background-image: url(../img/background.png);
     background-size: cover;
 }
+
+.corpo {
+    scale: 2;
+}
+
 #memoria {
     width: 0;
     height: 0;

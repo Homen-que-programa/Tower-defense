@@ -10,6 +10,10 @@ var torreInformacao = []
 var torreMensagemColisao = []
 var torreIndex = 0
 
+var quantiaTorreLimite = 10
+var quantiaTorreAzul = 0
+var quantiaTorreVermelho = 0
+
 const baseAzulPosition = [450, 25]
 var baseAzulVida = 2500
 const baseAzulBarraId = document.getElementById('base-azul-barra')
@@ -147,7 +151,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         let breackWhile = true
         let _alvoVisao
         if (_encurralado) {
-            _alvoVisao = 'X'
+            _alvoVisao = vermelhoAzul[1] === 'vermelho' ? 'X' : 'Y'
             _unidadeEncurralada = true
         } else {
             _alvoVisao = vermelhoAzul[2][0]
@@ -823,11 +827,23 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
             if (tabelaCaminho[i+Math.floor(_y/tabelaCaminhoTamanho)][e+Math.floor(_x/tabelaCaminhoTamanho)] !== '.') {
                 return
             }
-            tabelaCaminho[i+Math.floor(_y/tabelaCaminhoTamanho)][e+Math.floor(_x/tabelaCaminhoTamanho)] = 'X'
+            if (vermelhoAzul[1] === 'azul') {
+                tabelaCaminho[i+Math.floor(_y/tabelaCaminhoTamanho)][e+Math.floor(_x/tabelaCaminhoTamanho)] = 'X'
+            } else {
+                tabelaCaminho[i+Math.floor(_y/tabelaCaminhoTamanho)][e+Math.floor(_x/tabelaCaminhoTamanho)] = 'Y'
+            }
         }
     }
     caminhoAlteracoes++
     atualizarCaminhoMetade()
+    
+    if (vermelhoAzul[1] === 'azul') {
+        quantiaTorreAzul += espaco
+        document.getElementById('azul-quantia-torre').innerHTML = quantiaTorreAzul
+    } else {
+        quantiaTorreVermelho += espaco
+        document.getElementById('vermelho-quantia-torre').innerHTML = quantiaTorreVermelho
+    }
 
     _torreElement.style.top = `${_y}px`
     _torreElement.style.left = `${_x}px`
@@ -900,6 +916,8 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
             _forDistancia = Math.floor(Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)/tabelaCaminhoTamanho + 5)
         }
 
+        let _verificarTabela = vermelhoAzul[1] === 'azul' ? 'X' : 'Y'
+
         for (let i = 0; i < _forDistancia; i++) {
             // if (vermelhoAzul[1] === 'vermelho' || true) {
             //     let ponto = document.createElement('div')
@@ -923,7 +941,7 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                 }
                 _xposicaoTabelaUnid = (_yposicaoTabelaUnid - _b) / _a
             }
-            if (_tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== '.' && _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'X' && _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'J') {
+            if (_tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== '.' && _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== _verificarTabela && _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'J') {
                 _obstaculoCaminhoTrue = false
             }
         }
@@ -1036,6 +1054,13 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                     }
                     caminhoAlteracoes++
                     atualizarCaminhoMetade()
+                    if (vermelhoAzul[1] === 'azul') {
+                        quantiaTorreAzul -= espaco
+                        document.getElementById('azul-quantia-torre').innerHTML = quantiaTorreAzul
+                    } else {
+                        quantiaTorreVermelho -= espaco
+                        document.getElementById('vermelho-quantia-torre').innerHTML = quantiaTorreVermelho
+                    }
                     torreInformacao[_torreIndexCopy][1] = 'morto'
                     for (let i = 0; i < _torreIntervaloLoad.length; i++) {
                         clearInterval(_torreIntervaloLoad[i])
@@ -1134,14 +1159,14 @@ function atualizarCaminhoMetade() {
 }
 atualizarCaminhoMetade()
 
-let abababa = setInterval(() => {
-    criarUnidade(Math.floor(Math.random()*300), Math.floor(Math.random()*900), 150, 25, 1000, 2, 500, 70, 50, 'background: brown;', 1, ['A', 'azul', ['V', 'vermelho']])
-    criarUnidade(Math.floor(Math.random()*300 + 1600), Math.floor(Math.random()*900), 150, 25, 1000, 2, 500, 70, 50, 'background: brown;', 1, ['V', 'vermelho', ['A', 'azul']])
-}, 10)
+// let abababa = setInterval(() => {
+//     criarUnidade(Math.floor(Math.random()*300), Math.floor(Math.random()*900), 150, 25, 1000, 2, 500, 70, 50, 'background: brown;', 1, ['A', 'azul', ['V', 'vermelho']])
+//     criarUnidade(Math.floor(Math.random()*300 + 1600), Math.floor(Math.random()*900), 150, 25, 1000, 2, 500, 70, 50, 'background: brown;', 1, ['V', 'vermelho', ['A', 'azul']])
+// }, 10)
 
-setTimeout(() => {
-    clearInterval(abababa)
-}, 1000)
+// setTimeout(() => {
+//     clearInterval(abababa)
+// }, 1000)
 
 // setInterval(() => {
 //     let _numero1 = Math.floor(Math.random() * 20)

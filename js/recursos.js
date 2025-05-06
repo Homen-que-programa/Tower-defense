@@ -1,14 +1,25 @@
 var recursosAzul = {
-    ouro: [5000, document.getElementById('ouro-azul')],
-    comida: [5000, document.getElementById('comida-azul')],
-    recurso: [5000, document.getElementById('recurso-azul')],
+    ouro: [60, document.getElementById('ouro-azul')],
+    comida: [60, document.getElementById('comida-azul')],
+    recurso: [60, document.getElementById('recurso-azul')],
     producao: [0, 0, 0]
 }
 var recursosVermelho = {
-    ouro: [5000, document.getElementById('ouro-vermelho')],
-    comida: [5000, document.getElementById('comida-vermelho')],
-    recurso: [5000, document.getElementById('recurso-vermelho')],
+    ouro: [60, document.getElementById('ouro-vermelho')],
+    comida: [60, document.getElementById('comida-vermelho')],
+    recurso: [60, document.getElementById('recurso-vermelho')],
     producao: [0, 0, 0]
+}
+
+var modoDev = true
+
+if (modoDev) {
+    recursosVermelho.ouro[0] = 50000
+    recursosVermelho.comida[0] = 50000
+    recursosVermelho.recurso[0] = 50000
+    recursosAzul.ouro[0] = 50000
+    recursosAzul.comida[0] = 50000
+    recursosAzul.recurso[0] = 50000
 }
 
 var brocasAzul = [[], [], [], [], []]
