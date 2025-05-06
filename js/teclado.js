@@ -384,7 +384,6 @@ document.onkeydown = () => {
         // Enter
         if (direitaAtivos[0]) {
             document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).onclick()
-            posicionarSoldados('cancelarVermelho', direitaSoldados)
         } else if (direitaAtivos[1]) {
             if (posicionarSoldados('vermelho', direitaSoldados)) {
                 if (lateralMatrizVermelho[0][1]) {
@@ -447,11 +446,6 @@ document.onkeydown = () => {
         // Espaço
         if (esquerdaAtivos[0]) {
             document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
-            if (esquerdaAtivos[3]) {
-                posicionarSoldados('cancelarAzul', esquerdaSoldados)
-            } else if (esquerdaAtivos[4]) {
-                posicionarTorres('cancelarAzul', esquerdaTorres)
-            }
         } else if (esquerdaAtivos[1]) {
             if (posicionarSoldados('azul', esquerdaSoldados)) {
                 if (lateralMatrizAzul[0][1]) {

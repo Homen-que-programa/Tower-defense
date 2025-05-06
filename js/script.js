@@ -147,6 +147,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         let _xytab = [[Math.floor((_y+25)/tabelaCaminhoTamanho), Math.floor((_x+25)/tabelaCaminhoTamanho)]]
         let _xytabRetorno = []
 
+        let _limitLoad = 500
         let _e = 1
         let breackWhile = true
         let _alvoVisao
@@ -163,9 +164,10 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         }
         _tabelaCaminhoCopy[_xytab[0][0]][_xytab[0][1]] = 0
 
-        while (breackWhile && _e < 200) {
+        while (breackWhile && _e < _limitLoad) {
             let _xytabSub = []
             let _verificacao = 0
+            console.log(_e)
             for (let i = 0; i < _xytab.length; i++) {
                 for (let e = [-1, 0]; e[0] < 2; e[0]+=2) {
                     for (let b = 0; b < 2; b++) {
@@ -187,7 +189,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
                     }
                 }
             }
-            if (_verificacao === 0 || _e > 190) {
+            if (_verificacao === 0 || _e > _limitLoad - 10) {
                 _unidadeVisaoCaminho(true)
                 return
             }
@@ -196,10 +198,10 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         }
 
         let _xytabMin = []
-        let _xyMin = [[], 100]
+        let _xyMin = [[], _limitLoad]
         e = 0
 
-        while (e < 100) {
+        while (e < _limitLoad) {
             e++
 
             for (let _forI = -1; _forI < 2; _forI++) {
