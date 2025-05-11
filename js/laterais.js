@@ -3,25 +3,25 @@ var lateralMatrizVermelho = [["lateral-soldados-direita", false], ["lateral-broc
 var posicionarAtivo = [false, false]
 var posicionarAtulizacao = 0
 
-var matrizPrecoUnidades = [[0, 20, 10], [0, 30, 20], [10, 70, 35], [10, 100, 15]]
+var matrizPrecoUnidades = [[0, 20, 5], [0, 30, 15], [10, 70, 25], [15, 100, 35], [40, 250, 70], [55, 350, 120]]
 
 var matrizPrecoTorres = [
-    [50, 30, 70],
-    [50, 30, 70],
-    [50, 30, 70],
-    [50, 30, 70]
+    [120, 50, 80],
+    [220, 70, 140],
+    [450, 120, 310],
+    [330, 90, 230]
 ]
 var matrizUpgradeTorresPreco = [
-    [[0, 20, 10], [0, 30, 20], [10, 70, 35]],
-    [[0, 20, 10], [0, 30, 20], [10, 70, 35]],
-    [[0, 20, 10], [0, 30, 20], [10, 70, 35]],
-    [[0, 20, 10], [0, 30, 20], [10, 70, 35]]
+    [[50, 10, 25], [100, 30, 50], [150, 50, 75]],
+    [[100, 30, 50], [200, 60, 100], [300, 100, 150]],
+    [[250, 100, 150], [350, 125, 200], [500, 250, 350]],
+    [[150, 50, 75], [250, 100, 150], [400, 150, 250]]
 ]
 var matrizUpgradeTorresMelhorias = [
     [[['vida', 2000]], [['vida', 3000]], [['vida', 5000]]],
-    [[['vida', 500], ['dano', 10], ['range', 50]], [['vida', 500], ['dano', 10], ['range', 50]], [['vida', 500], ['dano', 10], ['range', 50]]],
-    [[['vida', 500], ['dano', 10], ['range', 50]], [['vida', 500], ['dano', 10], ['range', 50]], [['vida', 500], ['dano', 10], ['range', 50]]],
-    [[['vida', 500], ['velocidadeAtaque', 200], ['range', 50]], [['vida', 500], ['velocidadeAtaque', 200], ['range', 50]], [['vida', 500], ['velocidadeAtaque', 200], ['range', 50]]]
+    [[['vida', 700], ['dano', 10], ['range', 50]], [['vida', 700], ['dano', 10], ['range', 50]], [['vida', 700], ['dano', 10], ['range', 50]]],
+    [[['vida', 700], ['dano', 10], ['range', 50]], [['vida', 700], ['dano', 10], ['range', 50]], [['vida', 700], ['dano', 10], ['range', 50]]],
+    [[['vida', 700], ['velocidadeAtaque', 200], ['range', 50]], [['vida', 700], ['velocidadeAtaque', 200], ['range', 50]], [['vida', 700], ['velocidadeAtaque', 200], ['range', 50]]]
 ]
 var matrizTamanhoTorres = [
     [100, 200],
@@ -80,7 +80,7 @@ function abrirLateralVermelho(_numLateral) {
     }
 }
 
-function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
+function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
     if (_timeOuCansel === 'azul') {
         if (matrizPrecoUnidades[_unidadeEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosAzul.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosAzul.recurso[0]) {
             return false
@@ -95,6 +95,10 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
     if (_timeOuCansel === 'cancelarAzul' || (_timeOuCansel === 'azul' && posicionarAtivo[0])) {
         posicionarAtivo[0] = false
         clearInterval(posicionarIntervaloAzul)
+        if (!_unidadeRetorno) {
+            posicionarTorres('cancelarAzul', 0, true)
+            upgradeTorres('cancelarAzul', true)
+        }
         if (posicionarAtivo[1]) {
             for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
                 for (let e = 0; e < tabelaCaminhoMetade[i].length/2-1; e++) {
@@ -114,6 +118,10 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
     } else if (_timeOuCansel === 'cancelarVermelho' || (_timeOuCansel === 'vermelho' && posicionarAtivo[1])) {
         posicionarAtivo[1] = false
         clearInterval(posicionarIntervaloVermelho)
+        if (!_unidadeRetorno) {
+            posicionarTorres('cancelarVermelho', 0, true)
+            upgradeTorres('cancelarVermelho', true)
+        }
         if (posicionarAtivo[0]) {
             for (let i = 0; i < tabelaCaminho.length; i+=2) {
                 for (let e = tabelaCaminho[i].length/2; e < tabelaCaminho[i].length; e+=2) {
@@ -134,7 +142,7 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
         posicionarAtulizacaoCopyAzul = posicionarAtulizacao
         posicionarAtulizacao++
         caminhoAlteracoesCopyAzul = -5
-
+        
         posicionarIntervaloAzul = setInterval(() => {
             if (posicionarAtulizacaoCopyAzul !== posicionarAtulizacao || caminhoAlteracoesCopyAzul !== caminhoAlteracoes) {
                 posicionarAtulizacaoCopyAzul = posicionarAtulizacao
@@ -154,29 +162,41 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                             document.getElementById(`coluna-${i+1}-${e+1}`).onclick = () => {
                                 if (!(matrizPrecoUnidades[_unidadeEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosAzul.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosAzul.recurso[0])) {
                                     let verificacao = false
+                                    let _espacoOcupado
                                     if (_unidadeEscolhida === 0) {
-                                        if (quantiaUnidadeAzul < quantiaUnidadeLimite) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 150, 25, 1000, 1, 500, 70, 50, 'background-color: brown;', 1, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                        _espacoOcupado = 1
+                                        if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 200, 25, 1000, 1, 500, 70, 40, 'background-color: brown;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 1) {
-                                        if (quantiaUnidadeAzul < quantiaUnidadeLimite-1) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 200, 30, 500, 1, 650, 250, 50, 'background-color: grey;', 2, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                        _espacoOcupado = 2
+                                        if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 75, 45, 1000, 1, 500, 200, 40, 'background-color: grey;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 2) {
-                                        if (quantiaUnidadeAzul < quantiaUnidadeLimite-2) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 800, 100, 1700, 1, 500, 70, 75, 'background-color: green;', 3, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
-                                            verificacao = true
-                                        }
-                                    } else if (_unidadeEscolhida === 33) {
-                                        if (quantiaUnidadeAzul < quantiaUnidadeLimite-2) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 400, 100, 1500, 1.5, 800, 600, 50, 'background-color: blue;', 3, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                        _espacoOcupado = 3
+                                        if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 700, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 3) {
-                                        if (quantiaUnidadeAzul < quantiaUnidadeLimite-2) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 250, 5, 1000, 1, 500, 200, 50, 'background-color: blue;', 1, ['A', 'azul', ['V', 'vermelho']], 'homenQueDaBuff')
+                                        _espacoOcupado = 2
+                                        if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 350, 15, 1000, 1, 500, 150, 40, 'background-color: blue;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'homenQueDaBuff')
+                                            verificacao = true
+                                        }
+                                    } else if (_unidadeEscolhida === 4) {
+                                        _espacoOcupado = 1
+                                        if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 450, 55, 1000, 1, 500, 70, 40, 'background-color: purple;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                            verificacao = true
+                                        }
+                                    } else if (_unidadeEscolhida === 5) {
+                                        _espacoOcupado = 2
+                                        if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 150, 155, 1300, 1, 650, 300, 40, 'background-color: yellow;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     }
@@ -189,7 +209,7 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                                         recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
                                     }
                                 }
-                                posicionarSoldados('cancelarAzul', 0)
+                                posicionarSoldados('cancelarAzul', 0, false)
                             }
                         }
                     }
@@ -221,29 +241,41 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                             document.getElementById(`coluna-${i+1}-${e+1}`).onclick = () => {
                                 if (!(matrizPrecoUnidades[_unidadeEscolhida][0] > recursosVermelho.ouro[0] || matrizPrecoUnidades[_unidadeEscolhida][1] > recursosVermelho.comida[0] || matrizPrecoUnidades[_unidadeEscolhida][2] > recursosVermelho.recurso[0])) {
                                     let verificacao = false
+                                    let _espacoOcupado
                                     if (_unidadeEscolhida === 0) {
-                                        if (quantiaUnidadeVermelho < quantiaUnidadeLimite) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 150, 25, 1000, 1, 500, 70, 50, 'background-color: brown;', 1, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                        _espacoOcupado = 1
+                                        if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 200, 25, 1000, 1, 500, 70, 40, 'background-color: brown;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 1) {
-                                        if (quantiaUnidadeVermelho < quantiaUnidadeLimite-1) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 200, 30, 500, 1, 650, 250, 50, 'background-color: grey;', 2, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                        _espacoOcupado = 2
+                                        if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 75, 45, 1000, 1, 500, 200, 40, 'background-color: grey;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 2) {
-                                        if (quantiaUnidadeVermelho < quantiaUnidadeLimite-2) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 800, 100, 1700, 1.5, 500, 70, 75, 'background-color: green;', 3, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
-                                            verificacao = true
-                                        }
-                                    } else if (_unidadeEscolhida === 33) {
-                                        if (quantiaUnidadeVermelho < quantiaUnidadeLimite-2) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 400, 100, 1500, 2, 800, 600, 50, 'background-color: blue;', 3, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                        _espacoOcupado = 3
+                                        if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 700, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 3) {
-                                        if (quantiaUnidadeVermelho < quantiaUnidadeLimite-2) {
-                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 250, 5, 1000, 1, 500, 200, 50, 'background-color: blue;', 1, ['V', 'vermelho', ['A', 'azul']], 'homenQueDaBuff')
+                                        _espacoOcupado = 2
+                                        if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 350, 15, 1000, 1, 500, 150, 40, 'background-color: blue;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'homenQueDaBuff')
+                                            verificacao = true
+                                        }
+                                    } else if (_unidadeEscolhida === 4) {
+                                        _espacoOcupado = 1
+                                        if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 450, 55, 1000, 1, 500, 70, 40, 'background-color: purple;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                            verificacao = true
+                                        }
+                                    } else if (_unidadeEscolhida === 5) {
+                                        _espacoOcupado = 2
+                                        if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
+                                            criarUnidade((e+0.25)*tabelaCaminhoMetadeTamanho, (i+0.25)*tabelaCaminhoMetadeTamanho, 150, 155, 1300, 1, 650, 300, 40, 'background-color: yellow;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     }
@@ -256,7 +288,7 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
                                         recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
                                     }
                                 }
-                                posicionarSoldados('cancelarVermelho', 0)
+                                posicionarSoldados('cancelarVermelho', 0, false)
                             }
                         }
                     }
@@ -270,7 +302,7 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida) {
 
 
 
-function posicionarTorres(_timeOuCansel, _torreEscolhida) {
+function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
     if (_timeOuCansel === 'azul') {
         if (matrizPrecoTorres[_torreEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoTorres[_torreEscolhida][1] > recursosAzul.comida[0] || matrizPrecoTorres[_torreEscolhida][2] > recursosAzul.recurso[0]) {
             return false
@@ -285,6 +317,10 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
     if (_timeOuCansel === 'cancelarAzul' || (_timeOuCansel === 'azul' && posicionarAtivo[0])) {
         posicionarAtivo[0] = false
         clearInterval(posicionarTorreIntervaloAzul)
+        if (!_torreRetorno) {
+            posicionarSoldados('cancelarAzul', 0, true)
+            upgradeTorres('cancelarAzul', true)
+        }
         if (posicionarAtivo[1]) {
             for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
                 for (let e = 0; e < tabelaCaminhoMetade[i].length/2-1; e++) {
@@ -304,6 +340,10 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
     } else if (_timeOuCansel === 'cancelarVermelho' || (_timeOuCansel === 'vermelho' && posicionarAtivo[1])) {
         posicionarAtivo[1] = false
         clearInterval(posicionarTorreIntervaloVermelho)
+        if (!_torreRetorno) {
+            posicionarSoldados('cancelarVermelho', 0, true)
+            upgradeTorres('cancelarVermelho', true)
+        }
         if (posicionarAtivo[0]) {
             for (let i = 0; i < tabelaCaminho.length; i+=2) {
                 for (let e = tabelaCaminho[i].length/2; e < tabelaCaminho[i].length; e+=2) {
@@ -365,8 +405,10 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                 document.getElementById(`coluna-${i+1}-${e+1}`).onclick = () => {
                                     if (!(matrizPrecoTorres[_torreEscolhida][0] > recursosAzul.ouro[0] || matrizPrecoTorres[_torreEscolhida][1] > recursosAzul.comida[0] || matrizPrecoTorres[_torreEscolhida][2] > recursosAzul.recurso[0])) {
                                         let verificacao = true
+                                        let _espacoOcupado
                                         if (_torreEscolhida === 0) {
-                                            if (quantiaTorreAzul < quantiaTorreLimite) {
+                                            _espacoOcupado = 1
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -377,11 +419,12 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 0, 0, 0, _torreTamanho, 'background-color: rgb(150, 140, 127);', 1, ['A', 'azul', ['V', 'vermelho']], 'horizontal', 'nenhum', [], false, 'nenhum', 'Cercado', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 0, 0, 0, _torreTamanho, 'background-color: rgb(150, 140, 127);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum', [], false, 'nenhum', 'Cercado', _torreEscolhida)
                                                 }
                                             }
-                                        } else if (_torreEscolhida === 1) { 
-                                            if (quantiaTorreAzul < quantiaTorreLimite-2-2) {
+                                        } else if (_torreEscolhida === 1) {
+                                            _espacoOcupado = 3
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -392,11 +435,12 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 30, 1000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', 3, ['A', 'azul', ['V', 'vermelho']], 'horizontal', 'unico', [], true, 'nenhum', 'Mulher na torre', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 30, 1000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'unico', [], true, 'nenhum', 'Mulher na torre', _torreEscolhida)
                                                 }
                                             }
                                         } else if (_torreEscolhida === 2) {
-                                            if (quantiaTorreAzul < quantiaTorreLimite-2) {
+                                            _espacoOcupado = 3
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -407,11 +451,12 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 30, 2000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', 3, ['A', 'azul', ['V', 'vermelho']], 'horizontal', 'area', [100], true, 'nenhum', 'Homen que taca bomba', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 30, 2000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'area', [100], true, 'nenhum', 'Homen que taca bomba', _torreEscolhida)
                                                 }
                                             }
                                         } else if (_torreEscolhida === 33) {
-                                            if (quantiaTorreAzul < quantiaTorreLimite-2) {
+                                            _espacoOcupado = 3
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -422,11 +467,12 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 4, 100, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', 3, ['A', 'azul', ['V', 'vermelho']], 'horizontal', 'unico', [100], true, 'nenhum', 'Torre em desenvolvimento', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 4, 100, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'unico', [100], true, 'nenhum', 'Torre em desenvolvimento', _torreEscolhida)
                                                 }
                                             }
                                         } else if (_torreEscolhida === 3) {
-                                            if (quantiaTorreAzul < quantiaTorreLimite-2) {
+                                            _espacoOcupado = 3
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -437,7 +483,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 20, 2000, 600, _torreTamanho, 'background-color: rgb(150, 140, 127);', 3, ['A', 'azul', ['V', 'vermelho']], 'horizontal', 'unico', [], true, 'homenQueTacaBoleadeira', 'Homen que taca boleadeira', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 20, 2000, 600, _torreTamanho, 'background-color: rgb(150, 140, 127);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'unico', [], true, 'homenQueTacaBoleadeira', 'Homen que taca boleadeira', _torreEscolhida)
                                                 }
                                             }
                                         }
@@ -450,7 +496,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                             recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
                                         }
                                     }
-                                    posicionarTorres('cancelarAzul', 0)
+                                    posicionarTorres('cancelarAzul', 0, false)
                                 }
                             }
                         }
@@ -504,8 +550,10 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                 document.getElementById(`coluna-${i+1}-${e+1}`).onclick = () => {
                                     if (!(matrizPrecoTorres[_torreEscolhida][0] > recursosVermelho.ouro[0] || matrizPrecoTorres[_torreEscolhida][1] > recursosVermelho.comida[0] || matrizPrecoTorres[_torreEscolhida][2] > recursosVermelho.recurso[0])) {
                                         let verificacao = true
+                                        let _espacoOcupado
                                         if (_torreEscolhida === 0) {
-                                            if (quantiaTorreVermelho < quantiaTorreLimite) {
+                                            _espacoOcupado = 1
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -516,11 +564,12 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 0, 0, 0, _torreTamanho, 'background-color: rgb(150, 140, 127);', 1, ['V', 'vermelho', ['A', 'azul']], 'horizontal', 'nenhum', [], false, 'nenhum', 'Cercado', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 0, 0, 0, _torreTamanho, 'background-color: rgb(150, 140, 127);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum', [], false, 'nenhum', 'Cercado', _torreEscolhida)
                                                 }
                                             }
                                         } else if (_torreEscolhida === 1) {
-                                            if (quantiaTorreVermelho < quantiaTorreLimite-2) {
+                                            _espacoOcupado = 3
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -531,11 +580,12 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 40, 1000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', 3, ['V', 'vermelho', ['A', 'azul']], 'horizontal', 'unico', [], true, 'nenhum', 'Mulher na torre', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 40, 1000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'unico', [], true, 'nenhum', 'Mulher na torre', _torreEscolhida)
                                                 }
                                             }
-                                        } else if (_torreEscolhida === 2) {    
-                                            if (quantiaTorreVermelho < quantiaTorreLimite-2) {
+                                        } else if (_torreEscolhida === 2) {  
+                                            _espacoOcupado = 3  
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -546,11 +596,12 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 40, 1000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', 3, ['V', 'vermelho', ['A', 'azul']], 'horizontal', 'area', [100], true, 'nenhum', 'Homen que taca bomba', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 40, 1000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'area', [100], true, 'nenhum', 'Homen que taca bomba', _torreEscolhida)
                                                 }
                                             }
                                         } else if (_torreEscolhida === 3) {
-                                            if (quantiaTorreVermelho < quantiaTorreLimite-2) {
+                                            _espacoOcupado = 3
+                                            if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
                                                 let _x = e*tabelaCaminhoMetadeTamanho
                                                 let _y = i*tabelaCaminhoMetadeTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1]/tabelaCaminhoTamanho); i++) {
@@ -561,7 +612,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 20, 2000, 600, _torreTamanho, 'background-color: rgb(150, 140, 127);', 3, ['V', 'vermelho', ['A', 'azul']], 'horizontal', 'unico', [], true, 'homenQueTacaBoleadeira', 'Homen que taca boleadeira', _torreEscolhida)
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 20, 2000, 600, _torreTamanho, 'background-color: rgb(150, 140, 127);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'unico', [], true, 'homenQueTacaBoleadeira', 'Homen que taca boleadeira', _torreEscolhida)
                                                 }
                                             }
                                         }
@@ -574,7 +625,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida) {
                                             recursosVermelho.recurso[1].innerHTML = recursosVermelho.recurso[0]
                                         }
                                     }
-                                    posicionarTorres('cancelarVermelho', 0)
+                                    posicionarTorres('cancelarVermelho', 0, false)
                                 }
                             }
                         }
@@ -614,11 +665,15 @@ function upgradeBase(vermelhoAzul) {
 
 
 
-function upgradeTorres(_timeOuCansel) {
+function upgradeTorres(_timeOuCansel, _upgradeRetorno) {
     document.getElementById('quadriculado').style.opacity = '1'
     if (_timeOuCansel === 'cancelarAzul' || (_timeOuCansel === 'azul' && posicionarAtivo[0])) {
         posicionarAtivo[0] = false
         clearInterval(upgradeTorreIntervaloAzul)
+        if (!_upgradeRetorno) {
+            posicionarSoldados('cancelarAzul', 0, true)
+            posicionarTorres('cancelarAzul', 0, true)
+        }
         if (posicionarAtivo[1]) {
             for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
                 for (let e = 0; e < tabelaCaminhoMetade[i].length/2-1; e++) {
@@ -638,6 +693,10 @@ function upgradeTorres(_timeOuCansel) {
     } else if (_timeOuCansel === 'cancelarVermelho' || (_timeOuCansel === 'vermelho' && posicionarAtivo[1])) {
         posicionarAtivo[1] = false
         clearInterval(upgradeTorreIntervaloVermelho)
+        if (!_upgradeRetorno) {
+            posicionarSoldados('cancelarVermelho', 0, true)
+            posicionarTorres('cancelarVermelho', 0, true)
+        }
         if (posicionarAtivo[0]) {
             for (let i = 0; i < tabelaCaminho.length; i+=2) {
                 for (let e = tabelaCaminho[i].length/2; e < tabelaCaminho[i].length; e+=2) {
@@ -681,7 +740,7 @@ function upgradeTorres(_timeOuCansel) {
                                         }
                                     }
                                 }
-                                upgradeTorres('cancelarAzul', 0)
+                                upgradeTorres('cancelarAzul')
                             }
                         } else {
                             document.getElementById(`coluna-${i+1}-${e+1}`).style.cssText += 'filter: hue-rotate(180deg);'
@@ -719,7 +778,7 @@ function upgradeTorres(_timeOuCansel) {
                                         }
                                     }
                                 }
-                                upgradeTorres('cancelarVermelho', 0)
+                                upgradeTorres('cancelarVermelho')
                             }
                         } else {
                             document.getElementById(`coluna-${i+1}-${e+1}`).style.cssText += 'filter: hue-rotate(180deg);'

@@ -416,6 +416,8 @@ body {
     background-color: rgb(64, 179, 41);
 }
 
+
+
 .lateral-upgrades {
     width: 0;
     gap: 50px;
@@ -454,7 +456,6 @@ body {
     font-size: 90px;
     font-weight: 700;
 }
-
 .container-upgrade div {
     display: flex;
     flex-direction: column;
@@ -468,6 +469,18 @@ body {
 .container-upgrade:hover {
     background-color: rgb(77, 58, 184);
 }
+.container-upgrade div .preco-descricao {
+    width: 840px;
+    text-align: justify;
+}
+#upgrade-esquerda-torres {
+    height: 500px;
+}
+#upgrade-direita-torres {
+    height: 500px;
+}
+
+
 
 .lateral-mostrar-upgrade {
     width: 0;
@@ -545,7 +558,7 @@ body {
 .coluna-quadrado {
     width: 65%;
     height: 65%;
-    opacity: 0.6;
+    opacity: 0.4;
     transition: 0.2s;
     transition-property: opacity, height, width;
     background-color: rgba(15, 195, 201);

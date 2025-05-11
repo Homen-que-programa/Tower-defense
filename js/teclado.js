@@ -1,22 +1,24 @@
-var direitaSoldadosIds = ["soldado-direita-homem-caverna", "soldado-direita-homem-que-taca-pedra", "soldado-direita-homem-montado", "soldado-direita-homem-que-da-buff"]
+var direitaSoldadosIds = ["soldado-direita-homem-caverna", "soldado-direita-homem-que-taca-pedra", "soldado-direita-homem-montado", "soldado-direita-homem-que-da-buff", "soldado-direita-homem-com-graveto", "soldado-direita-homem-que-taca-rocha"]
 var direitaTorresIds = ["torre-direita-cercado", "torre-direita-mulher-na-torre", "torre-direita-homen-que-taca-bomba", "torre-direita-homen-que-taca-boleadeira"]
 var direitaUpgradesIds = ["upgrade-direita-base", "upgrade-direita-torres"]
 var direitaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var direitaBrocasEstados = [false, false, false, false, false]
-var direitaAtivos = [false, false, false, false, false]
+var direitaAtivos = [false, false, false, false, false, false]
 var direitaQuadriculado = [0, 0]
+var direitaUpgrades = 0
 var direitaTorres = 0
 var direitaSoldados = 0
 var direitaBrocas = 0
 var direitaBrocasEscolhas = 0
 
-var esquerdaSoldadosIds = ["soldado-esquerda-homem-caverna", "soldado-esquerda-homem-que-taca-pedra", "soldado-esquerda-homem-montado", "soldado-esquerda-homem-que-da-buff"]
+var esquerdaSoldadosIds = ["soldado-esquerda-homem-caverna", "soldado-esquerda-homem-que-taca-pedra", "soldado-esquerda-homem-montado", "soldado-esquerda-homem-que-da-buff", "soldado-esquerda-homem-com-graveto", "soldado-esquerda-homem-que-taca-rocha"]
 var esquerdaTorresIds = ["torre-esquerda-cercado", "torre-esquerda-mulher-na-torre", "torre-esquerda-homen-que-taca-bomba", "torre-esquerda-homen-que-taca-boleadeira"]
 var esquerdaUpgradesIds = ["upgrade-esquerda-base", "upgrade-esquerda-torres"]
 var esquerdaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var esquerdaBrocasEstados = [false, false, false, false, false]
-var esquerdaAtivos = [false, false, false, false, false]
+var esquerdaAtivos = [false, false, false, false, false, false]
 var esquerdaQuadriculado = [0, 0]
+var esquerdaUpgrades = 0
 var esquerdaTorres = 0
 var esquerdaSoldados = 0
 var esquerdaBrocas = 0
@@ -25,6 +27,7 @@ var esquerdaBrocasEscolhas = 0
 var torreVerticalHorizontal = [true, true]
 
 document.onkeydown = () => {
+    // console.log(event.keyCode)
     if (event.keyCode === 37) {
         // <
         if (direitaAtivos[0]) {
@@ -37,6 +40,15 @@ document.onkeydown = () => {
                 direitaQuadriculado[0] = 6
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas > 0) {
                 document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -60,15 +72,24 @@ document.onkeydown = () => {
                 direitaQuadriculado[1] = 9
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (direitaAtivos[1]) {
             if (direitaSoldados > 0) {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados--
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados = direitaSoldadosIds.length-1
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             }
         } else if (direitaAtivos[2] || direitaAtivos[3]) {
             direitaAtivos[2] = true
@@ -76,23 +97,33 @@ document.onkeydown = () => {
             document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBrocaDireita(7)
             if (direitaBrocas > 0) {
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 direitaBrocas--
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             } else {
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 direitaBrocas = 4
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             }
         } else if (direitaAtivos[4]) {
             if (direitaTorres > 0) {
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres--
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
             } else {
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres = direitaTorresIds.length-1
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+            }
+        } else if (direitaAtivos[5]) {
+            if (direitaUpgrades > 0) {
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaUpgrades--
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
+            } else {
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaUpgrades = direitaUpgradesIds.length-1
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
         }
     } else if (event.keyCode === 39) {
@@ -107,6 +138,15 @@ document.onkeydown = () => {
                 direitaQuadriculado[0] = 0
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas < 2) {
                 document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -130,15 +170,24 @@ document.onkeydown = () => {
                 direitaQuadriculado[1] = 0
                 document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (direitaAtivos[1]) {
             if (direitaSoldados < direitaSoldadosIds.length-1) {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados++
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados = 0
-                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             }
         } else if (direitaAtivos[2] || direitaAtivos[3]) {
             direitaAtivos[2] = true
@@ -146,23 +195,33 @@ document.onkeydown = () => {
             document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBrocaDireita(7)
             if (direitaBrocas < 4) {
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 direitaBrocas++
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             } else {
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 direitaBrocas = 0
-                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             }
         } else if (direitaAtivos[4]) {
             if (direitaTorres < direitaTorresIds.length-1) {
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres++
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
             } else {
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres = 0
-                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+            }
+        } else if (direitaAtivos[5]) {
+            if (direitaUpgrades < direitaUpgradesIds.length-1) {
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaUpgrades++
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
+            } else {
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaUpgrades = 0
+                document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
         }
     }    
@@ -178,6 +237,15 @@ document.onkeydown = () => {
                 esquerdaQuadriculado[0] = 6
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas > 0) {
                 document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -201,15 +269,24 @@ document.onkeydown = () => {
                 esquerdaQuadriculado[1] = 9
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (esquerdaAtivos[1]) {
             if (esquerdaSoldados > 0) {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados--
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados = esquerdaSoldadosIds.length-1
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             }
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3]) {
             esquerdaAtivos[2] = true
@@ -217,23 +294,33 @@ document.onkeydown = () => {
             document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBroca(7)
             if (esquerdaBrocas > 0) {
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 esquerdaBrocas--
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             } else {
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 esquerdaBrocas = 4
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             }
         } else if (esquerdaAtivos[4]) {
             if (esquerdaTorres > 0) {
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres--
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
             } else {
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres = esquerdaTorresIds.length-1
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+            }
+        } else if (esquerdaAtivos[5]) {
+            if (esquerdaUpgrades > 0) {
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaUpgrades--
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
+            } else {
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaUpgrades = esquerdaUpgradesIds.length-1
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
         }
     } else if (event.keyCode === 68) {
@@ -248,6 +335,15 @@ document.onkeydown = () => {
                 esquerdaQuadriculado[0] = 0
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas < 2) {
                 document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
@@ -271,15 +367,24 @@ document.onkeydown = () => {
                 esquerdaQuadriculado[1] = 0
                 document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
             }
+            let quadrado = document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`)
+            quadrado.addEventListener('mouseover', e => {
+                quadrado.style.cssText += 'width: 100%;height: 100%;opacity: 0.6;'
+            })
+            quadrado.addEventListener('mouseout', e => {
+                if (document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`) !== quadrado) {
+                    quadrado.style.cssText += 'width: 65%;height: 65%;opacity: 0.4;'
+                }
+            })
         } else if (esquerdaAtivos[1]) {
             if (esquerdaSoldados < esquerdaSoldadosIds.length-1) {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados++
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             } else {
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(69, 109, 218);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados = 0
-                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText = 'background-color: rgb(46, 78, 219);'
+                document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
             }
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3]) {
             esquerdaAtivos[2] = true
@@ -287,32 +392,43 @@ document.onkeydown = () => {
             document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
             espacoBroca(7)
             if (esquerdaBrocas < 4) {
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 esquerdaBrocas++
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             } else {
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(190, 142, 102)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
                 esquerdaBrocas = 0
-                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText = 'background-color: rgb(218, 153, 97)'
+                document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(218, 153, 97)'
             }
         } else if (esquerdaAtivos[4]) {
             if (esquerdaTorres < esquerdaTorresIds.length-1) {
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres++
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
             } else {
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(65, 141, 50);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres = 0
-                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText = 'background-color: rgb(64, 179, 41);'
+                document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+            }
+        } else if (esquerdaAtivos[5]) {
+            if (esquerdaUpgrades < esquerdaUpgradesIds.length-1) {
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaUpgrades++
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
+            } else {
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaUpgrades = 0
+                document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
         }
     }
     else if (event.keyCode === 190) {
         // .
-        posicionarTorres('cancelarVermelho', direitaTorres)
+        posicionarTorres('cancelarVermelho', direitaTorres, false)
         abrirLateralVermelho(2)
         direitaAtivos[4] = lateralMatrizVermelho[2][1]
         if (direitaAtivos[4]) {
+            direitaAtivos[5] = false
             direitaAtivos[3] = false
             direitaAtivos[2] = false
             direitaAtivos[1] = false
@@ -320,55 +436,85 @@ document.onkeydown = () => {
         }
     } else if (event.keyCode === 193) {
         // /
-        posicionarSoldados('cancelarVermelho', direitaSoldados)
+        posicionarSoldados('cancelarVermelho', direitaSoldados, false)
         abrirLateralVermelho(0)
         direitaAtivos[1] = lateralMatrizVermelho[0][1]
         if (direitaAtivos[1]) {
+            direitaAtivos[5] = false
+            direitaAtivos[4] = false
             direitaAtivos[3] = false
             direitaAtivos[2] = false
             direitaAtivos[0] = false
         }
     } else if (event.keyCode === 191) {
         // ;
-        posicionarSoldados('cancelarVermelho', direitaSoldados)
+        posicionarSoldados('cancelarVermelho', direitaSoldados, false)
         abrirLateralVermelho(1)
         direitaAtivos[2] = lateralMatrizVermelho[1][1]
         if (direitaAtivos[2]) {
+            direitaAtivos[5] = false
             direitaAtivos[3] = false
             direitaAtivos[1] = false
             direitaAtivos[0] = false
         }
+    } else if (event.keyCode === 188) {
+        // ,
+        posicionarSoldados('cancelarVermelho', direitaSoldados, false)
+        abrirLateralVermelho(3)
+        direitaAtivos[5] = lateralMatrizVermelho[3][1]
+        if (direitaAtivos[5]) {
+            direitaAtivos[4] = false
+            direitaAtivos[3] = false
+            direitaAtivos[2] = false
+            direitaAtivos[1] = false
+            direitaAtivos[0] = false
+        }
     }
-    else if (event.keyCode === 88) {
-        // X
-        posicionarTorres('cancelarAzul', esquerdaTorres)
+    else if (event.keyCode === 86) {
+        // V
+        posicionarTorres('cancelarAzul', esquerdaTorres, false)
         abrirLateralAzul(2)
         esquerdaAtivos[4] = lateralMatrizAzul[2][1]
         if (esquerdaAtivos[4]) {
+            esquerdaAtivos[5] = false
             esquerdaAtivos[3] = false
             esquerdaAtivos[2] = false
             esquerdaAtivos[1] = false
             esquerdaAtivos[0] = false
         }
-    } else if (event.keyCode === 67) {
-        // C
-        posicionarSoldados('cancelarAzul', esquerdaSoldados)
+    } else if (event.keyCode === 88) {
+        // X
+        posicionarSoldados('cancelarAzul', esquerdaSoldados, false)
         abrirLateralAzul(0)
         esquerdaAtivos[1] = lateralMatrizAzul[0][1]
         if (esquerdaAtivos[1]) {
+            esquerdaAtivos[5] = false
             esquerdaAtivos[4] = false
             esquerdaAtivos[3] = false
             esquerdaAtivos[2] = false
             esquerdaAtivos[0] = false
         }
-    } else if (event.keyCode === 86) {
-        // V
-        posicionarSoldados('cancelarAzul', esquerdaSoldados)
+    } else if (event.keyCode === 67) {
+        // C
+        posicionarSoldados('cancelarAzul', esquerdaSoldados, false)
         abrirLateralAzul(1)
         esquerdaAtivos[2] = lateralMatrizAzul[1][1]
         if (esquerdaAtivos[2]) {
+            esquerdaAtivos[5] = false
             esquerdaAtivos[4] = false
             esquerdaAtivos[3] = false
+            esquerdaAtivos[1] = false
+            esquerdaAtivos[0] = false
+        }
+    } else if (event.keyCode === 66) {
+        // B
+        posicionarSoldados('cancelarAzul', esquerdaSoldados, false)
+        abrirLateralAzul(3)
+        esquerdaAtivos[5] = lateralMatrizAzul[3][1]
+        if (esquerdaAtivos[5]) {
+            esquerdaAtivos[4] = false
+            esquerdaAtivos[3] = false
+            esquerdaAtivos[2] = false
             esquerdaAtivos[1] = false
             esquerdaAtivos[0] = false
         }
@@ -394,6 +540,7 @@ document.onkeydown = () => {
                 direitaAtivos[2] = false
                 direitaAtivos[3] = true
                 direitaAtivos[4] = false
+                direitaAtivos[5] = false
             }
         } else if (direitaAtivos[2] && !direitaBrocasEstados[direitaBrocas]) {
             espacoBrocaDireita(direitaBrocas)
@@ -402,6 +549,7 @@ document.onkeydown = () => {
             direitaAtivos[0] = false
             direitaAtivos[1] = false
             direitaAtivos[2] = false
+            direitaAtivos[5] = false
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas === 0 && !(recursosVermelho.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
                 
@@ -418,6 +566,7 @@ document.onkeydown = () => {
                 direitaAtivos[1] = false
                 direitaAtivos[3] = false
                 direitaAtivos[4] = false
+                direitaAtivos[5] = false
             }
         } else if (direitaAtivos[2] && direitaBrocasEstados[direitaBrocas]) {
             upigradesDireita(direitaBrocas)
@@ -431,6 +580,21 @@ document.onkeydown = () => {
                 direitaAtivos[2] = false
                 direitaAtivos[3] = false
                 direitaAtivos[4] = true
+                direitaAtivos[5] = false
+            }
+        } else if (direitaAtivos[5]) {
+            if (direitaUpgrades === 1) {
+                if (upgradeTorres('vermelho')) {
+                    if (lateralMatrizVermelho[3][1]) {
+                        abrirLateralVermelho(3)
+                    }
+                    direitaAtivos[0] = true
+                    direitaAtivos[1] = false
+                    direitaAtivos[2] = false
+                    direitaAtivos[3] = false
+                    direitaAtivos[4] = false
+                    direitaAtivos[5] = true
+                }
             }
         }
     }
@@ -456,6 +620,7 @@ document.onkeydown = () => {
                 esquerdaAtivos[2] = false
                 esquerdaAtivos[3] = true
                 esquerdaAtivos[4] = false
+                esquerdaAtivos[5] = false
             }
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)
@@ -465,6 +630,7 @@ document.onkeydown = () => {
             esquerdaAtivos[1] = false
             esquerdaAtivos[2] = false
             esquerdaAtivos[4] = false
+            esquerdaAtivos[5] = false
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas === 0 && !(recursosAzul.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
                 
@@ -481,6 +647,7 @@ document.onkeydown = () => {
                 esquerdaAtivos[1] = false
                 esquerdaAtivos[3] = false
                 esquerdaAtivos[4] = false
+                esquerdaAtivos[5] = false
             }
         } else if (esquerdaAtivos[2] && esquerdaBrocasEstados[esquerdaBrocas]) {
             upigrades(esquerdaBrocas)
@@ -494,6 +661,21 @@ document.onkeydown = () => {
                 esquerdaAtivos[2] = false
                 esquerdaAtivos[3] = false
                 esquerdaAtivos[4] = true
+                esquerdaAtivos[5] = false
+            }
+        } else if (esquerdaAtivos[5]) {
+            if (esquerdaUpgrades === 1) {
+                if (upgradeTorres('azul')) {
+                    if (lateralMatrizAzul[3][1]) {
+                        abrirLateralAzul(3)
+                    }
+                    esquerdaAtivos[0] = true
+                    esquerdaAtivos[1] = false
+                    esquerdaAtivos[2] = false
+                    esquerdaAtivos[3] = false
+                    esquerdaAtivos[4] = false
+                    esquerdaAtivos[5] = true
+                }
             }
         }
     }

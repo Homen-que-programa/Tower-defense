@@ -167,7 +167,6 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         while (breackWhile && _e < _limitLoad) {
             let _xytabSub = []
             let _verificacao = 0
-            console.log(_e)
             for (let i = 0; i < _xytab.length; i++) {
                 for (let e = [-1, 0]; e[0] < 2; e[0]+=2) {
                     for (let b = 0; b < 2; b++) {
@@ -356,9 +355,9 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         let _b = _yposicaoTabelaUnid - (((_yposicaoTabelaIni - _yposicaoTabelaUnid) / (_xposicaoTabelaIni - _xposicaoTabelaUnid)) * _xposicaoTabelaUnid)
 
         if (Math.abs(_xposicaoTabelaUnid - _xposicaoTabelaIni)/tabelaCaminhoTamanho > Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)/tabelaCaminhoTamanho) {
-            _forDistancia = Math.floor(Math.abs(_xposicaoTabelaUnid - _xposicaoTabelaIni)/tabelaCaminhoTamanho + 15)
+            _forDistancia = Math.floor(Math.abs(_xposicaoTabelaUnid - _xposicaoTabelaIni)/tabelaCaminhoTamanho + 5)
         } else {
-            _forDistancia = Math.floor(Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)/tabelaCaminhoTamanho + 15)
+            _forDistancia = Math.floor(Math.abs(_yposicaoTabelaUnid - _yposicaoTabelaIni)/tabelaCaminhoTamanho + 5)
         }
 
         for (let i = 0; i < _forDistancia; i++) {
@@ -377,7 +376,8 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
                 }
                 _xposicaoTabelaUnid = (_yposicaoTabelaUnid - _b) / _a
             }
-            // if (vermelhoAzul[1] === 'azul') {
+            // if (vermelhoAzul[1] === 'vermelho') {
+            //     console.log(_unidadeTamanho)
             //     let ponto = document.createElement('div')
             //     ponto.className = 'ponto'
             //     ponto.style.top = `${_yposicaoTabelaUnid}px`
@@ -392,6 +392,8 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
     }
 
     let _unidadeVerificarColisaoUnidades = () => {
+        let _alvosUnidadeVisiveisCopy = Object.assign([], _alvosUnidadeVisiveis)
+
         _alvosUnidadeNoRange = []
         _alvosUnidadeVisiveis = []
         _alvoMaisProximo = []
@@ -408,10 +410,20 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
 
         for (let i = 0; i < _alvosUnidadeNoRange.length; i++) {
             _obstaculoCaminhoTrue = true
+            let _verificacao = false
 
-            _verficarObstaculoCaminhoTrue(unidadeInformacao[_alvosUnidadeNoRange[i][0]][7] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, unidadeInformacao[_alvosUnidadeNoRange[i][0]][6] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, 'unidade', _alvosUnidadeNoRange[i][0], 0)
-            _verficarObstaculoCaminhoTrue(unidadeInformacao[_alvosUnidadeNoRange[i][0]][7] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, unidadeInformacao[_alvosUnidadeNoRange[i][0]][6] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, 'unidade', _alvosUnidadeNoRange[i][0], _unidadeTamanho)
+            for (let n = 0; n < _alvosUnidadeVisiveisCopy.length; n++) {
+                if (_alvosUnidadeVisiveisCopy[n][0] === _alvosUnidadeNoRange[i][0]) {
+                    _verificacao = true
+                }
+            }
 
+            if (_verificacao) {
+                _verficarObstaculoCaminhoTrue(unidadeInformacao[_alvosUnidadeNoRange[i][0]][7] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, unidadeInformacao[_alvosUnidadeNoRange[i][0]][6] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, 'unidade', _alvosUnidadeNoRange[i][0], _unidadeTamanho/2)
+            } else {
+                _verficarObstaculoCaminhoTrue(unidadeInformacao[_alvosUnidadeNoRange[i][0]][7] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, unidadeInformacao[_alvosUnidadeNoRange[i][0]][6] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, 'unidade', _alvosUnidadeNoRange[i][0], 0)
+                _verficarObstaculoCaminhoTrue(unidadeInformacao[_alvosUnidadeNoRange[i][0]][7] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, unidadeInformacao[_alvosUnidadeNoRange[i][0]][6] + unidadeInformacao[_alvosUnidadeNoRange[i][0]][4]/2, 'unidade', _alvosUnidadeNoRange[i][0], _unidadeTamanho)
+            }
             if (_obstaculoCaminhoTrue) {
                 _alvosUnidadeVisiveis.push(_alvosUnidadeNoRange[i])
             }
@@ -420,7 +432,20 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         let _unidadeDistanciaBase = (((_baseAlvoPosition[1]) - (_x + _unidadeTamanho/2)) ** 2 + ((_baseAlvoPosition[0]) - (_y + _unidadeTamanho/2)) ** 2) ** 0.5 - _unidadeTamanho/2
         if (_unidadeDistanciaBase <= _unidadeRangeVisao) {
             _obstaculoCaminhoTrue = true
-            _verficarObstaculoCaminhoTrue(_baseAlvoPosition[0], _baseAlvoPosition[1], 'base', -1, _unidadeTamanho/2)
+            let _verificacao = false
+
+            for (let n = 0; n < _alvosUnidadeVisiveisCopy.length; n++) {
+                if (_alvosUnidadeVisiveisCopy[n][0] === -1) {
+                    _verificacao = true
+                }
+            }
+
+            if (_verificacao) {
+                _verficarObstaculoCaminhoTrue(_baseAlvoPosition[0], _baseAlvoPosition[1], 'base', -1, _unidadeTamanho/2)
+            } else {
+                _verficarObstaculoCaminhoTrue(_baseAlvoPosition[0], _baseAlvoPosition[1], 'base', -1, 0)
+                _verficarObstaculoCaminhoTrue(_baseAlvoPosition[0], _baseAlvoPosition[1], 'base', -1, _unidadeTamanho)
+            }
 
             if (_obstaculoCaminhoTrue) {
                 _baseAlvo = [-1, _unidadeDistanciaBase, 'base']
@@ -467,6 +492,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
     }
 
     let _unidadeVerificarColisaoTorres = () => {
+        let _alvosTorreVisiveisCopy = _alvosTorreVisiveis
         _alvosTorreNoRange = []
         _alvosTorreVisiveis = []
         _alvoTorreMaisProximo = []
@@ -520,10 +546,20 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
 
         for (let i = 0; i < _alvosTorreNoRange.length; i++) {
             _obstaculoCaminhoTrue = true
+            let _verificacao = false
 
-            _verficarObstaculoCaminhoTrue(torreInformacao[_alvosTorreNoRange[i][0]][0][0][1], torreInformacao[_alvosTorreNoRange[i][0]][0][0][0], 'torre', _alvosTorreNoRange[i][0], 0)
-            _verficarObstaculoCaminhoTrue(torreInformacao[_alvosTorreNoRange[i][0]][0][0][1], torreInformacao[_alvosTorreNoRange[i][0]][0][0][0], 'torre', _alvosTorreNoRange[i][0], _unidadeTamanho)
+            for (let n = 0; n < _alvosTorreVisiveisCopy.length; n++) {
+                if (_alvosTorreVisiveisCopy[n][0] === _alvosTorreNoRange[i][0]) {
+                    _verificacao = true
+                }
+            }
 
+            if (_verificacao) {
+                _verficarObstaculoCaminhoTrue(torreInformacao[_alvosTorreNoRange[i][0]][0][0][1], torreInformacao[_alvosTorreNoRange[i][0]][0][0][0], 'torre', _alvosTorreNoRange[i][0], _unidadeTamanho/2)
+            } else {
+                _verficarObstaculoCaminhoTrue(torreInformacao[_alvosTorreNoRange[i][0]][0][0][1], torreInformacao[_alvosTorreNoRange[i][0]][0][0][0], 'torre', _alvosTorreNoRange[i][0], 0)
+                _verficarObstaculoCaminhoTrue(torreInformacao[_alvosTorreNoRange[i][0]][0][0][1], torreInformacao[_alvosTorreNoRange[i][0]][0][0][0], 'torre', _alvosTorreNoRange[i][0], _unidadeTamanho)
+            }
             if (_obstaculoCaminhoTrue) {
                 _alvosTorreVisiveis.push(_alvosTorreNoRange[i])
             }
@@ -714,7 +750,6 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         _unidadeVelocidade = velocidade
         _unidadeRangeVisao = visao
         _unidadeRange = range
-        _unidadeTamanho = tamanho
         for (let e = 0; e < unidadeInformacao[_unidadeIndexCopy][9].length; e++) {
             for (let i = 0; i < unidadeInformacao[_unidadeIndexCopy][9][e][1].length; i++) {
                 if (unidadeInformacao[_unidadeIndexCopy][9][e][1][i][0] === 'velocidade') {
@@ -795,7 +830,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
 
 
 
-function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano, danoV, visao, tamanho, cor, espaco, vermelhoAzul, verticalHorizontal, tipoDeDano, areaDoDano, atrairAlvo, caracter, nomeDaTorre, torreEscolhida) {
+function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano, danoV, visao, tamanho, cor, espaco, vermelhoAzul, tipoDeDano, areaDoDano, atrairAlvo, caracter, nomeDaTorre, torreEscolhida) {
     let _x = x
     let _y = y
     let _torreElement = document.createElement('div')
@@ -1104,16 +1139,12 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                                             }
                                         }
                                         if (_caracterVerificacao) {
-                                            console.log(unidadeInformacao[_alvoMaisProximo[0]][9])
                                             unidadeInformacao[_alvoMaisProximo[0]][9].push(['homenQueTacaBoleadeira', [['dano', 'somaSimples', -10], ['velocidade', 'porcentagem', 0.4]]])
-                                            console.log(unidadeInformacao[_alvoMaisProximo[0]][9])
                                             let _caracterAlvo = _alvoMaisProximo[0]
                                             setTimeout(() => {
                                                 for (let i = 0; i < unidadeInformacao[_caracterAlvo][9].length; i++) {
                                                     if (unidadeInformacao[_caracterAlvo][9][i][0] === 'homenQueTacaBoleadeira') {
-                                                        console.log(unidadeInformacao[_caracterAlvo][9])
                                                         unidadeInformacao[_caracterAlvo][9].splice(i, 1)
-                                                        console.log(unidadeInformacao[_caracterAlvo][9])
                                                     }
                                                 }
                                             }, 3000)
