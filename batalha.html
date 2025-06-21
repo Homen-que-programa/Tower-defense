@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.3">
+    <link rel="stylesheet" href="css/batalha.css">
+    <script src="js/script.js" defer></script>
+    <script src="js/laterais.js" defer></script>
+    <script src="js/teclado.js" defer></script>
+    <script src="js/recursos.js" defer></script>
+    <title>Êmulo das Torres</title>
+</head>
+<body>
+    <div id="memoria">
+        <div id="modelo-broca-ouro">
+            <div class="espaco-broca-ouro">
+                <div class="broca-nome">Broca De Ouro</div>
+                <div class="broca-stats">Ouro por segundo: <div class="">4.5</div></div>
+                <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-valor-venda-ouro-1">400</div> O <div class="broca-valor-venda" id="broca-valor-venda-comida-1">70</div> C <div class="broca-valor-venda" id="broca-valor-venda-recursos-1">550</div> R</div>
+                <div class="broca-upigrade" onclick="">Upgrade: <div class="upigrade-preco-ouro upigrade-preco">230</div> O <div class="upigrade-preco-comida upigrade-preco">50</div> C <div class="upigrade-preco-recursos upigrade-preco">350</div> R</div>
+                <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
+            </div>
+        </div>
+        <div id="modelo-broca-direita-ouro">
+            <div class="espaco-broca-ouro">
+                <div class="broca-nome">Broca De Ouro</div>
+                <div class="broca-stats">Ouro por segundo: <div class="">4.5</div></div>
+                <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-valor-venda-ouro-1">400</div> O <div class="broca-valor-venda" id="broca-valor-venda-comida-1">70</div> C <div class="broca-valor-venda" id="broca-valor-venda-recursos-1">550</div> R</div>
+                <div class="broca-upigrade" onclick="">Upgrade: <div class="upigrade-preco-ouro upigrade-preco">230</div> O <div class="upigrade-preco-comida upigrade-preco">50</div> C <div class="upigrade-preco-recursos upigrade-preco">350</div> R</div>
+                <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alinhar-buttons">
+        <div class="esquerda">
+            <div class="button-soldados" id="button-soldados" onclick="abrirLateralAzul(0)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-brocas" id="button-brocas" onclick="abrirLateralAzul(1)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-torres" id="button-torres" onclick="abrirLateralAzul(2)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-upgrades" id="button-upgrades" onclick="abrirLateralAzul(3)">
+                <div class="icone"></div>
+            </div>
+        </div>
+        <div class="meio">
+            <div class="recursos-azul recursos">
+                <p>Ouro:</p><div class="ouro" id="ouro-azul"></div>
+                <p>Comida:</p><div class="comida" id="comida-azul"></div>
+                <p>Recurso:</p><div class="recurso" id="recurso-azul"></div>
+                <p>Unidades:</p><div id="azul-quantia-unidade">0</div>/ 15
+                <p>Torres:</p><div id="azul-quantia-torre">0</div>/ 10
+            </div>
+            <div class="recursos-vermelho recursos">
+                <p>Ouro:</p><div class="ouro" id="ouro-vermelho"></div>
+                <p>Comida:</p><div class="comida" id="comida-vermelho"></div>
+                <p>Recurso:</p><div class="recurso" id="recurso-vermelho"></div>
+                <p>Unidades:</p><div id="vermelho-quantia-unidade">0</div>/ 15
+                <p>Torres:</p><div id="vermelho-quantia-torre">0</div>/ 10
+            </div>
+        </div>
+        <div class="direita">
+            <div class="button-soldados" id="button-soldados" onclick="abrirLateralVermelho(0)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-brocas" id="button-brocas" onclick="abrirLateralVermelho(1)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-torres" id="button-torres" onclick="abrirLateralVermelho(2)">
+                <div class="icone"></div>
+            </div>
+            <div class="button-upgrades" id="button-upgrades" onclick="abrirLateralVermelho(3)">
+                <div class="icone"></div>
+            </div>
+        </div>
+    </div>
+    <div class="alinhar-corpo">
+        <div class="lateral lateral-esquerda">
+            <div class="lateral-soldados" id="lateral-soldados">
+                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-caverna" onclick="posicionarSoldados('azul', 0)">
+                    <div>
+                        <P>Homem caverna</P>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemCaverna.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-que-taca-pedra" onclick="posicionarSoldados('azul', 1)">
+                    <div>
+                        <p>Homem que taca pedra</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemPedra.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-montado" onclick="posicionarSoldados('azul', 2)">
+                    <div>
+                        <p>Homem montado</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+                <!-- <div class="soldado-fuzileiro" id="soldado-esquerda-homem-lanca" onclick="posicionarSoldados('azul', 3)">
+                    <div>
+                        <p>Homem com lança</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemLanca.png" width="400px" height="400px">
+                </div> -->
+                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-que-da-buff" onclick="posicionarSoldados('azul', 3)">
+                    <div>
+                        <p>Homem que da buff</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-com-graveto" onclick="posicionarSoldados('azul', 4)">
+                    <div>
+                        <p>Homem com graveto</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-esquerda-homem-que-taca-rocha" onclick="posicionarSoldados('azul', 5)">
+                    <div>
+                        <p>Homem que taca rocha</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-brocas" id="lateral-brocas">
+                <div class="espaco-broca" id="espaco-broca-1" onclick="clicarBroca(0)">
+                    <div class="espaco-escolhas" id="espaco-escolha-1" onclick="espacoBroca(0)">
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-1" onclick="escolhaBroca(0, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-1" onclick="escolhaBroca(1, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-1" onclick="escolhaBroca(2, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-1">
+                        <div class="broca-nome">Broca De <div id="nome-broca-1"></div>: Nivel <div id="nivel-broca-1"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-1"></div> por segundo: <div id="recurso-broca-1"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-1"></div> O <div class="broca-valor-venda" id="broca-venda-comida-1"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-1"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(0)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-1"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-1"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-1"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-2" onclick="clicarBroca(1)">
+                    <div class="espaco-escolhas" id="espaco-escolha-2" onclick="espacoBroca(1)">
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-2" onclick="escolhaBroca(0, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-2" onclick="escolhaBroca(1, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-2" onclick="escolhaBroca(2, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-2">
+                        <div class="broca-nome">Broca De <div id="nome-broca-2"></div>: Nivel <div id="nivel-broca-2"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-2"></div> por segundo: <div id="recurso-broca-2"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-2"></div> O <div class="broca-valor-venda" id="broca-venda-comida-2"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-2"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(1)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-2"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-2"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-2"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-3" onclick="clicarBroca(2)">
+                    <div class="espaco-escolhas" id="espaco-escolha-3" onclick="espacoBroca(2)">
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-3" onclick="escolhaBroca(0, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-3" onclick="escolhaBroca(1, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-3" onclick="escolhaBroca(2, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-3">
+                        <div class="broca-nome">Broca De <div id="nome-broca-3"></div>: Nivel <div id="nivel-broca-3"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-3"></div> por segundo: <div id="recurso-broca-3"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-3"></div> O <div class="broca-valor-venda" id="broca-venda-comida-3"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-3"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(2)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-3"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-3"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-3"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-4" onclick="clicarBroca(3)">
+                    <div class="espaco-escolhas" id="espaco-escolha-4" onclick="espacoBroca(3)">
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-4" onclick="escolhaBroca(0, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-4" onclick="escolhaBroca(1, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-4" onclick="escolhaBroca(2, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-4">
+                        <div class="broca-nome">Broca De <div id="nome-broca-4"></div>: Nivel <div id="nivel-broca-4"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-4"></div> por segundo: <div id="recurso-broca-4"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-4"></div> O <div class="broca-valor-venda" id="broca-venda-comida-4"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-4"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(3)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-4"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-4"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-4"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-5" onclick="clicarBroca(4)">
+                    <div class="espaco-escolhas" id="espaco-escolha-5" onclick="espacoBroca(4)">
+                        <div class="broca-ouro broca-escolha" id="broca-ouro-5" onclick="escolhaBroca(0, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-comida-5" onclick="escolhaBroca(1, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-recurso-5" onclick="escolhaBroca(2, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-5">
+                        <div class="broca-nome">Broca De <div id="nome-broca-5"></div>: Nivel <div id="nivel-broca-5"></div></div>
+                        <div class="broca-stats"><div id="nome2-broca-5"></div> por segundo: <div id="recurso-broca-5"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="broca-venda-ouro-5"></div> O <div class="broca-valor-venda" id="broca-venda-comida-5"></div> C <div class="broca-valor-venda" id="broca-venda-recurso-5"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigrades(4)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="broca-preco-ouro-5"></div> O <div class="upigrade-preco-comida upigrade-preco" id="broca-preco-comida-5"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="broca-preco-recurso-5"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBroca()">Deletar</div>
+                    </div>
+                </div>
+            </div>
+            <div class="lateral-torres" id="lateral-torres">
+                <div class="container-torre" id="torre-esquerda-cercado" onclick="posicionarTorres('azul', 0)">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-esquerda-mulher-na-torre" onclick="posicionarTorres('azul', 1)">
+                    <div>
+                        <P>Mulher na torre</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-esquerda-homen-que-taca-bomba" onclick="posicionarTorres('azul', 2)">
+                    <div>
+                        <P>Homen que taca bomba</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-esquerda-homen-que-taca-boleadeira" onclick="posicionarTorres('azul', 3)">
+                    <div>
+                        <P>Homen que taca boleadeira</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-upgrades" id="lateral-upgrades">
+                <div class="container-upgrade" id="upgrade-esquerda-base" onclick="baseUpgrade('azul')">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-upgrade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-upgrade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-upgrade" id="upgrade-esquerda-torres" onclick="upgradeTorres('azul')">
+                    <div>
+                        <P>Fazer upgrades em torres</P>
+                        <div class="preco-descricao">
+                            Escolha uma torre, veja suas informções e faça upgrades nela.
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-mostrar-upgrade" id="lateral-mostrar-upgrade">
+                <div>
+                    <h2 class="mostrar-upgrade-nome"></h2>
+                    <h3 class="mostrar-upgrade-nivel"></h3>
+                    <div>
+                        <h3>Vida: </h3>
+                        <h3 class="mostrar-upgrade-vida-atual"></h3>
+                        /
+                        <h3 class="mostrar-upgrade-vida-maxima"></h3>
+                    </div>
+                    <h3 class="mostrar-upgrade-dano"></h3>
+                    <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
+                    <h3 class="mostrar-upgrade-range"></h3>
+                    <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                    <br>
+                    <h3>Curto de compra</h3>
+                    <h3 class="mostrar-upgrade-preco-ouro"></h3>
+                    <h3 class="mostrar-upgrade-preco-comida"></h3>
+                    <h3 class="mostrar-upgrade-preco-recurso"></h3>
+                    <button class="mostrar-upgrade-comprar">comprar</button>
+                </div>
+            </div>
+        </div>
+        <div class="corpo" id="corpo">
+            <div class="quadriculado" id="quadriculado">
+                <div class="linha" id="linha1">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-1-20"></div></div>
+                </div>
+                <div class="linha" id="linha2">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-2-20"></div></div>
+                </div>
+                <div class="linha" id="linha3">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-3-20"></div></div>
+                </div>
+                <div class="linha" id="linha4">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-4-20"></div></div>
+                </div>
+                <div class="linha" id="linha5">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-5-20"></div></div>
+                </div>
+                <div class="linha" id="linha6">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-6-20"></div></div>
+                </div>
+                <div class="linha" id="linha7">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-7-20"></div></div>
+                </div>
+                <div class="linha" id="linha8">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-8-20"></div></div>
+                </div>
+                <div class="linha" id="linha9">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-9-20"></div></div>
+                </div>
+                <div class="linha" id="linha10">
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-1"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-2"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-3"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-4"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-5"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-6"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-7"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-8"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-9"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-10"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-11"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-12"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-13"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-14"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-15"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-16"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-17"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-18"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-19"></div></div>
+                    <div class="coluna"><div class="coluna-quadrado" id="coluna-10-20"></div></div>
+                </div>
+            </div>
+
+            <div class="base-azul" id="base-azul">
+                <div class="base-azul-barra" id="base-azul-barra"></div>
+            </div>
+            <div class="base-vermelho" id="base-vermelho">
+                <div class="base-vermelho-barra" id="base-vermelho-barra"></div>
+            </div>
+
+
+            <div class="quadrado" id="quadrado"></div>
+
+
+            <div class="obstaculo ob1"></div>
+            <div class="obstaculo ob2"></div>
+            <div class="obstaculo ob3"></div>
+            <div class="obstaculo ob4"></div>
+
+        </div>
+        <div class="lateral lateral-direita">
+            <div class="lateral-soldados" id="lateral-soldados-direita">
+                <div class="soldado-fuzileiro" id="soldado-direita-homem-caverna" onclick="posicionarSoldados('vermelho', 0)">
+                    <div>
+                        <P>Homem caverna</P>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemCaverna.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-direita-homem-que-taca-pedra" onclick="posicionarSoldados('vermelho', 1)">
+                    <div>
+                        <p>Homem que taca pedra</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemPedra.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-direita-homem-montado" onclick="posicionarSoldados('vermelho', 2)">
+                    <div>
+                        <p>Homem montado</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-direita-homem-que-da-buff" onclick="posicionarSoldados('vermelho', 3)">
+                    <div>
+                        <p>Homem que da buff</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-direita-homem-com-graveto" onclick="posicionarSoldados('vermelho', 4)">
+                    <div>
+                        <p>Homem com graveto</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+                <div class="soldado-fuzileiro" id="soldado-direita-homem-que-taca-rocha" onclick="posicionarSoldados('vermelho', 5)">
+                    <div>
+                        <p>Homem que taca rocha</p>
+                        <div class="preco-unidade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-unidade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-unidade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/homemMontado.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-brocas" id="lateral-brocas-direita">
+                <div class="espaco-broca" id="espaco-broca-direita-1" onclick="clicarBrocaDireita(0)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-1" onclick="espacoBrocaDireita(0)">
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-1" onclick="escolhaBrocaDireita(0, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-1" onclick="escolhaBrocaDireita(1, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-1" onclick="escolhaBrocaDireita(2, 0)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-1">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-1"></div>: Nivel <div id="direita-nivel-broca-1"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-1"></div> por segundo: <div id="direita-recurso-broca-1"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-1"></div> O - <div class="broca-valor-venda" id="direita-broca-venda-comida-1"></div> C - <div class="broca-valor-venda" id="direita-broca-venda-recurso-1"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(0)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-1"></div> O - <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-1"></div> C - <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-1"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-2" onclick="clicarBrocaDireita(1)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-2" onclick="espacoBrocaDireita(1)">
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-2" onclick="escolhaBrocaDireita(0, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-2" onclick="escolhaBrocaDireita(1, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-2" onclick="escolhaBrocaDireita(2, 1)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-2">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-2"></div>: Nivel <div id="direita-nivel-broca-2"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-2"></div> por segundo: <div id="direita-recurso-broca-2"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-2"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-2"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-2"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(1)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-2"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-2"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-2"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-3" onclick="clicarBrocaDireita(2)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-3" onclick="espacoBrocaDireita(2)">
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-3" onclick="escolhaBrocaDireita(0, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-3" onclick="escolhaBrocaDireita(1, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-3" onclick="escolhaBrocaDireita(2, 2)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-3">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-3"></div>: Nivel <div id="direita-nivel-broca-3"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-3"></div> por segundo: <div id="direita-recurso-broca-3"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-3"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-3"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-3"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(2)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-3"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-3"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-3"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-4" onclick="clicarBrocaDireita(3)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-4" onclick="espacoBrocaDireita(3)">
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-4" onclick="escolhaBrocaDireita(0, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-4" onclick="escolhaBrocaDireita(1, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-4" onclick="escolhaBrocaDireita(2, 3)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-4">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-4"></div>: Nivel <div id="direita-nivel-broca-4"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-4"></div> por segundo: <div id="direita-recurso-broca-4"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-4"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-4"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-4"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(3)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-4"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-4"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-4"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+                <div class="espaco-broca" id="espaco-broca-direita-5" onclick="clicarBrocaDireita(4)">
+                    <div class="espaco-escolhas" id="espaco-escolha-direita-5" onclick="espacoBrocaDireita(4)">
+                        <div class="broca-ouro broca-escolha" id="broca-direita-ouro-5" onclick="escolhaBrocaDireita(0, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-comida broca-escolha" id="broca-direita-comida-5" onclick="escolhaBrocaDireita(1, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                        <div class="broca-recurso broca-escolha" id="broca-direita-recurso-5" onclick="escolhaBrocaDireita(2, 4)">
+                            <div><div class="preco-compra-ouro"></div> O</div>
+                            <div><div class="preco-compra-comida"></div> C</div>
+                            <div><div class="preco-compra-recurso"></div> R</div>
+                        </div>
+                    </div>
+                    <div class="receber-broca" id="receber-broca-direita-5">
+                        <div class="broca-nome">Broca De <div id="direita-nome-broca-5"></div>: Nivel <div id="direita-nivel-broca-5"></div></div>
+                        <div class="broca-stats"><div id="direita-nome2-broca-5"></div> por segundo: <div id="direita-recurso-broca-5"></div></div>
+                        <div class="broca-venda">Valor de venda: <div class="broca-valor-venda" id="direita-broca-venda-ouro-5"></div> O <div class="broca-valor-venda" id="direita-broca-venda-comida-5"></div> C <div class="broca-valor-venda" id="direita-broca-venda-recurso-5"></div> R</div>
+                        <div class="broca-upigrade" onclick="upigradesDireita(4)">Upgrade: <div class="upigrade-preco-ouro upigrade-preco" id="direita-broca-preco-ouro-5"></div> O <div class="upigrade-preco-comida upigrade-preco" id="direita-broca-preco-comida-5"></div> C <div class="upigrade-preco-recursos upigrade-preco" id="direita-broca-preco-recurso-5"></div> R</div>
+                        <div class="broca-deletar" onclick="deletarBrocaDireita()">Deletar</div>
+                    </div>
+                </div>
+            </div>
+            <div class="lateral-torres" id="lateral-torres-direita">
+                <div class="container-torre" id="torre-direita-cercado" onclick="posicionarTorres('vermelho', 0)">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-direita-mulher-na-torre" onclick="posicionarTorres('vermelho', 1)">
+                    <div>
+                        <P>Mulher na torre</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-direita-homen-que-taca-bomba" onclick="posicionarTorres('vermelho', 2)">
+                    <div>
+                        <P>Homen que taca bomba</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-torre" id="torre-direita-homen-que-taca-boleadeira" onclick="posicionarTorres('vermelho', 3)">
+                    <div>
+                        <P>Homen que taca boleadeira</P>
+                        <div class="preco-torre">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-torre-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-torre-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-upgrades" id="lateral-upgrades-direita">
+                <div class="container-upgrade" id="upgrade-direita-base" onclick="posicionarUpgrades('azul', 0)">
+                    <div>
+                        <P>Cercado</P>
+                        <div class="preco-upgrade">
+                            <div class="letras">Custo:</div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="letras"> </div>
+                            <div class="preco-upgrade-ouro"></div>
+                            <div class="letras">O</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-comida"></div>
+                            <div class="letras">C</div>
+                            <div class="letras">-</div>
+                            <div class="preco-upgrade-recurso"></div>
+                            <div class="letras">R</div>
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+                <div class="container-upgrade" id="upgrade-direita-torres" onclick="upgradeTorres('vermelho')">
+                    <div>
+                        <P>Fazer upgrades em torres</P>
+                        <div class="preco-descricao">
+                            Escolha uma torre, veja suas informções e faça upgrades nela.
+                        </div>
+                    </div>
+                    <img src="img/mulherTorre.png" width="400px" height="400px">
+                </div>
+            </div>
+            <div class="lateral-mostrar-upgrade" id="lateral-mostrar-upgrade-direita">
+                <div>
+                    <h2 class="mostrar-upgrade-nome"></h2>
+                    <h3 class="mostrar-upgrade-nivel"></h3>
+                    <div>
+                        <h3>Vida: </h3>
+                        <h3 class="mostrar-upgrade-vida-atual"></h3>
+                        /
+                        <h3 class="mostrar-upgrade-vida-maxima"></h3>
+                    </div>
+                    <h3 class="mostrar-upgrade-dano"></h3>
+                    <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
+                    <h3 class="mostrar-upgrade-range"></h3>
+                    <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                    <br>
+                    <h3>Curto de compra</h3>
+                    <h3 class="mostrar-upgrade-preco-ouro"></h3>
+                    <h3 class="mostrar-upgrade-preco-comida"></h3>
+                    <h3 class="mostrar-upgrade-preco-recurso"></h3>
+                    <button class="mostrar-upgrade-comprar">comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

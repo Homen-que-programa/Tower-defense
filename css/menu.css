@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Jacquard+12&family=Jacquard+24&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+body {
+    background-image: url(../img/background.png);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    gap: 100px;
+}
+
+h1 {
+    color: rgb(243, 184, 95);
+    font-size: 300px;
+    margin-bottom: 200px;
+    font-weight: 900;
+    letter-spacing: 10px;
+
+    font-family: "Caprasimo", serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.menu-button {
+    background-image: url(../img/placaMadeira.png);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 225px;
+    width: 1000px;
+    padding: 40px;
+    color: rgb(247, 236, 223);
+    font-size: 100px;
+    font-weight: 500;
+    transition: all 0.4s;
+    letter-spacing: 5px;
+    font-family: "Caprasimo", serif;
+}
+
+.menu-button:hover {
+    scale: 1.1;
+}

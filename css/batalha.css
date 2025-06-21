@@ -630,6 +630,7 @@ body {
     height: 50px;
     background-color: rgb(34, 125, 228);
     border-radius: 50%;
+    box-sizing: border-box;
     position: absolute;
     display: flex;
     justify-content: center;
@@ -641,7 +642,11 @@ body {
     background-color: rgb(165, 139, 105);
     background-image: url('../img/construcao-quebrado.webp');
     background-size: 100px;
+    background-origin: border-box;
+    background-clip: border-box;
     border-radius: 10px;
+    border: 10px solid rgb(94, 94, 94);
+    box-sizing: border-box;
     position: absolute;
     display: flex;
     justify-content: center;

@@ -94,6 +94,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
     _unidadeElement.style.cssText += cor
     _unidadeElementVida.style.opacity = '0.35'
     _unidadeElementVida.style.backgroundColor = vermelhoAzul[1] === 'azul' ? 'blue' : 'red'
+    _unidadeElement.style.cssText += `border: 5px solid ${vermelhoAzul[1] === 'azul' ? 'rgba(34, 125, 228, 0.5)' : 'rgba(228, 57, 34, 0.5)'};`
 
     _unidadeTamanho = 50
 
@@ -139,7 +140,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         }
     }
 
-    let _unidadeVisaoCaminho = (_encurralado) => {
+    let _unidadeVisaoCaminho = (_encurralado, _encurraladoAliado) => {
         _caminhoAlteracoesCopy = caminhoAlteracoes
         _caminhotab = []
 
@@ -152,7 +153,11 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
         let breackWhile = true
         let _alvoVisao
         if (_encurralado) {
-            _alvoVisao = vermelhoAzul[1] === 'vermelho' ? 'X' : 'Y'
+            if (_encurraladoAliado) {
+                _alvoVisao = vermelhoAzul[1] === 'vermelho' ? 'Y' : 'X'
+            } else {
+                _alvoVisao = vermelhoAzul[1] === 'vermelho' ? 'X' : 'Y'
+            }
             _unidadeEncurralada = true
         } else {
             _alvoVisao = vermelhoAzul[2][0]
@@ -189,7 +194,11 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
                 }
             }
             if (_verificacao === 0 || _e > _limitLoad - 10) {
-                _unidadeVisaoCaminho(true)
+                if (_encurralado) {
+                    _unidadeVisaoCaminho(true, true)
+                } else {
+                    _unidadeVisaoCaminho(true, false)
+                }
                 return
             }
             _xytab = _xytabSub
