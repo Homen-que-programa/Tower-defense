@@ -1,5 +1,5 @@
 var direitaSoldadosIds = ["soldado-direita-homem-caverna", "soldado-direita-homem-que-taca-pedra", "soldado-direita-homem-montado", "soldado-direita-homem-que-da-buff", "soldado-direita-homem-com-graveto", "soldado-direita-homem-que-taca-rocha"]
-var direitaTorresIds = ["torre-direita-cercado", "torre-direita-mulher-na-torre", "torre-direita-homen-que-taca-bomba", "torre-direita-homen-que-taca-boleadeira"]
+var direitaTorresIds = ["torre-direita-cercado", "torre-direita-portao", "torre-direita-mulher-na-torre", "torre-direita-homem-que-taca-bomba", "torre-direita-homem-que-taca-boleadeira", "torre-direita-minas-terrestres"]
 var direitaUpgradesIds = ["upgrade-direita-base", "upgrade-direita-torres"]
 var direitaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var direitaBrocasEstados = [false, false, false, false, false]
@@ -12,7 +12,7 @@ var direitaBrocas = 0
 var direitaBrocasEscolhas = 0
 
 var esquerdaSoldadosIds = ["soldado-esquerda-homem-caverna", "soldado-esquerda-homem-que-taca-pedra", "soldado-esquerda-homem-montado", "soldado-esquerda-homem-que-da-buff", "soldado-esquerda-homem-com-graveto", "soldado-esquerda-homem-que-taca-rocha"]
-var esquerdaTorresIds = ["torre-esquerda-cercado", "torre-esquerda-mulher-na-torre", "torre-esquerda-homen-que-taca-bomba", "torre-esquerda-homen-que-taca-boleadeira"]
+var esquerdaTorresIds = ["torre-esquerda-cercado", "torre-esquerda-portao", "torre-esquerda-mulher-na-torre", "torre-esquerda-homem-que-taca-bomba", "torre-esquerda-homem-que-taca-boleadeira", "torre-esquerda-minas-terrestres"]
 var esquerdaUpgradesIds = ["upgrade-esquerda-base", "upgrade-esquerda-torres"]
 var esquerdaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var esquerdaBrocasEstados = [false, false, false, false, false]
@@ -51,13 +51,13 @@ document.onkeydown = () => {
             })
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas > 0) {
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 direitaBrocasEscolhas--
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             } else {
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 direitaBrocasEscolhas = 2
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             }
         }
     } else if (event.keyCode === 38) {
@@ -86,15 +86,17 @@ document.onkeydown = () => {
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados--
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados-direita').scroll(0, direitaSoldados*100)
             } else {
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados = direitaSoldadosIds.length-1
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados-direita').scroll(0, direitaSoldados*100)
             }
         } else if (direitaAtivos[2] || direitaAtivos[3]) {
             direitaAtivos[2] = true
             direitaAtivos[3] = false
-            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
             espacoBrocaDireita(7)
             if (direitaBrocas > 0) {
                 document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
@@ -110,10 +112,12 @@ document.onkeydown = () => {
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres--
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres-direita').scroll(0, direitaTorres*100)
             } else {
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres = direitaTorresIds.length-1
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres-direita').scroll(0, direitaTorres*100)
             }
         } else if (direitaAtivos[5]) {
             if (direitaUpgrades > 0) {
@@ -149,13 +153,13 @@ document.onkeydown = () => {
             })
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas < 2) {
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 direitaBrocasEscolhas++
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             } else {
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 direitaBrocasEscolhas = 0
-                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             }
         }
     } else if (event.keyCode === 40) {
@@ -184,15 +188,17 @@ document.onkeydown = () => {
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados++
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados-direita').scroll(0, direitaSoldados*100)
             } else {
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 direitaSoldados = 0
                 document.getElementById(direitaSoldadosIds[direitaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados-direita').scroll(0, direitaSoldados*100)
             }
         } else if (direitaAtivos[2] || direitaAtivos[3]) {
             direitaAtivos[2] = true
             direitaAtivos[3] = false
-            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
             espacoBrocaDireita(7)
             if (direitaBrocas < 4) {
                 document.getElementById(`espaco-broca-direita-${direitaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
@@ -208,10 +214,12 @@ document.onkeydown = () => {
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres++
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres-direita').scroll(0, direitaTorres*100)
             } else {
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 direitaTorres = 0
                 document.getElementById(direitaTorresIds[direitaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres-direita').scroll(0, direitaTorres*100)
             }
         } else if (direitaAtivos[5]) {
             if (direitaUpgrades < direitaUpgradesIds.length-1) {
@@ -248,13 +256,13 @@ document.onkeydown = () => {
             })
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas > 0) {
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 esquerdaBrocasEscolhas--
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             } else {
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 esquerdaBrocasEscolhas = 2
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             }
         }
     } else if (event.keyCode === 87) {
@@ -283,15 +291,17 @@ document.onkeydown = () => {
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados--
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados').scroll(0, esquerdaSoldados*100)
             } else {
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados = esquerdaSoldadosIds.length-1
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados').scroll(0, esquerdaSoldados*100)
             }
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3]) {
             esquerdaAtivos[2] = true
             esquerdaAtivos[3] = false
-            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
             espacoBroca(7)
             if (esquerdaBrocas > 0) {
                 document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
@@ -307,10 +317,12 @@ document.onkeydown = () => {
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres--
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres').scroll(0, esquerdaTorres*100)
             } else {
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres = esquerdaTorresIds.length-1
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres').scroll(0, esquerdaTorres*100)
             }
         } else if (esquerdaAtivos[5]) {
             if (esquerdaUpgrades > 0) {
@@ -346,13 +358,13 @@ document.onkeydown = () => {
             })
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas < 2) {
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 esquerdaBrocasEscolhas++
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             } else {
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
                 esquerdaBrocasEscolhas = 0
-                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+                document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             }
         }
     } else if (event.keyCode === 83) {
@@ -381,15 +393,17 @@ document.onkeydown = () => {
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados++
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados').scroll(0, esquerdaSoldados*100)
             } else {
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(69, 109, 218);'
                 esquerdaSoldados = 0
                 document.getElementById(esquerdaSoldadosIds[esquerdaSoldados]).style.cssText += 'background-color: rgb(46, 78, 219);'
+                document.getElementById('lateral-soldados').scroll(0, esquerdaSoldados*100)
             }
         } else if (esquerdaAtivos[2] || esquerdaAtivos[3]) {
             esquerdaAtivos[2] = true
             esquerdaAtivos[3] = false
-            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgba(90, 90, 90, 0);'
+            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgba(90, 90, 90, 0);'
             espacoBroca(7)
             if (esquerdaBrocas < 4) {
                 document.getElementById(`espaco-broca-${esquerdaBrocas+1}`).style.cssText += 'background-color: rgb(190, 142, 102)'
@@ -405,10 +419,12 @@ document.onkeydown = () => {
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres++
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres').scroll(0, esquerdaTorres*100)
             } else {
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(65, 141, 50);'
                 esquerdaTorres = 0
                 document.getElementById(esquerdaTorresIds[esquerdaTorres]).style.cssText += 'background-color: rgb(64, 179, 41);'
+                document.getElementById('lateral-torres').scroll(0, esquerdaTorres*100)
             }
         } else if (esquerdaAtivos[5]) {
             if (esquerdaUpgrades < esquerdaUpgradesIds.length-1) {
@@ -544,7 +560,7 @@ document.onkeydown = () => {
             }
         } else if (direitaAtivos[2] && !direitaBrocasEstados[direitaBrocas]) {
             espacoBrocaDireita(direitaBrocas)
-            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+            document.getElementById(`broca-direita-${direitaBrocasEscolhasIds[direitaBrocasEscolhas]}-${direitaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             direitaAtivos[3] = true
             direitaAtivos[0] = false
             direitaAtivos[1] = false
@@ -624,7 +640,7 @@ document.onkeydown = () => {
             }
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)
-            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             esquerdaAtivos[3] = true
             esquerdaAtivos[0] = false
             esquerdaAtivos[1] = false
