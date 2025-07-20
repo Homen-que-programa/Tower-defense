@@ -3,26 +3,30 @@ var direitaTorresIds = ["torre-direita-cercado", "torre-direita-portao", "torre-
 var direitaUpgradesIds = ["upgrade-direita-base", "upgrade-direita-torres"]
 var direitaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var direitaBrocasEstados = [false, false, false, false, false]
-var direitaAtivos = [false, false, false, false, false, false]
+var direitaAtivos = [false, false, false, false, false, false, false]
 var direitaQuadriculado = [0, 0]
+var direitaUpgradesMostrar = 0
 var direitaUpgrades = 0
 var direitaTorres = 0
 var direitaSoldados = 0
 var direitaBrocas = 0
 var direitaBrocasEscolhas = 0
+let direitaTorreElementoComprar = document.querySelectorAll(`#lateral-mostrar-upgrade-direita .mostrar-upgrade-comprar`)
 
 var esquerdaSoldadosIds = ["soldado-esquerda-homem-caverna", "soldado-esquerda-homem-que-taca-pedra", "soldado-esquerda-homem-montado", "soldado-esquerda-homem-que-da-buff", "soldado-esquerda-homem-com-graveto", "soldado-esquerda-homem-que-taca-rocha"]
 var esquerdaTorresIds = ["torre-esquerda-cercado", "torre-esquerda-portao", "torre-esquerda-mulher-na-torre", "torre-esquerda-homem-que-taca-bomba", "torre-esquerda-homem-que-taca-boleadeira", "torre-esquerda-minas-terrestres"]
 var esquerdaUpgradesIds = ["upgrade-esquerda-base", "upgrade-esquerda-torres"]
 var esquerdaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var esquerdaBrocasEstados = [false, false, false, false, false]
-var esquerdaAtivos = [false, false, false, false, false, false]
+var esquerdaAtivos = [false, false, false, false, false, false, false]
 var esquerdaQuadriculado = [0, 0]
+var esquerdaUpgradesMostrar = 0
 var esquerdaUpgrades = 0
 var esquerdaTorres = 0
 var esquerdaSoldados = 0
 var esquerdaBrocas = 0
 var esquerdaBrocasEscolhas = 0
+let esquerdaTorreElementoComprar = document.querySelectorAll(`#lateral-mostrar-upgrade .mostrar-upgrade-comprar`)
 
 var torreVerticalHorizontal = [true, true]
 
@@ -129,6 +133,20 @@ document.onkeydown = () => {
                 direitaUpgrades = direitaUpgradesIds.length-1
                 document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
+        } else if (direitaAtivos[6]) {
+            if (direitaUpgradesMostrar > 0) {
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseout()
+                direitaUpgradesMostrar--
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseover()
+            } else {
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseout()
+                direitaUpgradesMostrar = direitaTorreElementoComprar.length-1
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseover()
+            }
         }
     } else if (event.keyCode === 39) {
         // >
@@ -230,6 +248,20 @@ document.onkeydown = () => {
                 document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
                 direitaUpgrades = 0
                 document.getElementById(direitaUpgradesIds[direitaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
+            }
+        } else if (direitaAtivos[6]) {
+            if (direitaUpgradesMostrar < direitaTorreElementoComprar.length-1) {
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseout()
+                direitaUpgradesMostrar++
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseover()
+            } else {
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseout()
+                direitaUpgradesMostrar = 0
+                direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                direitaTorreElementoComprar[direitaUpgradesMostrar].onmouseover()
             }
         }
     }    
@@ -334,6 +366,20 @@ document.onkeydown = () => {
                 esquerdaUpgrades = esquerdaUpgradesIds.length-1
                 document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
+        } else if (esquerdaAtivos[6]) {
+            if (esquerdaUpgradesMostrar > 0) {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar--
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
+            } else {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar = esquerdaTorreElementoComprar.length-1
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
+            }
         }
     } else if (event.keyCode === 68) {
         // D
@@ -435,6 +481,20 @@ document.onkeydown = () => {
                 document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(46, 26, 161);'
                 esquerdaUpgrades = 0
                 document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
+            }
+        } else if (esquerdaAtivos[6]) {
+            if (esquerdaUpgradesMostrar < esquerdaTorreElementoComprar.length-1) {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar++
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
+            } else {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar = 0
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
             }
         }
     }
@@ -545,7 +605,20 @@ document.onkeydown = () => {
     else if (event.keyCode === 13) {
         // Enter
         if (direitaAtivos[0]) {
-            document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).onclick()
+            async function a () {
+                await document.getElementById(`coluna-${direitaQuadriculado[1]+1}-${direitaQuadriculado[0]+14}`).onclick()
+                if (direitaAtivos[5] && !posicionarAtivo[1]) {
+                    direitaAtivos[0] = false
+                    direitaAtivos[1] = false
+                    direitaAtivos[2] = false
+                    direitaAtivos[3] = false
+                    direitaAtivos[4] = false
+                    direitaAtivos[5] = false
+                    direitaAtivos[6] = true
+                    direitaTorreElementoComprar[direitaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                }
+            }
+            a()
         } else if (direitaAtivos[1]) {
             if (posicionarSoldados('vermelho', direitaSoldados)) {
                 if (lateralMatrizVermelho[0][1]) {
@@ -557,6 +630,7 @@ document.onkeydown = () => {
                 direitaAtivos[3] = true
                 direitaAtivos[4] = false
                 direitaAtivos[5] = false
+                direitaAtivos[6] = false
             }
         } else if (direitaAtivos[2] && !direitaBrocasEstados[direitaBrocas]) {
             espacoBrocaDireita(direitaBrocas)
@@ -566,6 +640,7 @@ document.onkeydown = () => {
             direitaAtivos[1] = false
             direitaAtivos[2] = false
             direitaAtivos[5] = false
+            direitaAtivos[6] = false
         } else if (direitaAtivos[3]) {
             if (direitaBrocasEscolhas === 0 && !(recursosVermelho.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosVermelho.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosVermelho.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
                 
@@ -583,6 +658,7 @@ document.onkeydown = () => {
                 direitaAtivos[3] = false
                 direitaAtivos[4] = false
                 direitaAtivos[5] = false
+                direitaAtivos[6] = false
             }
         } else if (direitaAtivos[2] && direitaBrocasEstados[direitaBrocas]) {
             upigradesDireita(direitaBrocas)
@@ -597,6 +673,7 @@ document.onkeydown = () => {
                 direitaAtivos[3] = false
                 direitaAtivos[4] = true
                 direitaAtivos[5] = false
+                direitaAtivos[6] = false
             }
         } else if (direitaAtivos[5]) {
             if (direitaUpgrades === 1) {
@@ -610,8 +687,11 @@ document.onkeydown = () => {
                     direitaAtivos[3] = false
                     direitaAtivos[4] = false
                     direitaAtivos[5] = true
+                    direitaAtivos[6] = false
                 }
             }
+        } else if (direitaAtivos[6]) {
+            direitaTorreElementoComprar[direitaUpgradesMostrar].onclick()
         }
     }
     else if (event.keyCode === 8) {
@@ -625,7 +705,20 @@ document.onkeydown = () => {
     else if (event.keyCode === 32) {
         // Espaço
         if (esquerdaAtivos[0]) {
-            document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
+            async function a () {
+                await document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
+                if (esquerdaAtivos[5] && !posicionarAtivo[0]) {
+                    esquerdaAtivos[0] = false
+                    esquerdaAtivos[1] = false
+                    esquerdaAtivos[2] = false
+                    esquerdaAtivos[3] = false
+                    esquerdaAtivos[4] = false
+                    esquerdaAtivos[5] = false
+                    esquerdaAtivos[6] = true
+                    esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                }
+            }
+            a()
         } else if (esquerdaAtivos[1]) {
             if (posicionarSoldados('azul', esquerdaSoldados)) {
                 if (lateralMatrizAzul[0][1]) {
@@ -637,6 +730,7 @@ document.onkeydown = () => {
                 esquerdaAtivos[3] = true
                 esquerdaAtivos[4] = false
                 esquerdaAtivos[5] = false
+                esquerdaAtivos[6] = false
             }
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)
@@ -647,6 +741,7 @@ document.onkeydown = () => {
             esquerdaAtivos[2] = false
             esquerdaAtivos[4] = false
             esquerdaAtivos[5] = false
+            esquerdaAtivos[6] = false
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas === 0 && !(recursosAzul.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
                 
@@ -664,6 +759,7 @@ document.onkeydown = () => {
                 esquerdaAtivos[3] = false
                 esquerdaAtivos[4] = false
                 esquerdaAtivos[5] = false
+                esquerdaAtivos[6] = false
             }
         } else if (esquerdaAtivos[2] && esquerdaBrocasEstados[esquerdaBrocas]) {
             upigrades(esquerdaBrocas)
@@ -678,6 +774,7 @@ document.onkeydown = () => {
                 esquerdaAtivos[3] = false
                 esquerdaAtivos[4] = true
                 esquerdaAtivos[5] = false
+                esquerdaAtivos[6] = false
             }
         } else if (esquerdaAtivos[5]) {
             if (esquerdaUpgrades === 1) {
@@ -691,8 +788,11 @@ document.onkeydown = () => {
                     esquerdaAtivos[3] = false
                     esquerdaAtivos[4] = false
                     esquerdaAtivos[5] = true
+                    esquerdaAtivos[6] = false
                 }
             }
+        } else if (esquerdaAtivos[6]) {
+            esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onclick()
         }
     }
     else if (event.keyCode === 84) {

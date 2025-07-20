@@ -3,13 +3,15 @@ var esquerdaTorresIds = ["torre-esquerda-cercado", "torre-esquerda-portao", "tor
 var esquerdaUpgradesIds = ["upgrade-esquerda-base", "upgrade-esquerda-torres"]
 var esquerdaBrocasEscolhasIds = ["ouro", "comida", "recurso"]
 var esquerdaBrocasEstados = [false, false, false, false, false]
-var esquerdaAtivos = [false, false, false, false, false, false]
+var esquerdaAtivos = [false, false, false, false, false, false, false]
 var esquerdaQuadriculado = [0, 0]
+var esquerdaUpgradesMostrar = 0
 var esquerdaUpgrades = 0
 var esquerdaTorres = 0
 var esquerdaSoldados = 0
 var esquerdaBrocas = 0
 var esquerdaBrocasEscolhas = 0
+let esquerdaTorreElementoComprar = document.querySelectorAll(`#lateral-mostrar-upgrade .mostrar-upgrade-comprar`)
 
 var torreVerticalHorizontal = [true, true]
 
@@ -116,6 +118,20 @@ document.onkeydown = () => {
                 esquerdaUpgrades = esquerdaUpgradesIds.length-1
                 document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
+        } else if (esquerdaAtivos[6]) {
+            if (esquerdaUpgradesMostrar > 0) {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar--
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
+            } else {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar = esquerdaTorreElementoComprar.length-1
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
+            }
         }
     } else if (event.keyCode === 68 || event.keyCode === 39) {
         // D // >
@@ -218,6 +234,20 @@ document.onkeydown = () => {
                 esquerdaUpgrades = 0
                 document.getElementById(esquerdaUpgradesIds[esquerdaUpgrades]).style.cssText += 'background-color: rgb(77, 58, 184);'
             }
+        } else if (esquerdaAtivos[6]) {
+            if (esquerdaUpgradesMostrar < esquerdaTorreElementoComprar.length-1) {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar++
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
+            } else {
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(46, 26, 161);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseout()
+                esquerdaUpgradesMostrar = 0
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onmouseover()
+            }
         }
     }
     else if (event.keyCode === 86 || event.keyCode === 190) {
@@ -226,6 +256,7 @@ document.onkeydown = () => {
         abrirLateralAzul(2)
         esquerdaAtivos[4] = lateralMatrizAzul[2][1]
         if (esquerdaAtivos[4]) {
+            esquerdaAtivos[6] = false
             esquerdaAtivos[5] = false
             esquerdaAtivos[3] = false
             esquerdaAtivos[2] = false
@@ -238,6 +269,7 @@ document.onkeydown = () => {
         abrirLateralAzul(0)
         esquerdaAtivos[1] = lateralMatrizAzul[0][1]
         if (esquerdaAtivos[1]) {
+            esquerdaAtivos[6] = false
             esquerdaAtivos[5] = false
             esquerdaAtivos[4] = false
             esquerdaAtivos[3] = false
@@ -250,6 +282,7 @@ document.onkeydown = () => {
         abrirLateralAzul(1)
         esquerdaAtivos[2] = lateralMatrizAzul[1][1]
         if (esquerdaAtivos[2]) {
+            esquerdaAtivos[6] = false
             esquerdaAtivos[5] = false
             esquerdaAtivos[4] = false
             esquerdaAtivos[3] = false
@@ -262,6 +295,7 @@ document.onkeydown = () => {
         abrirLateralAzul(3)
         esquerdaAtivos[5] = lateralMatrizAzul[3][1]
         if (esquerdaAtivos[5]) {
+            esquerdaAtivos[6] = false
             esquerdaAtivos[4] = false
             esquerdaAtivos[3] = false
             esquerdaAtivos[2] = false
@@ -275,7 +309,20 @@ document.onkeydown = () => {
     } else if (event.keyCode === 32 || event.keyCode === 13) {
         // Espaço // Enter
         if (esquerdaAtivos[0]) {
-            document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
+            async function a () {
+                await document.getElementById(`coluna-${esquerdaQuadriculado[1]+1}-${esquerdaQuadriculado[0]+1}`).onclick()
+                if (esquerdaAtivos[5] && !posicionarAtivo[0]) {
+                    esquerdaAtivos[0] = false
+                    esquerdaAtivos[1] = false
+                    esquerdaAtivos[2] = false
+                    esquerdaAtivos[3] = false
+                    esquerdaAtivos[4] = false
+                    esquerdaAtivos[5] = false
+                    esquerdaAtivos[6] = true
+                    esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].style.cssText += 'background-color: rgb(77, 58, 184);'
+                }
+            }
+            a()
         } else if (esquerdaAtivos[1]) {
             if (posicionarSoldados('azul', esquerdaSoldados)) {
                 if (lateralMatrizAzul[0][1]) {
@@ -287,16 +334,18 @@ document.onkeydown = () => {
                 esquerdaAtivos[3] = true
                 esquerdaAtivos[4] = false
                 esquerdaAtivos[5] = false
+                esquerdaAtivos[6] = false
             }
         } else if (esquerdaAtivos[2] && !esquerdaBrocasEstados[esquerdaBrocas]) {
             espacoBroca(esquerdaBrocas)
-            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 20px solid rgb(210, 209, 219);'
+            document.getElementById(`broca-${esquerdaBrocasEscolhasIds[esquerdaBrocasEscolhas]}-${esquerdaBrocas+1}`).style.cssText += 'border: 5px solid rgb(210, 209, 219);'
             esquerdaAtivos[3] = true
             esquerdaAtivos[0] = false
             esquerdaAtivos[1] = false
             esquerdaAtivos[2] = false
             esquerdaAtivos[4] = false
             esquerdaAtivos[5] = false
+            esquerdaAtivos[6] = false
         } else if (esquerdaAtivos[3]) {
             if (esquerdaBrocasEscolhas === 0 && !(recursosAzul.ouro[0] >= matrizUpigradesOuro[0][0][0] && recursosAzul.comida[0] >= matrizUpigradesOuro[0][0][1] && recursosAzul.recurso[0] >= matrizUpigradesOuro[0][0][2])) {
                 
@@ -314,6 +363,7 @@ document.onkeydown = () => {
                 esquerdaAtivos[3] = false
                 esquerdaAtivos[4] = false
                 esquerdaAtivos[5] = false
+                esquerdaAtivos[6] = false
             }
         } else if (esquerdaAtivos[2] && esquerdaBrocasEstados[esquerdaBrocas]) {
             upigrades(esquerdaBrocas)
@@ -328,6 +378,7 @@ document.onkeydown = () => {
                 esquerdaAtivos[3] = false
                 esquerdaAtivos[4] = true
                 esquerdaAtivos[5] = false
+                esquerdaAtivos[6] = false
             }
         } else if (esquerdaAtivos[5]) {
             if (esquerdaUpgrades === 1) {
@@ -341,8 +392,11 @@ document.onkeydown = () => {
                     esquerdaAtivos[3] = false
                     esquerdaAtivos[4] = false
                     esquerdaAtivos[5] = true
+                    esquerdaAtivos[6] = false
                 }
             }
+        } else if (esquerdaAtivos[6]) {
+            esquerdaTorreElementoComprar[esquerdaUpgradesMostrar].onclick()
         }
     } else if (event.keyCode === 84 || event.keyCode === 8) {
         // T // Apagar

@@ -19,45 +19,7 @@ var portoesVermelhoAzul = {
     vermelho: 0
 }
 
-const baseAzulPosition = [450, 25]
-var baseAzulVidaMax = 2500
-var baseAzulVida = 2500
-const baseAzulBarraId = document.getElementById('base-azul-barra')
-
-const baseVermelhoPosition = [450, 1975]
-var baseVermelhoVidaMax = 2500
-var baseVermelhoVida = 2500
-const baseVermelhoBarraId = document.getElementById('base-vermelho-barra')
-
-var caminhoAlteracoes = 0
-const tabelaCaminhoMetadeTamanho = 100
-const tabelaCaminhoMetade = []
-const tabelaCaminhoTamanho = 50
-const tabelaCaminho = [
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['A', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', 'V'],
-    ['A', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', 'V'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.'],
-    ['.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', 'B', 'B', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.', '.']
-]
-
-
-function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor, espaco, vermelhoAzul, caracter) {
+function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor, espaco, vermelhoAzul, caracter, zombie) {
     let _x = x
     let _y = y
     let _unidadeElement = document.createElement('div')
@@ -102,7 +64,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
     _unidadeElement.style.cssText += cor
     _unidadeElementVida.style.opacity = '0.35'
     _unidadeElementVida.style.backgroundColor = vermelhoAzul[1] === 'azul' ? 'blue' : 'red'
-    _unidadeElement.style.cssText += `border: 5px solid ${vermelhoAzul[1] === 'azul' ? 'rgba(34, 125, 228, 0.5)' : 'rgba(228, 57, 34, 0.5)'};`
+    _unidadeElement.style.cssText += `border: 5px solid ${vermelhoAzul[1] === 'azul' ? 'rgb(71, 133, 204)' : 'rgb(204, 87, 71)'};`
 
     _unidadeTamanho = 50
 
@@ -116,12 +78,14 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
 
     unidadeInformacao.push([_unidadeElement.id, _unidadeIndexCopy, vermelhoAzul[1], 'circulo', _unidadeTamanho, _unidadeRangeVisao, _x+(_unidadeTamanho/2), _y+(_unidadeTamanho/2), _unidadeVida, []])
 
-    if (vermelhoAzul[1] === 'azul') {
-        quantiaUnidadeAzul += espaco
-        document.getElementById('azul-quantia-unidade').innerHTML = quantiaUnidadeAzul
-    } else {
-        quantiaUnidadeVermelho += espaco
-        document.getElementById('vermelho-quantia-unidade').innerHTML = quantiaUnidadeVermelho
+    if (!zombie) {
+        if (vermelhoAzul[1] === 'azul') {
+            quantiaUnidadeAzul += espaco
+            document.getElementById('azul-quantia-unidade').innerHTML = quantiaUnidadeAzul
+        } else {
+            quantiaUnidadeVermelho += espaco
+            document.getElementById('vermelho-quantia-unidade').innerHTML = quantiaUnidadeVermelho
+        }
     }
     unidadeIndex++
 
@@ -439,7 +403,11 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
                 (
                 tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== '.' &&
                 tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'y' &&
-                tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'x'
+                tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'x' &&
+                tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'yy' &&
+                tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'xx' &&
+                tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'A' &&
+                tabelaCaminho[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'V'
                 ) &&
                 (
                 tipoDeAlvo === 'torre' ? _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'J' :
@@ -550,6 +518,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
             }
         }
     }
+    
 
     let _unidadeVerificarColisaoTorres = () => {
         let _alvosTorreVisiveisCopy = _alvosTorreVisiveis
@@ -657,12 +626,14 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
             if (_unidadeVida <= 0 || unidadeInformacao[_unidadeIndexCopy][8] <= 0 || unidadeInformacao[_unidadeIndexCopy][1] === 'morto') {
                 document.getElementById('corpo').removeChild(_unidadeElement)
                 unidadeInformacao[_unidadeIndexCopy][1] = 'morto'
-                if (vermelhoAzul[1] === 'azul') {
-                    quantiaUnidadeAzul -= espaco
-                    document.getElementById('azul-quantia-unidade').innerHTML = quantiaUnidadeAzul
-                } else {
-                    quantiaUnidadeVermelho -= espaco
-                    document.getElementById('vermelho-quantia-unidade').innerHTML = quantiaUnidadeVermelho
+                if (!zombie) {
+                    if (vermelhoAzul[1] === 'azul') {
+                        quantiaUnidadeAzul -= espaco
+                        document.getElementById('azul-quantia-unidade').innerHTML = quantiaUnidadeAzul
+                    } else {
+                        quantiaUnidadeVermelho -= espaco
+                        document.getElementById('vermelho-quantia-unidade').innerHTML = quantiaUnidadeVermelho
+                    }
                 }
                 for (let i = 0; i < _unidadeIntervaloLoad.length; i++) {
                     clearInterval(_unidadeIntervaloLoad[i])
@@ -722,8 +693,18 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
                     }
                     if (_verificacao) {
                         if (_unidadeTimeout) {
-                            baseVermelhoVida -= _unidadeAtackDano
-                            baseVermelhoBarraId.style.width = `${(baseVermelhoVida/baseVermelhoVidaMax)*100}%`
+                            if (modoSobrevivencia && !zombie) {
+                                let recursoGanho = Math.floor(_unidadeAtackDano / 30)
+                                recursosAzul.ouro[0] += recursoGanho
+                                recursosAzul.comida[0] += recursoGanho
+                                recursosAzul.recurso[0] += recursoGanho
+                                recursosAzul.ouro[1].innerHTML = recursosAzul.ouro[0]
+                                recursosAzul.comida[1].innerHTML = recursosAzul.comida[0]
+                                recursosAzul.recurso[1].innerHTML = recursosAzul.recurso[0]
+                            } else {
+                                baseVermelhoVida -= _unidadeAtackDano
+                                baseVermelhoBarraId.style.width = `${(baseVermelhoVida/baseVermelhoVidaMax)*100}%`
+                            }
                             _unidadeTimeout = false
                             setTimeout(() => {
                                 _unidadeTimeout = true
@@ -890,7 +871,7 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
 
 
 
-function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano, danoV, visao, tamanho, cor, espaco, vermelhoAzul, tipoDeDano, areaDoDano, atrairAlvo, passavel, caracter, nomeDaTorre, torreEscolhida) {
+function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano, danoV, visao, tamanho, cor, espaco, vermelhoAzul, tipoDeDano, areaDoDano, atrairAlvo, passavel, caracter, nomeDaTorre, torreEscolhida, niveis, caracteristicas) {
     let _x = x
     let _y = y
     let _torreElement = document.createElement('div')
@@ -909,7 +890,7 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
     let _torrePosicaoOcupada = []
     let _meio = [_y+_torreTamanho[1]/2, _x+_torreTamanho[0]/2]
     let _torrePronta = false
-    let _torreNivelCopy = 0
+    let _torreNivelCopy = Object.assign([], niveis)
 
     let _alvosTorreNoRange = []
     let _alvosTorreVisiveis = []
@@ -921,6 +902,10 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
     let _caracterVariaveis = {
         minasTerrestres: {
             detonando: false
+        },
+        homemQueTacaBoleadeira: {
+            duracao: 3000,
+            debuf: 0.8
         }
     }
 
@@ -986,11 +971,12 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
             _torrePosicaoOcupada,
             nomeDaTorre,
             torreEscolhida,
-            0,
+            Object.assign([], _torreNivelCopy),
             _torreRangeVisao,
             _torrePronta,
             [_torreVidaMaxima, _torreAtackDano, _torreAtackVelocidade, _torreRangeVisao, _torreTempoConstrucao],
-            passavel
+            passavel,
+            Object.assign([], caracteristicas)
         ]
     )
 
@@ -1072,7 +1058,17 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                 }
                 _xposicaoTabelaUnid = (_yposicaoTabelaUnid - _b) / _a
             }
-            if (_tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== '.' && _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== _verificarTabela && _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'J') {
+            if (
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== '.' &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'x' &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'y' &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'xx' &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'yy' &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'A' &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'V' &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== _verificarTabela &&
+                _tabelaCaminhoCopy[Math.floor((_yposicaoTabelaUnid)/tabelaCaminhoTamanho)][Math.floor((_xposicaoTabelaUnid)/tabelaCaminhoTamanho)] !== 'J'
+            ) {
                 _obstaculoCaminhoTrue = false
             }
         }
@@ -1117,7 +1113,7 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                                 let _torreExplosaoElemento = document.createElement('div')
                                 
                                 _torreExplosaoElemento.id = 'mina-explosao'+_torreIndexCopy
-                                _torreExplosaoElemento.style.cssText += 'background-color: rgba(165, 42, 42, 0.2);position: absolute;border-radius: 50%;transition: all 1s;opacity: 1;'
+                                _torreExplosaoElemento.style.cssText += 'background-color: rgba(165, 42, 42, 0.2);position: absolute;border-radius: 50%;transition: all 1.5s;opacity: 1;scale: 0.7;'
                                 _torreExplosaoElemento.style.width = `${_torreRangeVisao*2}px`
                                 _torreExplosaoElemento.style.height = `${_torreRangeVisao*2}px`
                                 _torreExplosaoElemento.style.top = `${_meio[0] - _torreRangeVisao}px`
@@ -1125,15 +1121,19 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
 
                                 document.getElementById('corpo').appendChild(_torreExplosaoElemento)
 
-                                setTimeout(() => {
-                                    _torreExplosaoElemento.style.cssText += 'opacity: 0'
-                                }, 1)
+                                requestAnimationFrame(() => {
+                                    _torreExplosaoElemento.style.cssText += 'opacity: 0;scale: 1;'
+                                })
                                 setTimeout(() => {
                                     document.getElementById('corpo').removeChild(_torreExplosaoElemento)
                                 }, 1000)
                             }, _torreAtackVelocidade)
                         }
 
+                        _torreElement.style.cssText += `transition: background-color ${_torreAtackVelocidade/1000}s;`
+                        requestAnimationFrame(() => {
+                            _torreElement.style.cssText += 'background-color: rgba(226, 20, 20, 0.5);'
+                        })
                         _caracterVariaveis.minasTerrestres.detonando = true
                     }
                 }
@@ -1171,8 +1171,24 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
     }
 
     let _torreVerificarNivel = () => {
-        if (_torreNivelCopy !== torreInformacao[_torreIndexCopy][10] && _torrePronta) {
-            _torreNivelCopy = torreInformacao[_torreIndexCopy][10]
+        if (
+            (
+            _torreNivelCopy[0] !== torreInformacao[_torreIndexCopy][10][0] ||
+            _torreNivelCopy[1] !== torreInformacao[_torreIndexCopy][10][1] ||
+            _torreNivelCopy[2] !== torreInformacao[_torreIndexCopy][10][2]
+            ) && _torrePronta
+        ) {
+            let _torreMelhorias
+
+            if (_torreNivelCopy[0] !== torreInformacao[_torreIndexCopy][10][0]) {
+                _torreMelhorias = matrizUpgradeTorresMelhorias[torreInformacao[_torreIndexCopy][9]][0][torreInformacao[_torreIndexCopy][10][0]-1]
+            } else if (_torreNivelCopy[1] !== torreInformacao[_torreIndexCopy][10][1]) {
+                _torreMelhorias = matrizUpgradeTorresMelhorias[torreInformacao[_torreIndexCopy][9]][1][torreInformacao[_torreIndexCopy][10][1]-1]
+            } else if (_torreNivelCopy[2] !== torreInformacao[_torreIndexCopy][10][2]) {
+                _torreMelhorias = matrizUpgradeTorresMelhorias[torreInformacao[_torreIndexCopy][9]][2][torreInformacao[_torreIndexCopy][10][2]-1]
+            }
+
+            _torreNivelCopy = Object.assign([], torreInformacao[_torreIndexCopy][10])
 
             _torrePronta = false
             torreInformacao[_torreIndexCopy][12] = _torrePronta
@@ -1182,7 +1198,6 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
             _torreTimeoutLoad = setInterval(() => {
                 _torreTimeout += 100
                 if (_torreTimeout > _torreTempoConstrucao) {
-                    let _torreMelhorias = matrizUpgradeTorresMelhorias[torreInformacao[_torreIndexCopy][9]][torreInformacao[_torreIndexCopy][10]-1]
                     for (let i = 0; i < _torreMelhorias.length; i++) {
                         if (_torreMelhorias[i][0] === 'vida') {
                             _torreVidaMaxima = _torreVidaMaxima + _torreMelhorias[i][1]
@@ -1199,6 +1214,17 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                             _torreRangeVisao = _torreRangeVisao + _torreMelhorias[i][1]
                             torreInformacao[_torreIndexCopy][11] = _torreRangeVisao
                             torreInformacao[_torreIndexCopy][13][3] = _torreRangeVisao
+                        } else if (_torreMelhorias[i][0] === 'tempoConstrucao') {
+                            _torreTempoConstrucao = _torreTempoConstrucao + _torreMelhorias[i][1]
+                            torreInformacao[_torreIndexCopy][13][4] = _torreTempoConstrucao
+                        } else if (_torreMelhorias[i][0] === 'lentidao') {
+                            _caracterVariaveis.homemQueTacaBoleadeira.debuf += _torreMelhorias[i][1]
+                            _caracterVariaveis.homemQueTacaBoleadeira.debuf = Number(_caracterVariaveis.homemQueTacaBoleadeira.debuf).toFixed(3)
+                            torreInformacao[_torreIndexCopy][15][1][1] = _caracterVariaveis.homemQueTacaBoleadeira.debuf
+                        } else if (_torreMelhorias[i][0] === 'duracaoLentidao') {
+                            _caracterVariaveis.homemQueTacaBoleadeira.duracao += _torreMelhorias[i][1]
+                            _caracterVariaveis.homemQueTacaBoleadeira.duracao = Number(_caracterVariaveis.homemQueTacaBoleadeira.duracao).toFixed(3)
+                            torreInformacao[_torreIndexCopy][15][2][1] = _caracterVariaveis.homemQueTacaBoleadeira.duracao
                         }
                     }
                     _torreElement.style.cssText += cor
@@ -1281,7 +1307,7 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                                             }
                                         }
                                         if (_caracterVerificacao) {
-                                            unidadeInformacao[_alvoMaisProximo[0]][9].push(['homenQueTacaBoleadeira', [['dano', 'somaSimples', -10], ['velocidade', 'porcentagem', 0.4]]])
+                                            unidadeInformacao[_alvoMaisProximo[0]][9].push(['homenQueTacaBoleadeira', [['dano', 'somaSimples', -10], ['velocidade', 'porcentagem', _caracterVariaveis.homemQueTacaBoleadeira.debuf]]])
                                             let _caracterAlvo = _alvoMaisProximo[0]
                                             setTimeout(() => {
                                                 for (let i = 0; i < unidadeInformacao[_caracterAlvo][9].length; i++) {
@@ -1289,7 +1315,7 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                                                         unidadeInformacao[_caracterAlvo][9].splice(i, 1)
                                                     }
                                                 }
-                                            }, 3000)
+                                            }, _caracterVariaveis.homemQueTacaBoleadeira.duracao)
                                             unidadeInformacao[_alvoMaisProximo[0]][8] -= _torreAtackDano
                                             _alvoMaisProximo = []
                                         }

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.3">
     <link rel="stylesheet" href="css/batalha.css">
+    <script src="js/mapa.js" defer></script>
     <script src="js/script.js" defer></script>
     <script src="js/laterais.js" defer></script>
     <script src="js/teclado.js" defer></script>
@@ -102,30 +103,30 @@
 
     <div class="alinhar-buttons">
         <div class="esquerda">
-            <div class="button-soldados" id="button-soldados" onclick="abrirLateralAzul(0)">
+            <div class="button-soldados button-azul" id="button-soldados" onclick="abrirLateralAzul(0)">
                 <div class="icone"></div>
             </div>
-            <div class="button-brocas" id="button-brocas" onclick="abrirLateralAzul(1)">
+            <div class="button-brocas button-azul" id="button-brocas" onclick="abrirLateralAzul(1)">
                 <div class="icone"></div>
             </div>
-            <div class="button-torres" id="button-torres" onclick="abrirLateralAzul(2)">
+            <div class="button-torres button-azul" id="button-torres" onclick="abrirLateralAzul(2)">
                 <div class="icone"></div>
             </div>
-            <div class="button-upgrades" id="button-upgrades" onclick="abrirLateralAzul(3)">
+            <div class="button-upgrades button-azul" id="button-upgrades" onclick="abrirLateralAzul(3)">
                 <div class="icone"></div>
             </div>
         </div>
         <div class="direita">
-            <div class="button-soldados" id="button-soldados" onclick="abrirLateralVermelho(0)">
+            <div class="button-soldados button-vermelho" id="button-soldados" onclick="abrirLateralVermelho(0)">
                 <div class="icone"></div>
             </div>
-            <div class="button-brocas" id="button-brocas" onclick="abrirLateralVermelho(1)">
+            <div class="button-brocas button-vermelho" id="button-brocas" onclick="abrirLateralVermelho(1)">
                 <div class="icone"></div>
             </div>
-            <div class="button-torres" id="button-torres" onclick="abrirLateralVermelho(2)">
+            <div class="button-torres button-vermelho" id="button-torres" onclick="abrirLateralVermelho(2)">
                 <div class="icone"></div>
             </div>
-            <div class="button-upgrades" id="button-upgrades" onclick="abrirLateralVermelho(3)">
+            <div class="button-upgrades button-vermelho" id="button-upgrades" onclick="abrirLateralVermelho(3)">
                 <div class="icone"></div>
             </div>
         </div>
@@ -690,17 +691,40 @@
                         <h3 class="mostrar-upgrade-vida-atual"></h3>
                         /
                         <h3 class="mostrar-upgrade-vida-maxima"></h3>
+                        <h3 class="mostrar-upgrade-vida-melhoria mostrar-upgrade-melhoria"></h3>
                     </div>
-                    <h3 class="mostrar-upgrade-dano"></h3>
-                    <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
-                    <h3 class="mostrar-upgrade-range"></h3>
-                    <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                    <div>
+                        <h3 class="mostrar-upgrade-dano"></h3>
+                        <h3 class="mostrar-upgrade-dano-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
+                        <h3 class="mostrar-upgrade-velocidade-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-range"></h3>
+                        <h3 class="mostrar-upgrade-range-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                        <h3 class="mostrar-upgrade-tempo-debuf mostrar-upgrade-debuf"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-extra"></h3>
+                        <h3 class="mostrar-upgrade-extra-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-extra"></h3>
+                        <h3 class="mostrar-upgrade-extra-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
                     <br>
-                    <h3>Curto de compra</h3>
+                    <h3>Custo de compra</h3>
                     <h3 class="mostrar-upgrade-preco-ouro"></h3>
                     <h3 class="mostrar-upgrade-preco-comida"></h3>
                     <h3 class="mostrar-upgrade-preco-recurso"></h3>
-                    <button class="mostrar-upgrade-comprar">comprar</button>
+                    <button class="mostrar-upgrade-comprar">caminho 1</button>
+                    <button class="mostrar-upgrade-comprar">caminho 2</button>
+                    <button class="mostrar-upgrade-comprar">caminho 3</button>
                 </div>
             </div>
         </div>
@@ -1933,17 +1957,40 @@
                         <h3 class="mostrar-upgrade-vida-atual"></h3>
                         /
                         <h3 class="mostrar-upgrade-vida-maxima"></h3>
+                        <h3 class="mostrar-upgrade-vida-melhoria mostrar-upgrade-melhoria"></h3>
                     </div>
-                    <h3 class="mostrar-upgrade-dano"></h3>
-                    <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
-                    <h3 class="mostrar-upgrade-range"></h3>
-                    <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                    <div>
+                        <h3 class="mostrar-upgrade-dano"></h3>
+                        <h3 class="mostrar-upgrade-dano-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-velocidade-ataque"></h3>
+                        <h3 class="mostrar-upgrade-velocidade-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-range"></h3>
+                        <h3 class="mostrar-upgrade-range-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-tempo-construcao"></h3>
+                        <h3 class="mostrar-upgrade-tempo-debuf mostrar-upgrade-debuf"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-extra"></h3>
+                        <h3 class="mostrar-upgrade-extra-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
+                    <div>
+                        <h3 class="mostrar-upgrade-extra"></h3>
+                        <h3 class="mostrar-upgrade-extra-melhoria mostrar-upgrade-melhoria"></h3>
+                    </div>
                     <br>
-                    <h3>Curto de compra</h3>
+                    <h3>Custo de compra</h3>
                     <h3 class="mostrar-upgrade-preco-ouro"></h3>
                     <h3 class="mostrar-upgrade-preco-comida"></h3>
                     <h3 class="mostrar-upgrade-preco-recurso"></h3>
-                    <button class="mostrar-upgrade-comprar">comprar</button>
+                    <button class="mostrar-upgrade-comprar">caminho 1</button>
+                    <button class="mostrar-upgrade-comprar">caminho 2</button>
+                    <button class="mostrar-upgrade-comprar">caminho 3</button>
                 </div>
             </div>
         </div>
