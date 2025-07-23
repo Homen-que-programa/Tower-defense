@@ -11,6 +11,7 @@ var matrizPrecoTorres = [
     [220, 70, 140],
     [450, 120, 310],
     [330, 90, 230],
+    [120, 50, 80],
     [120, 50, 80]
 ]
 var matrizUpgradeTorresPreco = [
@@ -19,20 +20,21 @@ var matrizUpgradeTorresPreco = [
     [[100, 30, 50], [200, 60, 100], [300, 100, 150], [300, 100, 150], [300, 100, 150]],
     [[250, 100, 150], [350, 125, 200], [500, 250, 350], [500, 250, 350], [500, 250, 350]],
     [[150, 50, 75], [250, 100, 150], [400, 150, 250], [400, 150, 250], [400, 150, 250]],
-    [[120, 50, 80], [220, 70, 140], [450, 120, 310]]
+    [[120, 50, 80], [220, 70, 140], [450, 120, 310]],
+    [[150, 50, 75], [250, 100, 150], [400, 150, 250], [400, 150, 250], [400, 150, 250]]
 ]
 var matrizUpgradeTorresMelhorias = [
     [ // cercado
         [
-            [['vida', 2000], ['tempoConstrucao', 1500]],
-            [['vida', 3000], ['tempoConstrucao', 2500]],
+            [['vida', 2000], ['tempoConstrucao', 3000]],
+            [['vida', 3000], ['tempoConstrucao', 4500]],
             [['vida', 5000]]
         ]
     ],
     [ // portâo
         [
-            [['vida', 1000], ['tempoConstrucao', 1500]],
-            [['vida', 1500], ['tempoConstrucao', 2500]],
+            [['vida', 1000], ['tempoConstrucao', 3000]],
+            [['vida', 1500], ['tempoConstrucao', 4500]],
             [['vida', 2500]]
         ]
     ],
@@ -43,14 +45,14 @@ var matrizUpgradeTorresMelhorias = [
             [['vida', 700], ['dano', 10], ['range', 50]]
         ],
         [
-            [['vida', 100], ['velocidadeAtaque', -200], ['tempoConstrucao', 1500]],
-            [['vida', 100], ['velocidadeAtaque', -200], ['tempoConstrucao', 2500]],
+            [['vida', 100], ['velocidadeAtaque', -100], ['tempoConstrucao', 1500]],
+            [['vida', 100], ['velocidadeAtaque', -100], ['tempoConstrucao', 2500]],
             [['vida', 100], ['velocidadeAtaque', -200]]
         ],
         [
-            [['dano', 10], ['range', 50], ['tempoConstrucao', 1500]],
+            [['dano', 5], ['range', 50], ['tempoConstrucao', 1500]],
             [['dano', 10], ['range', 50], ['tempoConstrucao', 2500]],
-            [['dano', 10], ['range', 50]]
+            [['dano', 15], ['range', 50]]
         ]
 
     ],
@@ -61,8 +63,8 @@ var matrizUpgradeTorresMelhorias = [
             [['vida', 200], ['range', 50]]
         ],
         [
-            [['vida', 100], ['dano', 10], ['tempoConstrucao', 1500]],
-            [['vida', 100], ['dano', 10], ['tempoConstrucao', 2500]],
+            [['vida', 100], ['dano', 5], ['tempoConstrucao', 1500]],
+            [['vida', 100], ['dano', 5], ['tempoConstrucao', 2500]],
             [['vida', 100], ['dano', 10]]
         ],
         [
@@ -73,12 +75,12 @@ var matrizUpgradeTorresMelhorias = [
     ],
     [ // homem que taca boleadeira
         [
-            [['vida', 100], ['velocidadeAtaque', -200], ['tempoConstrucao', 1500]],
-            [['vida', 100], ['velocidadeAtaque', -200], ['tempoConstrucao', 2500]],
+            [['vida', 100], ['velocidadeAtaque', -150], ['tempoConstrucao', 1500]],
+            [['vida', 100], ['velocidadeAtaque', -150], ['tempoConstrucao', 2500]],
             [['vida', 100], ['velocidadeAtaque', -200]]
         ],
         [
-            [['vida', 200], ['dano', 10], ['range', 50], ['tempoConstrucao', 1500]],
+            [['vida', 200], ['dano', 5], ['range', 50], ['tempoConstrucao', 1500]],
             [['vida', 200], ['dano', 10], ['range', 50], ['duracaoLentidao', 500, 'extra2', '+ 0.5s'], ['tempoConstrucao', 2500]],
             [['vida', 200], ['dano', 10], ['range', 50], ['duracaoLentidao', 500, 'extra2', '+ 0.5s']]
         ],
@@ -93,6 +95,23 @@ var matrizUpgradeTorresMelhorias = [
             [['vida', 50], ['dano', 100], ['range', 50], ['velocidadeAtaque', -400], ['tempoConstrucao', 1500]],
             [['vida', 50], ['dano', 100], ['range', 50], ['velocidadeAtaque', -500], ['tempoConstrucao', 2500]],
             [['vida', 100], ['dano', 150], ['range', 150], ['velocidadeAtaque', -600]]
+        ]
+    ],
+    [ // base
+        [
+            [['vida', 2000], ['velocidadeAtaque', 300, 'debuf'], ['tempoConstrucao', 3000]],
+            [['vida', 2000], ['velocidadeAtaque', 300, 'debuf'], ['tempoConstrucao', 4500]],
+            [['vida', 4000], ['velocidadeAtaque', 400, 'debuf']]
+        ],
+        [
+            [['vida', 200], ['dano', 25], ['range', 150], ['tempoConstrucao', 3000]],
+            [['vida', 200], ['dano', 10], ['range', 50], ['tempoConstrucao', 4500]],
+            [['vida', 300], ['dano', 20], ['range', 50]]
+        ],
+        [
+            [['vida', 300], ['velocidadeAtaque', -200], ['dano', 10], ['range', 150], ['tempoConstrucao', 3000]],
+            [['vida', 300], ['velocidadeAtaque', -200], ['tempoConstrucao', 4500]],
+            [['vida', 400], ['velocidadeAtaque', -300]]
         ]
     ]
 ]
@@ -253,7 +272,7 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
                                     } else if (_unidadeEscolhida === 2) {
                                         _espacoOcupado = 3
                                         if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 700, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 500, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 3) {
@@ -332,7 +351,7 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
                                     } else if (_unidadeEscolhida === 2) {
                                         _espacoOcupado = 3
                                         if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 700, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 500, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 3) {
@@ -494,7 +513,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 8000, 0, 0, 0, _torreTamanho, 'background-color: rgb(145, 84, 35);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum', [], false, false, 'nenhum', 'Cercado', _torreEscolhida, [0, 'n', 'n'], [false])
+                                                    criarTorre(_x, _y, 400, 1500, 12000, 0, 0, 0, _torreTamanho, 'background-color: rgb(145, 84, 35);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum', [], false, false, 'nenhum', 'Cercado', _torreEscolhida, [0, 'n', 'n'], [false])
                                                 }
                                             }
                                         } else if (_torreEscolhida === 1) {
@@ -511,7 +530,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                                 }
                                                 if (verificacao) {
                                                     portoesVermelhoAzul.azul++
-                                                    criarTorre(_x, _y, 300, 750, 10000, 0, 0, 0, _torreTamanho, 'background-color: rgba(145, 85, 35, 0.75);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum', [], true, true, 'portao', 'Portão', _torreEscolhida, [0, 'n', 'n'], [false])
+                                                    criarTorre(_x, _y, 300, 750, 12000, 0, 0, 0, _torreTamanho, 'background-color: rgba(145, 85, 35, 0.75);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum', [], true, true, 'portao', 'Portão', _torreEscolhida, [0, 'n', 'n'], [false])
                                                 }
                                             }
                                         } else if (_torreEscolhida === 2) {
@@ -543,7 +562,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 6000, 30, 3000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'area', [100], true, false, 'nenhum', 'Homen que taca bomba', _torreEscolhida, [0, 0, 0], [false])
+                                                    criarTorre(_x, _y, 400, 1500, 6000, 15, 3000, 500, _torreTamanho, 'background-color: rgb(106, 151, 48);', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'area', [100], true, false, 'nenhum', 'Homen que taca bomba', _torreEscolhida, [0, 0, 0], [false])
                                                 }
                                             }
                                         } else if (_torreEscolhida === 4) {
@@ -672,7 +691,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                                     }
                                                 }
                                                 if (verificacao) {
-                                                    criarTorre(_x, _y, 400, 1500, 8000, 0, 0, 0, _torreTamanho, 'background-color: rgb(145, 84, 35);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum', [], false, false, 'nenhum', 'Cercado', _torreEscolhida, [0, 'n', 'n'], [false])
+                                                    criarTorre(_x, _y, 400, 1500, 12000, 0, 0, 0, _torreTamanho, 'background-color: rgb(145, 84, 35);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum', [], false, false, 'nenhum', 'Cercado', _torreEscolhida, [0, 'n', 'n'], [false])
                                                 }
                                             }
                                         } else if (_torreEscolhida === 1) {
@@ -689,7 +708,7 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                                 }
                                                 if (verificacao) {
                                                     portoesVermelhoAzul.vermelho++
-                                                    criarTorre(_x, _y, 300, 1000, 10000, 0, 0, 0, _torreTamanho, 'background-color: rgb(145, 84, 35, 0.75);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum', [], true, true, 'portao', 'Portão', _torreEscolhida, [0, 'n', 'n'], [false])
+                                                    criarTorre(_x, _y, 300, 1000, 12000, 0, 0, 0, _torreTamanho, 'background-color: rgb(145, 84, 35, 0.75);', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum', [], true, true, 'portao', 'Portão', _torreEscolhida, [0, 'n', 'n'], [false])
                                                 }
                                             }
                                         } else if (_torreEscolhida === 2) {
@@ -777,11 +796,6 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
     }
     return true
 }
-
-function upgradeBase(vermelhoAzul) {
-
-}
-
 
 
 
@@ -949,6 +963,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
     let _torreElementoPrecoRecurso
     let _torreElementoExtra
     let _torreElementoComprar
+    let _torreElementoDanoCausado
     let _torreEscolhida = torreInformacao[torreEscolhidaIndex][9]
     let _nivelDaTorre = 0
     let _niveisCancelados = [torreInformacao[torreEscolhidaIndex][10][0] === 'n', torreInformacao[torreEscolhidaIndex][10][1] === 'n', torreInformacao[torreEscolhidaIndex][10][2] === 'n']
@@ -1003,6 +1018,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
         _torreElementoPrecoRecurso = document.querySelector(`#lateral-mostrar-upgrade .mostrar-upgrade-preco-recurso`)
         _torreElementoExtra = document.querySelectorAll(`#lateral-mostrar-upgrade .mostrar-upgrade-extra`)
         _torreElementoComprar = document.querySelectorAll(`#lateral-mostrar-upgrade .mostrar-upgrade-comprar`)
+        _torreElementoDanoCausado = document.querySelector(`#lateral-mostrar-upgrade .mostrar-dano-causado`)
         _melhoriasElemento = document.querySelectorAll(`#lateral-mostrar-upgrade .mostrar-upgrade-melhoria`)
         _debufsElemento = document.querySelectorAll('#lateral-mostrar-upgrade .mostrar-upgrade-debuf')
 
@@ -1010,12 +1026,17 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
             _torreElementoVidaAtual.innerHTML = torreInformacao[torreEscolhidaIndex][5]
             _torreElementoVidaMaxima.innerHTML = torreInformacao[torreEscolhidaIndex][13][0]
 
+            if (torreInformacao[torreEscolhidaIndex][11] > 0 && _torreRangeCopy <= 0) {
+                _torreRengeElemento.style.border = '30px dashed rgba(165, 42, 42, 0.6)'
+            }
+
             _torreRangeCopy = torreInformacao[torreEscolhidaIndex][11]
             _torreRengeElemento.style.width = `${_torreRangeCopy * 2}px`
             _torreRengeElemento.style.height = `${_torreRangeCopy * 2}px`
             _torreRengeElemento.style.top = `${torreInformacao[torreEscolhidaIndex][0][0][1] - _torreRangeCopy}px`
             _torreRengeElemento.style.left = `${torreInformacao[torreEscolhidaIndex][0][0][0] - _torreRangeCopy}px`
 
+            _torreElementoDanoCausado.innerHTML = `Dano Causado: ${torreInformacao[torreEscolhidaIndex][16]}`
             _torreElementoNome.innerHTML = torreInformacao[torreEscolhidaIndex][8]
             _torreElementoNivel.innerHTML = `Nivel: ${!_niveisCancelados[0] ? torreInformacao[torreEscolhidaIndex][10][0] : ''}${!_niveisCancelados[1] ? ' - ' + torreInformacao[torreEscolhidaIndex][10][1] : ''}${!_niveisCancelados[2] ? ' - ' + torreInformacao[torreEscolhidaIndex][10][2] : ''}`
             _torreElementoVidaAtual.innerHTML = torreInformacao[torreEscolhidaIndex][5]
@@ -1053,6 +1074,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
         _torreElementoPrecoRecurso = document.querySelector(`#lateral-mostrar-upgrade-direita .mostrar-upgrade-preco-recurso`)
         _torreElementoExtra = document.querySelectorAll(`#lateral-mostrar-upgrade-direita .mostrar-upgrade-extra`)
         _torreElementoComprar = document.querySelectorAll(`#lateral-mostrar-upgrade-direita .mostrar-upgrade-comprar`)
+        _torreElementoDanoCausado = document.querySelector(`#lateral-mostrar-upgrade-direita .mostrar-dano-causado`)
         _melhoriasElemento = document.querySelectorAll(`#lateral-mostrar-upgrade-direita .mostrar-upgrade-melhoria`)
         _debufsElemento = document.querySelectorAll('#lateral-mostrar-upgrade-direita .mostrar-upgrade-debuf')
 
@@ -1060,12 +1082,17 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
             _torreElementoVidaAtual.innerHTML = torreInformacao[torreEscolhidaIndex][5]
             _torreElementoVidaMaxima.innerHTML = torreInformacao[torreEscolhidaIndex][13][0]
 
+            if (torreInformacao[torreEscolhidaIndex][11] > 0 && _torreRangeCopy <= 0) {
+                _torreRengeElemento.style.border = '30px dashed rgba(165, 42, 42, 0.6)'
+            }
+
             _torreRangeCopy = torreInformacao[torreEscolhidaIndex][11]
             _torreRengeElemento.style.width = `${_torreRangeCopy * 2}px`
             _torreRengeElemento.style.height = `${_torreRangeCopy * 2}px`
             _torreRengeElemento.style.top = `${torreInformacao[torreEscolhidaIndex][0][0][1] - _torreRangeCopy}px`
             _torreRengeElemento.style.left = `${torreInformacao[torreEscolhidaIndex][0][0][0] - _torreRangeCopy}px`
-
+        
+            _torreElementoDanoCausado.innerHTML = `Dano Causado: ${torreInformacao[torreEscolhidaIndex][16]}`
             _torreElementoNome.innerHTML = torreInformacao[torreEscolhidaIndex][8]
             _torreElementoNivel.innerHTML = `Nivel: ${!_niveisCancelados[0] ? torreInformacao[torreEscolhidaIndex][10][0] : ''}${!_niveisCancelados[1] ? ' - ' + torreInformacao[torreEscolhidaIndex][10][1] : ''}${!_niveisCancelados[2] ? ' - ' + torreInformacao[torreEscolhidaIndex][10][2] : ''}`
             _torreElementoVidaAtual.innerHTML = torreInformacao[torreEscolhidaIndex][5]
@@ -1094,6 +1121,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
     _torreElementoExtra[0].innerHTML = ''
     _torreElementoExtra[1].innerHTML = ''
 
+    _torreElementoDanoCausado.innerHTML = `Dano Causado: ${torreInformacao[torreEscolhidaIndex][16]}`
     _torreElementoNome.innerHTML = torreInformacao[torreEscolhidaIndex][8]
     _torreElementoNivel.innerHTML = `Nivel: ${!_niveisCancelados[0] ? torreInformacao[torreEscolhidaIndex][10][0] : ''}${!_niveisCancelados[1] ? ' - ' + torreInformacao[torreEscolhidaIndex][10][1] : ''}${!_niveisCancelados[2] ? ' - ' + torreInformacao[torreEscolhidaIndex][10][2] : ''}`
     _torreElementoVidaAtual.innerHTML = torreInformacao[torreEscolhidaIndex][5]
@@ -1139,7 +1167,11 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
                             } else if (_melhoriasArray[a][0] === 'dano' && e === 1) {
                                 _melhoriasElemento[e].innerHTML = `+ ${_melhoriasArray[a][1]}`
                             } else if (_melhoriasArray[a][0] === 'velocidadeAtaque' && e === 2) {
-                                _melhoriasElemento[e].innerHTML = `- ${Math.abs(_melhoriasArray[a][1]) / 1000}s`
+                                if (_melhoriasArray[a][2] === 'debuf') {
+                                    _debufsElemento[0].innerHTML = `+ ${Math.abs(_melhoriasArray[a][1]) / 1000}s`
+                                } else {
+                                    _melhoriasElemento[e].innerHTML = `- ${Math.abs(_melhoriasArray[a][1]) / 1000}s`
+                                }
                             } else if (_melhoriasArray[a][0] === 'range' && e === 3) {
                                 _melhoriasElemento[e].innerHTML = `+ ${_melhoriasArray[a][1]}`
                             } else if (_melhoriasArray[a][2] === 'extra' && e === 4) {
@@ -1147,7 +1179,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
                             } else if (_melhoriasArray[a][2] === 'extra2' && e === 5) {
                                 _melhoriasElemento[e].innerHTML = `${_melhoriasArray[a][3]}`
                             } else if (_melhoriasArray[a][0] === 'tempoConstrucao') {
-                                _debufsElemento[0].innerHTML = `+ ${_melhoriasArray[a][1] / 1000}s`
+                                _debufsElemento[1].innerHTML = `+ ${_melhoriasArray[a][1] / 1000}s`
                             }
                         }
                     }
@@ -1157,6 +1189,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
                         _melhoriasElemento[e].innerHTML = ''
                     }
                     _debufsElemento[0].innerHTML = ''
+                    _debufsElemento[1].innerHTML = ''
                 }
 
                 _torreElementoComprar[i].onclick = () => {
@@ -1243,7 +1276,11 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
                                     } else if (_melhoriasArray[a][0] === 'dano' && e === 1) {
                                         _melhoriasElemento[e].innerHTML = `+ ${_melhoriasArray[a][1]}`
                                     } else if (_melhoriasArray[a][0] === 'velocidadeAtaque' && e === 2) {
-                                        _melhoriasElemento[e].innerHTML = `- ${Math.abs(_melhoriasArray[a][1]) / 1000}s`
+                                        if (_melhoriasArray[a][2] === 'debuf') {
+                                            _debufsElemento[0].innerHTML = `+ ${Math.abs(_melhoriasArray[a][1]) / 1000}s`
+                                        } else {
+                                            _melhoriasElemento[e].innerHTML = `- ${Math.abs(_melhoriasArray[a][1]) / 1000}s`
+                                        }
                                     } else if (_melhoriasArray[a][0] === 'range' && e === 3) {
                                         _melhoriasElemento[e].innerHTML = `+ ${_melhoriasArray[a][1]}`
                                     } else if (_melhoriasArray[a][2] === 'extra' && e === 4) {
@@ -1251,7 +1288,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
                                     } else if (_melhoriasArray[a][2] === 'extra2' && e === 5) {
                                         _melhoriasElemento[e].innerHTML = `${_melhoriasArray[a][3]}`
                                     } else if (_melhoriasArray[a][0] === 'tempoConstrucao') {
-                                        _debufsElemento[0].innerHTML = `+ ${_melhoriasArray[a][1] / 1000}s`
+                                        _debufsElemento[1].innerHTML = `+ ${_melhoriasArray[a][1] / 1000}s`
                                     }
                                 }
                             }
@@ -1261,6 +1298,7 @@ function upgradeTorreLateral(vermelhoAzul, torreEscolhidaIndex, abriAtualisacao)
                                 _melhoriasElemento[e].innerHTML = ''
                             }
                             _debufsElemento[0].innerHTML = ''
+                            _debufsElemento[1].innerHTML = ''
                         }
 
                         _torreElementoComprar[i].onclick = () => {

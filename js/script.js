@@ -19,6 +19,7 @@ var portoesVermelhoAzul = {
     vermelho: 0
 }
 
+
 function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho, cor, espaco, vermelhoAzul, caracter, zombie) {
     let _x = x
     let _y = y
@@ -869,6 +870,56 @@ function criarUnidade(x, y, vida, dano, danoV, velocidade, visao, range, tamanho
 
 
 
+setTimeout(() => {
+    criarTorre(
+        baseAzulPosition[1] - 20,
+        baseAzulPosition[0] + 50,
+        400,
+        baseAzulVidaMax,
+        12000,
+        0,
+        2500,
+        0,
+        [0, 0],
+        'background-color: rgb(145, 84, 35);',
+        0,
+        ['A', 'azul', ['V', 'vermelho']],
+        'unico',
+        [],
+        false,
+        false,
+        'base',
+        'Base Azul',
+        matrizPrecoTorres.length - 1,
+        [0, 0, 0],
+        [false]
+    )
+
+    criarTorre(
+        baseVermelhoPosition[1] + 20,
+        baseVermelhoPosition[0] + 50,
+        400,
+        baseVermelhoVidaMax,
+        12000,
+        0,
+        2500,
+        0,
+        [0, 0],
+        'background-color: rgb(145, 84, 35);',
+        0,
+        ['V', 'vermelho', ['A', 'azul']],
+        'unico',
+        [],
+        false,
+        false,
+        'base',
+        'Base Vermelha',
+        matrizPrecoTorres.length - 1,
+        [0, 0, 0],
+        [false]
+    )
+}, 100)
+
 
 
 function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano, danoV, visao, tamanho, cor, espaco, vermelhoAzul, tipoDeDano, areaDoDano, atrairAlvo, passavel, caracter, nomeDaTorre, torreEscolhida, niveis, caracteristicas) {
@@ -925,26 +976,29 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
     caminhoAlteracoes++
     atualizarCaminhoMetade()
     
-    if (vermelhoAzul[1] === 'azul') {
-        quantiaTorreAzul += espaco
-        document.getElementById('azul-quantia-torre').innerHTML = quantiaTorreAzul
-    } else {
-        quantiaTorreVermelho += espaco
-        document.getElementById('vermelho-quantia-torre').innerHTML = quantiaTorreVermelho
+    if (caracter !== 'base') {
+        if (vermelhoAzul[1] === 'azul') {
+            quantiaTorreAzul += espaco
+            document.getElementById('azul-quantia-torre').innerHTML = quantiaTorreAzul
+        } else {
+            quantiaTorreVermelho += espaco
+            document.getElementById('vermelho-quantia-torre').innerHTML = quantiaTorreVermelho
+        }
+
+        _torreElement.style.top = `${_y}px`
+        _torreElement.style.left = `${_x}px`
+        _torreElement.style.width = `${_torreTamanho[0]}px`
+        _torreElement.style.height = `${_torreTamanho[1]}px`
+
+        _torreElementVida.style.opacity = '0.35'
+        _torreElementVida.style.backgroundColor = vermelhoAzul[1] === 'azul' ? 'blue' : 'red'
+        _torreElementVida.style.width = `${_torreVidaAtual}px`
+
+        _torreElement.id = `torre${torreIndex}`
+        _torreElement.className = 'torre'
+        _torreElement.id = `barra-vida${torreIndex}`
+        _torreElementVida.className = 'barra-vida'
     }
-
-    _torreElement.style.top = `${_y}px`
-    _torreElement.style.left = `${_x}px`
-    _torreElement.style.width = `${_torreTamanho[0]}px`
-    _torreElement.style.height = `${_torreTamanho[1]}px`
-    _torreElementVida.style.opacity = '0.35'
-    _torreElementVida.style.backgroundColor = vermelhoAzul[1] === 'azul' ? 'blue' : 'red'
-    _torreElementVida.style.width = `${_torreVidaAtual}px`
-
-    _torreElement.id = `torre${torreIndex}`
-    _torreElement.className = 'torre'
-    _torreElement.id = `barra-vida${torreIndex}`
-    _torreElementVida.className = 'barra-vida'
 
     document.getElementById('corpo').appendChild(_torreElement)
     _torreElement.appendChild(_torreElementVida)
@@ -976,7 +1030,8 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
             _torrePronta,
             [_torreVidaMaxima, _torreAtackDano, _torreAtackVelocidade, _torreRangeVisao, _torreTempoConstrucao],
             passavel,
-            Object.assign([], caracteristicas)
+            Object.assign([], caracteristicas),
+            0
         ]
     )
 
@@ -984,19 +1039,30 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
 
     let _torreTimeout = 0
 
-    let _torreTimeoutLoad = setInterval(() => {
-        _torreTimeout += 100
-        if (_torreTimeout > _torreTempoConstrucao) {
-            _torreElement.style.cssText += cor
-            _torreElement.style.cssText += 'background-image: none;'
-            _torrePronta = true
-            torreInformacao[_torreIndexCopy][12] = _torrePronta
-            torreInformacao[_torreIndexCopy][5] = _torreVidaVerdadeira*(_torreVidaAtual/_torreVidaTemporaria)
-            _torreVidaMaxima = _torreVidaVerdadeira
-            torreInformacao[_torreIndexCopy][13][0] = _torreVidaMaxima
-            clearInterval(_torreTimeoutLoad)
-        }
-    }, 100)
+    let _torreTimeoutLoad
+    if (caracter !== 'base') {
+        _torreTimeoutLoad = setInterval(() => {
+            _torreTimeout += 100
+            if (_torreTimeout > _torreTempoConstrucao) {
+                _torreElement.style.cssText += cor
+                _torreElement.style.cssText += 'background-image: none;'
+                _torrePronta = true
+                torreInformacao[_torreIndexCopy][12] = _torrePronta
+                torreInformacao[_torreIndexCopy][5] = _torreVidaVerdadeira * (_torreVidaAtual / _torreVidaTemporaria)
+                _torreVidaMaxima = _torreVidaVerdadeira
+                torreInformacao[_torreIndexCopy][13][0] = _torreVidaMaxima
+                clearInterval(_torreTimeoutLoad)
+            }
+        }, 100)
+    } else {
+        _torreElement.style.cssText += cor
+        _torreElement.style.cssText += 'background-image: none;'
+        _torrePronta = true
+        torreInformacao[_torreIndexCopy][12] = _torrePronta
+        torreInformacao[_torreIndexCopy][5] = _torreVidaVerdadeira * (_torreVidaAtual / _torreVidaTemporaria)
+        _torreVidaMaxima = _torreVidaVerdadeira
+        torreInformacao[_torreIndexCopy][13][0] = _torreVidaMaxima
+    }
 
     let _verficarObstaculoCaminhoTrue = (_yIni, _xIni) => {
         let _xposicaoTabelaUnid = _meio[1]
@@ -1200,10 +1266,27 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                 if (_torreTimeout > _torreTempoConstrucao) {
                     for (let i = 0; i < _torreMelhorias.length; i++) {
                         if (_torreMelhorias[i][0] === 'vida') {
-                            _torreVidaMaxima = _torreVidaMaxima + _torreMelhorias[i][1]
-                            _torreVidaAtual = _torreVidaAtual + _torreMelhorias[i][1]
-                            torreInformacao[_torreIndexCopy][5] = _torreVidaAtual
-                            torreInformacao[_torreIndexCopy][13][0] = _torreVidaMaxima
+                            if (caracter !== 'base') {
+                                _torreVidaMaxima = _torreVidaMaxima + _torreMelhorias[i][1]
+                                _torreVidaAtual = _torreVidaAtual + _torreMelhorias[i][1]
+                                torreInformacao[_torreIndexCopy][5] = _torreVidaAtual
+                                torreInformacao[_torreIndexCopy][13][0] = _torreVidaMaxima
+                            } else {
+                                _torreVidaMaxima = _torreVidaMaxima + _torreMelhorias[i][1]
+                                _torreVidaAtual = _torreVidaAtual + _torreMelhorias[i][1]
+
+                                if (vermelhoAzul[1] === 'azul') {
+                                    baseAzulVida = _torreVidaAtual
+                                    baseAzulVidaMax = _torreVidaMaxima
+                                    baseAzulBarraId.style.width = `${(baseAzulVida/baseAzulVidaMax)*100}%`
+                                } else {
+                                    baseVermelhoVida = _torreVidaAtual
+                                    baseVermelhoVidaMax = _torreVidaMaxima
+                                    baseVermelhoBarraId.style.width = `${(baseVermelhoVida/baseVermelhoVidaMax)*100}%`
+                                }
+                                torreInformacao[_torreIndexCopy][5] = _torreVidaAtual
+                                torreInformacao[_torreIndexCopy][13][0] = _torreVidaMaxima
+                            }
                         } else if (_torreMelhorias[i][0] === 'dano') {
                             _torreAtackDano = _torreAtackDano + _torreMelhorias[i][1]
                             torreInformacao[_torreIndexCopy][13][1] = _torreAtackDano
@@ -1245,34 +1328,63 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                 _torreVerificarNivel()
             }
 
-            if (_torreVidaAtual !== torreInformacao[_torreIndexCopy][5] || torreInformacao[_torreIndexCopy][1] === 'morto') {
-                if (_torreVidaAtual <= 0 || torreInformacao[_torreIndexCopy][5] <= 0 || torreInformacao[_torreIndexCopy][1] === 'morto') {
-                    document.getElementById('corpo').removeChild(_torreElement)
-                    for (let i = 0; i < _torrePosicaoOcupada.length; i++) {
-                        tabelaCaminho[_torrePosicaoOcupada[i][0]][_torrePosicaoOcupada[i][1]] = '.'
-                    }
-                    caminhoAlteracoes++
-                    atualizarCaminhoMetade()
-                    if (vermelhoAzul[1] === 'azul') {
-                        quantiaTorreAzul -= espaco
-                        if (caracter === 'portao') {
-                            portoesVermelhoAzul.azul--
+            if (caracter !== 'base') {
+                if (_torreVidaAtual !== torreInformacao[_torreIndexCopy][5] || torreInformacao[_torreIndexCopy][1] === 'morto') {
+                    if (_torreVidaAtual <= 0 || torreInformacao[_torreIndexCopy][5] <= 0 || torreInformacao[_torreIndexCopy][1] === 'morto') {
+                        document.getElementById('corpo').removeChild(_torreElement)
+                        for (let i = 0; i < _torrePosicaoOcupada.length; i++) {
+                            tabelaCaminho[_torrePosicaoOcupada[i][0]][_torrePosicaoOcupada[i][1]] = '.'
                         }
-                        document.getElementById('azul-quantia-torre').innerHTML = quantiaTorreAzul
+                        caminhoAlteracoes++
+                        atualizarCaminhoMetade()
+
+                        if (vermelhoAzul[1] === 'azul') {
+                            quantiaTorreAzul -= espaco
+                            if (caracter === 'portao') {
+                                portoesVermelhoAzul.azul--
+                            }
+                            document.getElementById('azul-quantia-torre').innerHTML = quantiaTorreAzul
+                        } else {
+                            quantiaTorreVermelho -= espaco
+                            if (caracter === 'portao') {
+                                portoesVermelhoAzul.vermelho--
+                            }
+                            document.getElementById('vermelho-quantia-torre').innerHTML = quantiaTorreVermelho
+                        }
+                        torreInformacao[_torreIndexCopy][1] = 'morto'
+                        for (let i = 0; i < _torreIntervaloLoad.length; i++) {
+                            clearInterval(_torreIntervaloLoad[i])
+                        }
                     } else {
-                        quantiaTorreVermelho -= espaco
-                        if (caracter === 'portao') {
-                            portoesVermelhoAzul.vermelho--
-                        }
-                        document.getElementById('vermelho-quantia-torre').innerHTML = quantiaTorreVermelho
+                        _torreVidaAtual = torreInformacao[_torreIndexCopy][5]
+                        _torreElementVida.style.width = `${Math.floor(400 * (_torreVidaAtual / _torreVidaVerdadeira))}px`
                     }
-                    torreInformacao[_torreIndexCopy][1] = 'morto'
-                    for (let i = 0; i < _torreIntervaloLoad.length; i++) {
-                        clearInterval(_torreIntervaloLoad[i])
+                }
+            } else {
+                if (vermelhoAzul[1] === 'azul') {
+                    if (_torreVidaAtual !== baseAzulVida) {
+                        _torreVidaAtual = baseAzulVida
+                        torreInformacao[_torreIndexCopy][5] = baseAzulVida
+
+                        if (_torreVidaAtual <= 0 || torreInformacao[_torreIndexCopy][5] <= 0 || torreInformacao[_torreIndexCopy][1] === 'morto') {
+                            torreInformacao[_torreIndexCopy][1] = 'morto'
+                            for (let i = 0; i < _torreIntervaloLoad.length; i++) {
+                                clearInterval(_torreIntervaloLoad[i])
+                            }
+                        }
                     }
                 } else {
-                    _torreVidaAtual = torreInformacao[_torreIndexCopy][5]
-                    _torreElementVida.style.width = `${Math.floor(400*(_torreVidaAtual/_torreVidaVerdadeira))}px`
+                    if (_torreVidaAtual !== baseVermelhoVida) {
+                        _torreVidaAtual = baseVermelhoVida
+                        torreInformacao[_torreIndexCopy][5] = baseVermelhoVida
+
+                        if (_torreVidaAtual <= 0 || torreInformacao[_torreIndexCopy][5] <= 0 || torreInformacao[_torreIndexCopy][1] === 'morto') {
+                            torreInformacao[_torreIndexCopy][1] = 'morto'
+                            for (let i = 0; i < _torreIntervaloLoad.length; i++) {
+                                clearInterval(_torreIntervaloLoad[i])
+                            }
+                        }
+                    }
                 }
             }
 
@@ -1294,6 +1406,11 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                                         if (unidadeInformacao[i][1] !== 'morto' && unidadeInformacao[i][2] === vermelhoAzul[2][1]) {
                                             let _unidadeDistancia = (((unidadeInformacao[i][6] + unidadeInformacao[i][4]/2) - (unidadeInformacao[_alvoMaisProximo[0]][6] + unidadeInformacao[_alvoMaisProximo[0]][4]/2)) ** 2 + ((unidadeInformacao[i][7] + unidadeInformacao[i][4]/2) - (unidadeInformacao[_alvoMaisProximo[0]][7] + unidadeInformacao[_alvoMaisProximo[0]][4]/2)) ** 2) ** 0.5
                                             if (_unidadeDistancia <= areaDoDano[0]) {
+                                                if (unidadeInformacao[i][8] - _torreAtackDano < 0) {
+                                                    torreInformacao[_torreIndexCopy][16] += unidadeInformacao[i][8]
+                                                } else {
+                                                    torreInformacao[_torreIndexCopy][16] += _torreAtackDano
+                                                }
                                                 unidadeInformacao[i][8] -= _torreAtackDano
                                             }
                                         }
@@ -1316,10 +1433,20 @@ function criarTorre(x, y, vidaTemporaria, vidaVerdadeira, tempoConstrucao, dano,
                                                     }
                                                 }
                                             }, _caracterVariaveis.homemQueTacaBoleadeira.duracao)
+                                            if (unidadeInformacao[_alvoMaisProximo[0]][8] - _torreAtackDano < 0) {
+                                                torreInformacao[_torreIndexCopy][16] += unidadeInformacao[_alvoMaisProximo[0]][8]
+                                            } else {
+                                                torreInformacao[_torreIndexCopy][16] += _torreAtackDano
+                                            }
                                             unidadeInformacao[_alvoMaisProximo[0]][8] -= _torreAtackDano
                                             _alvoMaisProximo = []
                                         }
                                     } else {
+                                        if (unidadeInformacao[_alvoMaisProximo[0]][8] - _torreAtackDano < 0) {
+                                            torreInformacao[_torreIndexCopy][16] += unidadeInformacao[_alvoMaisProximo[0]][8]
+                                        } else {
+                                            torreInformacao[_torreIndexCopy][16] += _torreAtackDano
+                                        }
                                         unidadeInformacao[_alvoMaisProximo[0]][8] -= _torreAtackDano
                                     }
                                 }

@@ -9,6 +9,8 @@ var baseVermelhoVidaMax = 2500
 var baseVermelhoVida = 2500
 const baseVermelhoBarraId = document.getElementById('base-vermelho-barra')
 
+var modoSobrevivencia = false
+
 var caminhoAlteracoes = 0
 const tabelaCaminhoMetadeTamanho = 100
 const tabelaCaminhoMetade = []

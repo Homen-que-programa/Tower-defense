@@ -11,7 +11,7 @@ var recursosVermelho = {
     producao: [0, 0, 0]
 }
 
-var modoDev = false
+var modoDev = true
 
 if (modoDev) {
     recursosVermelho.ouro[0] = 50000
