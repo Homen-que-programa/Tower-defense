@@ -26,7 +26,7 @@ var zombies = {
         incidencia: 100,
         tamanho: 30,
         criar: (x, y) => {
-            criarUnidade(x, y, 50, 15, 1000, 1, 500, 70, 30, 'background-color: brown;', 0, ['V', 'vermelho', ['A', 'azul']], 'nenhum', true)
+            criarUnidade(x, y, 50, 15, 1000, 1, 500, 70, 40, 'background-color: brown;', 0, ['V', 'vermelho', ['A', 'azul']], 'nenhum', true)
         }
     },
     musculoso: {
@@ -36,7 +36,7 @@ var zombies = {
         incidencia: 75,
         tamanho: 40,
         criar: (x, y) => {
-            criarUnidade(x, y, 100, 25, 1000, 1, 500, 70, 40, 'background-color: blue;', 0, ['V', 'vermelho', ['A', 'azul']], 'nenhum', true)
+            criarUnidade(x, y, 100, 25, 1000, 1, 500, 70, 50, 'background-color: blue;', 0, ['V', 'vermelho', ['A', 'azul']], 'nenhum', true)
         }
     }
 }
@@ -82,10 +82,10 @@ function iniciarOrda(dfEsco) {
         setTimeout(() => {
             let locaisDisponiveis = []
 
-            for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
-                    if (e < tabelaCaminhoMetade[i].length / 2 + 3) {
-                    } else if (tabelaCaminhoMetade[i][e] !== '.') {
+            for (let i = 0; i < tabelaCaminho.length; i++) {
+                for (let e = 0; e < tabelaCaminho[i].length; e++) {
+                    if (e < tabelaCaminho[i].length / 2 + 3) {
+                    } else if (tabelaCaminho[i][e] !== '.') {
                     } else {
                         locaisDisponiveis.push([e, i])
                     }
@@ -95,8 +95,8 @@ function iniciarOrda(dfEsco) {
             let localEscolhido = locaisDisponiveis[Math.floor(Math.random() * locaisDisponiveis.length)]
 
             localEscolhido = [
-                (localEscolhido[0] * tabelaCaminhoMetadeTamanho) + Math.min(tabelaCaminhoMetadeTamanho - zombies[zombieEscolhido].tamanho, Number((Math.random() * 0.5).toFixed(3)) * tabelaCaminhoMetadeTamanho),
-                (localEscolhido[1] * tabelaCaminhoMetadeTamanho) + Math.min(tabelaCaminhoMetadeTamanho - zombies[zombieEscolhido].tamanho, Number((Math.random() * 0.5).toFixed(3)) * tabelaCaminhoMetadeTamanho)
+                (localEscolhido[0] * tabelaCaminhoTamanho) + Math.min(tabelaCaminhoTamanho - zombies[zombieEscolhido].tamanho, Number((Math.random() * 0.5).toFixed(3)) * tabelaCaminhoTamanho),
+                (localEscolhido[1] * tabelaCaminhoTamanho) + Math.min(tabelaCaminhoTamanho - zombies[zombieEscolhido].tamanho, Number((Math.random() * 0.5).toFixed(3)) * tabelaCaminhoTamanho)
             ]
 
             zombies[zombieEscolhido].criar(localEscolhido[0], localEscolhido[1])

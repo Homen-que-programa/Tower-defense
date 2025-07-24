@@ -194,16 +194,16 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
             upgradeTorres('cancelarAzul', true)
         }
         if (posicionarAtivo[1]) {
-            for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                for (let e = 0; e < tabelaCaminhoMetade[i].length / 2 - 1; e++) {
+            for (let i = 0; i < tabelaCaminho.length; i++) {
+                for (let e = 0; e < tabelaCaminho[i].length / 2 - 1; e++) {
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                 }
             }
         } else {
             document.getElementById('quadriculado').style.opacity = '0'
-            for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
+            for (let i = 0; i < tabelaCaminho.length; i++) {
+                for (let e = 0; e < tabelaCaminho[i].length; e++) {
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                 }
@@ -241,14 +241,14 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
             if (posicionarAtulizacaoCopyAzul !== posicionarAtulizacao || caminhoAlteracoesCopyAzul !== caminhoAlteracoes) {
                 posicionarAtulizacaoCopyAzul = posicionarAtulizacao
                 caminhoAlteracoesCopyAzul = caminhoAlteracoes
-                for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                    for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
-                        if (e >= tabelaCaminhoMetade[i].length / 2 - 3) {
+                for (let i = 0; i < tabelaCaminho.length; i++) {
+                    for (let e = 0; e < tabelaCaminho[i].length; e++) {
+                        if (e >= tabelaCaminho[i].length / 2 - 3) {
                             if (!posicionarAtivo[1]) {
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                             }
-                        } else if (tabelaCaminhoMetade[i][e] !== '.') {
+                        } else if (tabelaCaminho[i][e] !== '.') {
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: hue-rotate(180deg);'
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                         } else {
@@ -260,37 +260,37 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
                                     if (_unidadeEscolhida === 0) {
                                         _espacoOcupado = 1
                                         if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 200, 25, 1000, 1, 500, 70, 40, 'background-color: brown;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 200, 25, 1000, 1, 200, 70, 50, 'background-color: brown;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 1) {
                                         _espacoOcupado = 2
                                         if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 75, 45, 1000, 1, 500, 200, 40, 'background-color: grey;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 75, 45, 1000, 1, 300, 200, 50, 'background-color: grey;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 2) {
                                         _espacoOcupado = 3
                                         if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 500, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 500, 50, 1700, 1, 200, 70, 60, 'background-color: green;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 3) {
                                         _espacoOcupado = 2
                                         if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 350, 15, 1000, 1, 500, 150, 40, 'background-color: blue;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'homenQueDaBuff')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 350, 20, 1000, 1, 200, 150, 50, 'background-color: blue;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'homenQueDaBuff')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 4) {
                                         _espacoOcupado = 1
                                         if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 450, 55, 1000, 1, 500, 70, 40, 'background-color: purple;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 450, 55, 1000, 1, 200, 70, 50, 'background-color: purple;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 5) {
                                         _espacoOcupado = 2
                                         if (quantiaUnidadeAzul <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 150, 155, 1300, 1, 650, 300, 40, 'background-color: yellow;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 150, 155, 1300, 1, 300, 300, 50, 'background-color: yellow;', _espacoOcupado, ['A', 'azul', ['V', 'vermelho']], 'nenhum')
                                             verificacao = true
                                         }
                                     }
@@ -320,14 +320,14 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
             if (posicionarAtulizacaoCopyVermelho !== posicionarAtulizacao || caminhoAlteracoesCopyVermelho !== caminhoAlteracoes) {
                 posicionarAtulizacaoCopyVermelho = posicionarAtulizacao
                 caminhoAlteracoesCopyVermelho = caminhoAlteracoes
-                for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                    for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
-                        if (e < tabelaCaminhoMetade[i].length / 2 + 3) {
+                for (let i = 0; i < tabelaCaminho.length; i++) {
+                    for (let e = 0; e < tabelaCaminho[i].length; e++) {
+                        if (e < tabelaCaminho[i].length / 2 + 3) {
                             if (!posicionarAtivo[0]) {
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                             }
-                        } else if (tabelaCaminhoMetade[i][e] !== '.') {
+                        } else if (tabelaCaminho[i][e] !== '.') {
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: hue-rotate(180deg);'
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                         } else {
@@ -339,37 +339,37 @@ function posicionarSoldados(_timeOuCansel, _unidadeEscolhida, _unidadeRetorno) {
                                     if (_unidadeEscolhida === 0) {
                                         _espacoOcupado = 1
                                         if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 200, 25, 1000, 1, 500, 70, 40, 'background-color: brown;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 200, 25, 1000, 1, 200, 70, 50, 'background-color: brown;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 1) {
                                         _espacoOcupado = 2
                                         if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 75, 45, 1000, 1, 500, 200, 40, 'background-color: grey;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 75, 45, 1000, 1, 300, 200, 50, 'background-color: grey;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 2) {
                                         _espacoOcupado = 3
                                         if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 500, 100, 1700, 1, 500, 70, 50, 'background-color: green;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 500, 50, 1700, 1, 200, 70, 60, 'background-color: green;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 3) {
                                         _espacoOcupado = 2
                                         if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 350, 15, 1000, 1, 500, 150, 40, 'background-color: blue;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'homenQueDaBuff')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 350, 20, 1000, 1, 200, 150, 50, 'background-color: blue;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'homenQueDaBuff')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 4) {
                                         _espacoOcupado = 1
                                         if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 450, 55, 1000, 1, 500, 70, 40, 'background-color: purple;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 450, 55, 1000, 1, 200, 70, 50, 'background-color: purple;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     } else if (_unidadeEscolhida === 5) {
                                         _espacoOcupado = 2
                                         if (quantiaUnidadeVermelho <= quantiaUnidadeLimite - _espacoOcupado) {
-                                            criarUnidade((e + 0.25) * tabelaCaminhoMetadeTamanho, (i + 0.25) * tabelaCaminhoMetadeTamanho, 150, 155, 1300, 1, 650, 300, 40, 'background-color: yellow;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
+                                            criarUnidade((e + 0.25) * tabelaCaminhoTamanho, (i + 0.25) * tabelaCaminhoTamanho, 150, 155, 1300, 1, 300, 300, 50, 'background-color: yellow;', _espacoOcupado, ['V', 'vermelho', ['A', 'azul']], 'nenhum')
                                             verificacao = true
                                         }
                                     }
@@ -416,16 +416,16 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
             upgradeTorres('cancelarAzul', true)
         }
         if (posicionarAtivo[1]) {
-            for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                for (let e = 0; e < tabelaCaminhoMetade[i].length / 2 - 1; e++) {
+            for (let i = 0; i < tabelaCaminho.length; i++) {
+                for (let e = 0; e < tabelaCaminho[i].length / 2 - 1; e++) {
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                 }
             }
         } else {
             document.getElementById('quadriculado').style.opacity = '0'
-            for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
+            for (let i = 0; i < tabelaCaminho.length; i++) {
+                for (let e = 0; e < tabelaCaminho[i].length; e++) {
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                 }
@@ -466,14 +466,14 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                 caminhoAlteracoesCopyAzul = caminhoAlteracoes
                 _torreVerticalHorizontalCopy = torreVerticalHorizontal[0]
                 _verificarQuntiaClicks = 0
-                for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                    for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
-                        if (e >= tabelaCaminhoMetade[i].length / 2 - 3) {
+                for (let i = 0; i < tabelaCaminho.length; i++) {
+                    for (let e = 0; e < tabelaCaminho[i].length; e++) {
+                        if (e >= tabelaCaminho[i].length / 2 - 3) {
                             if (!posicionarAtivo[1]) {
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                             }
-                        } else if (tabelaCaminhoMetade[i][e] !== '.') {
+                        } else if (tabelaCaminho[i][e] !== '.') {
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: hue-rotate(180deg);'
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                         } else {
@@ -488,8 +488,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                 }
                                 _verificarQuntiaClicks++
 
-                                for (let n = 0; n < Math.floor(_torreTamanho[1] / tabelaCaminhoMetadeTamanho); n++) {
-                                    for (let m = 0; m < Math.floor(_torreTamanho[0] / tabelaCaminhoMetadeTamanho); m++) {
+                                for (let n = 0; n < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); n++) {
+                                    for (let m = 0; m < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); m++) {
                                         document.getElementById(`coluna-${i + 1 + n}-${e + 1 + m}`).style.cssText += 'filter: hue-rotate(240deg);'
                                         document.getElementById(`coluna-${i + 1 + n}-${e + 1 + m}`).onclick = () => { }
                                     }
@@ -503,8 +503,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         if (_torreEscolhida === 0) {
                                             _espacoOcupado = 1
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -519,8 +519,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 1) {
                                             _espacoOcupado = 1
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado && portoesVermelhoAzul.azul < 1) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -536,8 +536,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 2) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -552,8 +552,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 3) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -568,8 +568,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 4) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -584,8 +584,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 5) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -600,8 +600,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 33) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -644,14 +644,14 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                 caminhoAlteracoesCopyVermelho = caminhoAlteracoes
                 _torreVerticalHorizontalCopy = torreVerticalHorizontal[1]
                 _verificarQuntiaClicks = 0
-                for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                    for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
-                        if (e < tabelaCaminhoMetade[i].length / 2 + 3) {
+                for (let i = 0; i < tabelaCaminho.length; i++) {
+                    for (let e = 0; e < tabelaCaminho[i].length; e++) {
+                        if (e < tabelaCaminho[i].length / 2 + 3) {
                             if (!posicionarAtivo[0]) {
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                             }
-                        } else if (tabelaCaminhoMetade[i][e] !== '.') {
+                        } else if (tabelaCaminho[i][e] !== '.') {
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: hue-rotate(180deg);'
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                         } else {
@@ -666,8 +666,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                 }
                                 _verificarQuntiaClicks++
 
-                                for (let n = 0; n < Math.floor(_torreTamanho[1] / tabelaCaminhoMetadeTamanho); n++) {
-                                    for (let m = 0; m < Math.floor(_torreTamanho[0] / tabelaCaminhoMetadeTamanho); m++) {
+                                for (let n = 0; n < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); n++) {
+                                    for (let m = 0; m < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); m++) {
                                         document.getElementById(`coluna-${i + 1 + n}-${e + 1 + m}`).style.cssText += 'filter: hue-rotate(240deg);'
                                         document.getElementById(`coluna-${i + 1 + n}-${e + 1 + m}`).onclick = () => { }
                                     }
@@ -681,8 +681,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         if (_torreEscolhida === 0) {
                                             _espacoOcupado = 1
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -697,8 +697,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 1) {
                                             _espacoOcupado = 1
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado && portoesVermelhoAzul.vermelho < 1) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -714,8 +714,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 2) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -730,8 +730,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 3) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -746,8 +746,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 4) {
                                             _espacoOcupado = 3
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -762,8 +762,8 @@ function posicionarTorres(_timeOuCansel, _torreEscolhida, _torreRetorno) {
                                         } else if (_torreEscolhida === 5) {
                                             _espacoOcupado = 2
                                             if (quantiaTorreAzul <= quantiaTorreLimite - _espacoOcupado) {
-                                                let _x = e * tabelaCaminhoMetadeTamanho
-                                                let _y = i * tabelaCaminhoMetadeTamanho
+                                                let _x = e * tabelaCaminhoTamanho
+                                                let _y = i * tabelaCaminhoTamanho
                                                 for (let i = 0; i < Math.floor(_torreTamanho[1] / tabelaCaminhoTamanho); i++) {
                                                     for (let e = 0; e < Math.floor(_torreTamanho[0] / tabelaCaminhoTamanho); e++) {
                                                         if (tabelaCaminho[i + Math.floor(_y / tabelaCaminhoTamanho)][e + Math.floor(_x / tabelaCaminhoTamanho)] !== '.') {
@@ -830,16 +830,16 @@ function upgradeTorres(_timeOuCansel, _upgradeRetorno) {
             posicionarTorres('cancelarAzul', 0, true)
         }
         if (posicionarAtivo[1]) {
-            for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                for (let e = 0; e < tabelaCaminhoMetade[i].length / 2 - 1; e++) {
+            for (let i = 0; i < tabelaCaminho.length; i++) {
+                for (let e = 0; e < tabelaCaminho[i].length / 2 - 1; e++) {
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                 }
             }
         } else {
             document.getElementById('quadriculado').style.opacity = '0'
-            for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
+            for (let i = 0; i < tabelaCaminho.length; i++) {
+                for (let e = 0; e < tabelaCaminho[i].length; e++) {
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                     document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                 }
@@ -877,19 +877,19 @@ function upgradeTorres(_timeOuCansel, _upgradeRetorno) {
             if (upgradeTorreAtulizacaoCopyAzul !== posicionarAtulizacao || caminhoAlteracoesCopyAzul !== caminhoAlteracoes) {
                 upgradeTorreAtulizacaoCopyAzul = posicionarAtulizacao
                 caminhoAlteracoesCopyAzul = caminhoAlteracoes
-                for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                    for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
-                        if (e >= tabelaCaminhoMetade[i].length / 2 - 3) {
+                for (let i = 0; i < tabelaCaminho.length; i++) {
+                    for (let e = 0; e < tabelaCaminho[i].length; e++) {
+                        if (e >= tabelaCaminho[i].length / 2 - 3) {
                             if (!posicionarAtivo[1]) {
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                             }
-                        } else if (tabelaCaminhoMetade[i][e] === 'X' || tabelaCaminhoMetade[i][e] === 'x' || tabelaCaminhoMetade[i][e] === 'xx') {
+                        } else if (tabelaCaminho[i][e] === 'X' || tabelaCaminho[i][e] === 'x' || tabelaCaminho[i][e] === 'xx') {
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: none;'
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => {
                                 for (let n = 0; n < torreInformacao.length; n++) {
                                     for (let m = 0; m < torreInformacao[n][7].length; m++) {
-                                        if ((i * 2) === torreInformacao[n][7][m][0] && (e * 2) === torreInformacao[n][7][m][1] && torreInformacao[n][1] !== 'morto') {
+                                        if (i === torreInformacao[n][7][m][0] && e === torreInformacao[n][7][m][1] && torreInformacao[n][1] !== 'morto') {
                                             upgradeTorreLateral('azul', n, true)
                                             break
                                         }
@@ -915,19 +915,19 @@ function upgradeTorres(_timeOuCansel, _upgradeRetorno) {
             if (upgradeTorreAtulizacaoCopyVermelho !== posicionarAtulizacao || caminhoAlteracoesCopyVermelho !== caminhoAlteracoes) {
                 upgradeTorreAtulizacaoCopyVermelho = posicionarAtulizacao
                 caminhoAlteracoesCopyVermelho = caminhoAlteracoes
-                for (let i = 0; i < tabelaCaminhoMetade.length; i++) {
-                    for (let e = 0; e < tabelaCaminhoMetade[i].length; e++) {
-                        if (e < tabelaCaminhoMetade[i].length / 2 + 3) {
+                for (let i = 0; i < tabelaCaminho.length; i++) {
+                    for (let e = 0; e < tabelaCaminho[i].length; e++) {
+                        if (e < tabelaCaminho[i].length / 2 + 3) {
                             if (!posicionarAtivo[0]) {
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: grayscale(100%);'
                                 document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => { }
                             }
-                        } else if (tabelaCaminhoMetade[i][e] === 'Y' || tabelaCaminhoMetade[i][e] === 'y' || tabelaCaminhoMetade[i][e] === 'yy') {
+                        } else if (tabelaCaminho[i][e] === 'Y' || tabelaCaminho[i][e] === 'y' || tabelaCaminho[i][e] === 'yy') {
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).style.cssText += 'filter: none;'
                             document.getElementById(`coluna-${i + 1}-${e + 1}`).onclick = () => {
                                 for (let n = 0; n < torreInformacao.length; n++) {
                                     for (let m = 0; m < torreInformacao[n][7].length; m++) {
-                                        if ((i * 2) === torreInformacao[n][7][m][0] && (e * 2) === torreInformacao[n][7][m][1] && torreInformacao[n][1] !== 'morto') {
+                                        if (i === torreInformacao[n][7][m][0] && e === torreInformacao[n][7][m][1] && torreInformacao[n][1] !== 'morto') {
                                             upgradeTorreLateral('vermelho', n, true)
                                             break
                                         }

@@ -783,6 +783,37 @@ body {
     z-index: 20;
     /* box-shadow: 0px 0px 0px 125px rgba(0, 247, 255, 0.25); */
 }
+.barra-vida {
+    margin-top: -30px;
+    height: 10px;
+    background-color: brown;
+    position: absolute;
+}
+.unidade-range {
+    position: absolute;
+    border: 15px dashed;
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+    opacity: 0.3;
+    animation: torre-range 30s infinite linear;
+}
+.unidade-buff {
+    position: absolute;
+    border: 10px dashed rgba(106, 201, 82, 0.4);
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+    animation: torre-range 10s infinite linear;
+}
+.unidade-debuff {
+    position: absolute;
+    border: 10px dashed rgba(201, 116, 82, 0.4);
+    border-radius: 50%;
+    align-self: center;
+    justify-self: center;
+    animation: torre-range 10s infinite linear;
+}
 .torre {
     width: 50px;
     height: 50px;
@@ -801,12 +832,6 @@ body {
     box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.253);
     z-index: 15;
     /* box-shadow: 0px 0px 0px 125px rgba(0, 247, 255, 0.25); */
-}
-.barra-vida {
-    margin-top: -30px;
-    height: 10px;
-    background-color: brown;
-    position: absolute;
 }
 
 .torre-range {
